@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ajouter un nouveau film</title></head>
+
+
+<body>
+<h1>Ajouter un nouveau film</h1>
+<form action="insert.php" method="post" enctype="multipart/form-data">
+
+<div>
+<p>Identifiant du film : <input name="idfilm" type ="text" size=4/></p>
+<p>Identifiant du r&eacute;alisateur : <input name="idrealisateur" type="text" size=4/></p>
+<p>Titre : <input name="titre" type="text" size=30/></p>
+<p>Annee : <input name="annee" type="text" size=4/></p>
+<p>Score : <input name="score" type="text" size=3/></p>
+<p>Nombre de votants : <input name="nbvotants" type="text" size=4 /></p>
+</div>
+
+<div>
+<input value="R&eacute;initialiser" type="reset" />
+<input value="Ajouter" type="submit" />
+
+</div>
+
+</form>
+

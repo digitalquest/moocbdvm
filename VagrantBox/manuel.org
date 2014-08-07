@@ -1,0 +1,250 @@
+#+TITLE: Manuel de la Box Vagrant du MOOC BD
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t
+#+OPTIONS: html5-fancy:nil tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7b)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+#+LATEX_HEADER:
+
+* Introduction
+
+** Environnement de travail virtualisé
+Nous fournissons un environnement de travail pour les travaux
+pratiques (TPs) du MOOC bases de données relationnelles, basé sur une
+machine virtuelle.
+
+L'objectif est de faire tourner, sur le poste de l'apprenant, une
+machine virtuelle contenant un environnement Linux (Debian /jessie/),
+dans lequel sont installés :
+- un *serveur de base de donnée* (SGBDR) PostgreSQL préconfiguré, dans
+  lequel des bases de données d'exemples du cours sont chargées.
+- un serveur Web (apache) permettant de fournir des applications Web
+  locales utiles pour les TPs :
+  - un "*exerciseur*" qui vous guidera dans l'apprentissage des requetes
+    SQL sur les bases de données d'exemples;
+  - un outil professionnel de requêtage et d'administration des bases
+    de données PostgreSQL : *phpPgAdmin*.
+
+L'objectif est que vous soyez autonomes dans l'utilisation de cet
+environnement, installable en local sur votre ordinateur (quelque soit
+votre système d'exploitation, à condition qu'il soit récent), y
+compris sans accès à internet.
+
+** Architecture technique
+
+Bien que cet environnement soit basé sur un système Linux, aucune
+compétence en administration système Unix ne devrait être nécessaire
+pour utiliser cet environnement : l'interaction se déroulera dans
+l'interface Web de votre navigateur, au moins pour les premiers TPs.
+
+Cet environnement basé sur des logiciels libres est redistribuable, et
+potentiellement réutilisable dans d'autre contextes, par exemple pour
+votre contexte professionel, au-delà de ce MOOC.
+
+Nous avons essayé de le rendre aussi léger que possible, mais portable
+sur tout système cible 64 bits récent dans lequel le gestionnaire de
+machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
+
+** Utilité dans des contextes différents
+
+Bien que les exemples du cours soit relativement simples, nous avons
+essayé de nous baser, pour cet environnement, sur une solution
+réaliste utilisée dans le monde professionnel (Debian, PostreSQL,
+phpPgAdmin, etc.).
+
+Si la solution de virtualisation choisie ne convient pas à vos
+contraintes, mais que vous avez installé un autre environnement
+PostgreSQL + Apache/PHP, il est toujours possible d'installer
+manuellement l'application d'exerciseur que nous avons développée,
+mais nous ne pouvons nous engager à fournir un support sur celle-ci.
+
+L'ensemble des sources de cet environnement sont disponibles en
+logiciel libre sur XXX (sous licences XXX).
+
+* Installation
+
+** Téléchargement des outils
+
+*** TODO Installation de Vagrant
+
+*** Création de la machine virtuelle
+
+Télécharger
+[[https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box][debian80.box]]
+(attention, env. 350 Mo) et le
+[[http://www-tp.int-evry.fr/~germai_s/Vagrantfile][Vagrantfile]][fn:1]
+depuis le site de l'INT.
+
+** Installation de la DebianBox.box
+
+- Ouvrir un invite de commande dans le dossier où =debian80.box= a été téléchargé.
+- Entrer la commande suivante si vous avez téléchargé la box :
+#+BEGIN_example
+$ vagrant box add debian80.box --name debian80
+#+END_example
+Ou cette commande-ci pour que debian80.box soit téléchargée automatiquement:
+#+BEGIN_example
+$ vagrant box add https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box --name debian80
+#+END_example
+
+- L'installation est terminée quand s'affiche la ligne : =Successfully added box debian80 (v0) for= '=virtualbox=' 
+
+** Mise en place de la machine virtuelle
+
+- Ouvrir un invite de commande dans le dossier où est le Vagrantfile.
+
+- Entrer la commande suivante : =vagrant up=.
+
+/!\ *La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant d'une connexion internet rapide.*
+
+- La mise en place est terminée quand s'affiche la ligne "Successfully created the virtual machine."
+
+
+* Utilisation
+
+** Lancement de la machine virtuelle
+- Ouvrir un invite de commande
+
+- Entrer la commande: vagrant up
+
+- La mise en place de la machine est finie quand s'affiche la ligne "..."
+
+** Accès aux applications pour les TPs
+
+*** Exerciseur de requêtes SQL
+- Une fois la machine installée, ouvrir un navigateur internet et aller sur http://localhost:8080/
+
+- Vous pouvez maintenant commencer votre apprentissage du SQL!
+
+*** phpPgAdmin
+- Connectez votre navigateur à l'adresse
+  http://localhost:8080/phppgadmin/
+
+- Connectez-vous au /Serveur/ =PostgreSQL= :
+
+  - User : =pg_reader=
+
+  - Password : =tpinfint=
+
+Vous pouvez désormais saisir des requêtes SQL sur le serveur.
+
+*** Ligne de commande :
+
+=vagrant ssh=
+
+=psql -U pg_reader vins=
+
+* FAQ
+
+** TODO Quels sont les prérequis
+
+- un espace disque disponible de (TODO) :
+  - 350 Mo pour DebianBox.box
+TBD
+
+** TODO Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?
+
+TBD
+
+Oui : récupérer le nécessaire dans le .zip, ... install postgres
+perso... etc.
+
+Extraire d'une .box une appliance VirtualBox : tar zxf package.box
+
+Import applicance dans VirtualBox, configuration redirection de ports,
+etc.
+
+** TODO J'ai un OS 32 bits, est-ce que ça marchera pour moi ?
+
+TBD
+
+** Il y a pleins de messages en verts et rouge quand j'entre la commande vagrant up!
+
+Ce comportement est tout à fait normal et correspond à l'installation des différents composants utiles pour l'apprentissage du SQL.
+
+** Le message de confirmation de mise en place ne s'affiche pas.
+
+Reprendre le manuel d'installation depuis le début en vérifiant que toutes les étapes ont été correctement suivies.
+
+Vérifier notamment que le BoxMOOCSQL est bien orthographié lors de l'utilisation de la commande.
+
+Se reporter au site du tp pour vérifier que le DebianBox.box et le Vagrantfile sont bien à jour tous les deux. Le cas échéant, télécharger les nouveaux DebianBox.box et Vagrantfile et recommencer l'installation.
+
+Si le problème persiste, contacter l'auteur du MOOC.
+
+** Quand j'utilise la commande vagrant up, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying..." ou "default: Warning: Remote connection disconnect. Retrying..."
+
+Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
+
+Si l'invite de commande en est rempli, il est conseillé d'interrompre
+la commande (ctrl-C sur UNIX, XXX sur windows) et de recommencer
+l'étape d'installation que vous faisiez.
+
+** TODO Si le binding de port ne fonctionne pas, que faire (rerédiger en fonction du message d'erreur réel)
+
+TBD
+
+** Comment me connecter via SSH à la VM vagrant
+=ssh -p 2222 vagrant@localhost= (mot de passe : =vagrant=)
+
+* TODOs                                                            :noexport:
+
+** TODO Customiser phppgadmin pour utiliser le français par défaut plutôt que auto pour la langue de l'interface ?
+dans /etc/phppgadmin/config.inc.php :
+ $conf['default_lang'] = 'french';
+** TODO Customization de la locale par défaut à français ?
+#+BEGIN_example
+cat preseed.txt 
+locales locales/locales_to_be_generated multiselect     en_US.UTF-8 UTF-8 fr_FR.UTF-8 UTF-8
+locales locales/default_environment_locale      select  fr_FR.UTF-8
+DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure locales
+#+END_example
+
+** DONE Customization du miroir par défait sur ftp.fr.debian.org ?
+CLOSED: [2014-08-07 jeu. 09:21]
+#+BEGIN_example
+deb http://ftp.fr.debian.org/debian jessie main contrib non-free 
+deb-src http://ftp.fr.debian.org/debian jessie main contrib non-free 
+
+deb http://security.debian.org/ jessie/updates main contrib non-free 
+deb-src http://security.debian.org/ jessie/updates main contrib non-free 
+
+# jessie-updates, previously known as 'volatile'
+deb http://ftp.fr.debian.org/debian jessie-updates main contrib non-free 
+deb-src http://ftp.fr.debian.org/debian jessie-updates main contrib non-free 
+#+END_example
+
+** TODO Customization du keymap
+
+#+BEGIN_example
+# cat keymap-preseed.txt 
+console-data	console-data/keymap/policy	select	Select keymap from arch list
+console-data	console-data/keymap/family	select	azerty
+console-data	console-data/keymap/azerty/layout	select	French
+console-data	console-data/keymap/azerty/french/variant	select	With Euro (latin 9)
+
+
+debconf-set-selections keymap-preseed.txt 
+DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure console-data
+
+# pas nécessaire :
+# dpkg-reconfigure keyboard-configuration
+
+service keyboard-setup restart
+#+END_example
+
+** TODO Faire une version GUI avec env de bureau complet ?
+peut-être juste une option de vagrant up ?
+
+* Footnotes
+
+[fn:1] Disponible dans le repository dans =Provisionning/Vagrantfile=
+
+
