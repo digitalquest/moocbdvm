@@ -243,6 +243,14 @@ service keyboard-setup restart
 ** TODO Faire une version GUI avec env de bureau complet ?
 peut-être juste une option de vagrant up ?
 
+
+* Copyright
+
+This document is (C) Copyright 2014 by Stephane Germain and Institut
+Mines-Telecoms and is licensed under a Creative Commons
+Attribution-ShareAlike 4.0 International License.
+(http://creativecommons.org/licenses/by-sa/4.0/)
+
 * Footnotes
 
 [fn:1] Disponible dans le repository dans =Provisionning/Vagrantfile=
