@@ -1,5 +1,26 @@
 VM environment for the MOOCBD labs
 
+Documentation
+-------------
+The purpose of this project is to create a virtual environment built
+with Vagrant and run by VirtualBox for labs of a MOOC on Relational
+Databases developped at Telecom SudParis [0].
+
+VagrantBox contains the Vagrantfile and associate provisioning scripts
+necessary to create the labs VM/Box.
+
+See VagrantBox/manuel.[org|html] for more docs (in french).
+
+
+Development
+-----------
+The hosting project is at
+https://fusionforge.int-evry.fr/projects/moocbdvm/
+
+The project's Git repository is available at
+https://fusionforge.int-evry.fr/scm/?group_id=63
+
+
 Copyright and license
 ---------------------
 The contents of this repository are copyrighted by their respective
@@ -8,13 +29,17 @@ authors.
 Unless otherwise stated, the contents of this project is under the MIT
 License (cf. COPYING file).
 
+
 Authors
 -------
 Stéphane Germain (ENSIIE student intern)
 Olivier Berger
 Christian Bac
 
+
 Acknowledgements
 ----------------
 The development of this project benefited from funding by Idex
 Paris-Saclay.
+
+[0] http://mooc.telecom-sudparis.eu/mod/book/view.php?id=431
