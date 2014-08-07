@@ -23,4 +23,9 @@ Vagrant.configure("2") do |config|
   # Make sure the correct processes are running
   # every time we start the VM.
   config.vm.provision "shell", run: "always", path:"./setup-debian/start.sh"
+
+  # Uncomment the following to access the GUI
+  # config.vm.provider "virtualbox" do |v|
+  #   v.gui = true
+  # end
 end
