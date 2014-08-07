@@ -2,6 +2,12 @@ date := $(shell date +%Y%m%d%H%M)
 topdir := moocbdvm-vagrantbox-$(date)
 archive = $(topdir)
 
+vm:
+	cd Provisionning; vagrant up
+
+box:
+	cd Provisionning; vagrant package --output $(topdir).box --include appli default
+
 dist:	
 	rm -f $(archive).zip $(archive).tgz
 	$(MAKE) archive=$(archive) $(archive).zip
