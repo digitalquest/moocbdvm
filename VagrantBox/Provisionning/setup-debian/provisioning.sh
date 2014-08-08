@@ -32,9 +32,9 @@ apt-get update -q -q
 
 apt-get dist-upgrade -q --yes --force-yes
 
-# Install Apache web server, PGSQL, PHP, JS
+# Install Apache web server, PGSQL, PHP, JS, Git
 echo ".installing needed applications"
-apt-get install -q -y apache2 php5 postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin
+apt-get install -q -y apache2 php5 postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
 
 apt-get clean
 
@@ -70,6 +70,11 @@ sed -ire 's/deny from all/# deny from all/' /etc/apache2/conf.d/phppgadmin
 sed -ire 's/allow from 127.0.0.0/# allow from 127.0.0.0/' /etc/apache2/conf.d/phppgadmin
 sed -ire 's/# allow from all/allow from all/' /etc/apache2/conf.d/phppgadmin
 
+# Clone the git repository for the provided website
+git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
+
+# Launch the sheel script used allow the user to use his own php pages. Not finished yet
+./setup-tp.sh
 
 # Restart postgresql services
 /etc/init.d/postgresql reload
