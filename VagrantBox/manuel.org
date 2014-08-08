@@ -74,27 +74,36 @@ logiciel libre sur XXX (sous licences XXX).
 
 *** TODO Installation de Vagrant
 
-*** Création de la machine virtuelle
+# La machine virtuelle prête à l'emploi est sur vagrantcloud
 
-Télécharger
-[[https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box][debian80.box]]
-(attention, env. 350 Mo) et le
-[[http://www-tp.int-evry.fr/~germai_s/Vagrantfile][Vagrantfile]][fn:1]
-depuis le site de l'INT.
+# *** Création de la machine virtuelle
 
-** Installation de la DebianBox.box
+# Télécharger
+# [[https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box][debian80.box]]
+# (attention, env. 350 Mo) et le
+# [[http://www-tp.int-evry.fr/~germai_s/Vagrantfile][Vagrantfile]][fn:1]
+# depuis le site de l'INT.
 
-- Ouvrir un invite de commande dans le dossier où =debian80.box= a été téléchargé.
-- Entrer la commande suivante si vous avez téléchargé la box :
-#+BEGIN_example
-$ vagrant box add debian80.box --name debian80
-#+END_example
-Ou cette commande-ci pour que debian80.box soit téléchargée automatiquement:
-#+BEGIN_example
-$ vagrant box add https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box --name debian80
-#+END_example
+*** Téléchargement de la box vagrant
 
-- L'installation est terminée quand s'affiche la ligne : =Successfully added box debian80 (v0) for= '=virtualbox=' 
+# Inutile, vagrant init suffit, et le vagrant up fera le download
+# - =vagrant box add oberger/moocbdvm=
+- =vagrant init oberger/moocbdvm=
+
+
+# ** Installation de la DebianBox.box
+
+# - Ouvrir un invite de commande dans le dossier où =debian80.box= a été téléchargé.
+# - Entrer la commande suivante si vous avez téléchargé la box :
+# #+BEGIN_example
+# $ vagrant box add debian80.box --name debian80
+# #+END_example
+# Ou cette commande-ci pour que debian80.box soit téléchargée automatiquement:
+# #+BEGIN_example
+# $ vagrant box add https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box --name debian80
+# #+END_example
+
+# - L'installation est terminée quand s'affiche la ligne : =Successfully added box debian80 (v0) for= '=virtualbox=' 
 
 ** Mise en place de la machine virtuelle
 
@@ -112,7 +121,10 @@ $ vagrant box add https://downloads.sourceforge.net/project/vagrantboxjessie/deb
 ** Lancement de la machine virtuelle
 - Ouvrir un invite de commande
 
-- Entrer la commande: vagrant up
+- Entrer la commande: =vagrant up=
+
+  - Lors de la première utilisation, téléchargera le fichier de box
+    =oberger/moocbdvm= depuis Internet.
 
 - La mise en place de la machine est finie quand s'affiche la ligne "..."
 
@@ -195,6 +207,11 @@ TBD
 =ssh -p 2222 vagrant@localhost= (mot de passe : =vagrant=)
 
 * TODOs                                                            :noexport:
+
+** TODO Documenter la publication de la box
+
+- box uploadée sur partage
+- ajoutée dans vagrantcloud (référencée par son URL de download de partage)
 
 ** TODO Customiser phppgadmin pour utiliser le français par défaut plutôt que auto pour la langue de l'interface ?
 dans /etc/phppgadmin/config.inc.php :
