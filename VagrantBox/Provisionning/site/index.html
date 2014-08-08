@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Manuel de la Box Vagrant du MOOC BD</title>
+<!-- 2014-08-08 ven. 18:17 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Olivier Berger" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Manuel de la Box Vagrant du MOOC BD</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Environnement de travail virtualisé</a></li>
+<li><a href="#sec-1-2">1.2. Architecture technique</a></li>
+<li><a href="#sec-1-3">1.3. Utilité dans des contextes différents</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Installation</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Téléchargement des outils</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. <span class="todo TODO">TODO</span> Installation de Vagrant</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Téléchargement de la box vagrant</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. Mise en place de la machine virtuelle</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Utilisation</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Lancement de la machine virtuelle</a></li>
+<li><a href="#sec-3-2">3.2. Accès aux applications pour les TPs</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Exerciseur de requêtes SQL</a></li>
+<li><a href="#sec-3-2-2">3.2.2. phpPgAdmin</a></li>
+<li><a href="#sec-3-2-3">3.2.3. Ligne de commande :</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-4">4. FAQ</a>
+<ul>
+<li><a href="#sec-4-1">4.1. <span class="todo TODO">TODO</span> Quels sont les prérequis</a></li>
+<li><a href="#sec-4-2">4.2. <span class="todo TODO">TODO</span> Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?</a></li>
+<li><a href="#sec-4-3">4.3. <span class="todo TODO">TODO</span> J'ai un OS 32 bits, est-ce que ça marchera pour moi ?</a></li>
+<li><a href="#sec-4-4">4.4. Il y a pleins de messages en verts et rouge quand j'entre la commande vagrant up!</a></li>
+<li><a href="#sec-4-5">4.5. Le message de confirmation de mise en place ne s'affiche pas.</a></li>
+<li><a href="#sec-4-6">4.6. Quand j'utilise la commande vagrant up, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying&#x2026;" ou "default: Warning: Remote connection disconnect. Retrying&#x2026;"</a></li>
+<li><a href="#sec-4-7">4.7. <span class="todo TODO">TODO</span> Si le binding de port ne fonctionne pas, que faire (rerédiger en fonction du message d'erreur réel)</a></li>
+<li><a href="#sec-4-8">4.8. Comment me connecter via SSH à la VM vagrant</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Copyright</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Environnement de travail virtualisé</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Nous fournissons un environnement de travail pour les travaux
+pratiques (TPs) du MOOC bases de données relationnelles, basé sur une
+machine virtuelle.
+</p>
+
+<p>
+L'objectif est de faire tourner, sur le poste de l'apprenant, une
+machine virtuelle contenant un environnement Linux (Debian <i>jessie</i>),
+dans lequel sont installés :
+</p>
+<ul class="org-ul">
+<li>un <b>serveur de base de donnée</b> (SGBDR) PostgreSQL préconfiguré, dans
+lequel des bases de données d'exemples du cours sont chargées.
+</li>
+<li>un serveur Web (apache) permettant de fournir des applications Web
+locales utiles pour les TPs :
+<ul class="org-ul">
+<li>un "<b>exerciseur</b>" qui vous guidera dans l'apprentissage des requetes
+SQL sur les bases de données d'exemples;
+</li>
+<li>un outil professionnel de requêtage et d'administration des bases
+de données PostgreSQL : <b>phpPgAdmin</b>.
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+L'objectif est que vous soyez autonomes dans l'utilisation de cet
+environnement, installable en local sur votre ordinateur (quelque soit
+votre système d'exploitation, à condition qu'il soit récent), y
+compris sans accès à internet.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Architecture technique</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Bien que cet environnement soit basé sur un système Linux, aucune
+compétence en administration système Unix ne devrait être nécessaire
+pour utiliser cet environnement : l'interaction se déroulera dans
+l'interface Web de votre navigateur, au moins pour les premiers TPs.
+</p>
+
+<p>
+Cet environnement basé sur des logiciels libres est redistribuable, et
+potentiellement réutilisable dans d'autre contextes, par exemple pour
+votre contexte professionel, au-delà de ce MOOC.
+</p>
+
+<p>
+Nous avons essayé de le rendre aussi léger que possible, mais portable
+sur tout système cible 64 bits récent dans lequel le gestionnaire de
+machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Utilité dans des contextes différents</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Bien que les exemples du cours soit relativement simples, nous avons
+essayé de nous baser, pour cet environnement, sur une solution
+réaliste utilisée dans le monde professionnel (Debian, PostreSQL,
+phpPgAdmin, etc.).
+</p>
+
+<p>
+Si la solution de virtualisation choisie ne convient pas à vos
+contraintes, mais que vous avez installé un autre environnement
+PostgreSQL + Apache/PHP, il est toujours possible d'installer
+manuellement l'application d'exerciseur que nous avons développée,
+mais nous ne pouvons nous engager à fournir un support sur celle-ci.
+</p>
+
+<p>
+L'ensemble des sources de cet environnement sont disponibles en
+logiciel libre sur XXX (sous licences XXX).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Installation</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Téléchargement des outils</h3>
+<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> <span class="todo TODO">TODO</span> Installation de Vagrant</h4>
+<div class="outline-text-4" id="text-2-1-1">
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Téléchargement de la box vagrant</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<ul class="org-ul">
+<li><code>vagrant init oberger/moocbdvm</code>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Mise en place de la machine virtuelle</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>Ouvrir un invite de commande dans le dossier où est le Vagrantfile.
+</li>
+
+<li>Entrer la commande suivante : <code>vagrant up</code>.
+</li>
+</ul>
+
+<p>
+/!\ <b>La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant d'une connexion internet rapide.</b>
+</p>
+
+<ul class="org-ul">
+<li>La mise en place est terminée quand s'affiche la ligne "Successfully created the virtual machine."
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Utilisation</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Lancement de la machine virtuelle</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Ouvrir un invite de commande
+</li>
+
+<li>Entrer la commande: <code>vagrant up</code>
+
+<ul class="org-ul">
+<li>Lors de la première utilisation, téléchargera le fichier de box
+<code>oberger/moocbdvm</code> depuis Internet.
+</li>
+</ul>
+</li>
+
+<li>La mise en place de la machine est finie quand s'affiche la ligne "&#x2026;"
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Accès aux applications pour les TPs</h3>
+<div class="outline-text-3" id="text-3-2">
+</div><div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Exerciseur de requêtes SQL</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<ul class="org-ul">
+<li>Une fois la machine installée, ouvrir un navigateur internet et aller sur <a href="http://localhost:8080/">http://localhost:8080/</a>
+</li>
+
+<li>Vous pouvez maintenant commencer votre apprentissage du SQL!
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> phpPgAdmin</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ul class="org-ul">
+<li>Connectez votre navigateur à l'adresse
+<a href="http://localhost:8080/phppgadmin/">http://localhost:8080/phppgadmin/</a>
+</li>
+
+<li>Connectez-vous au <i>Serveur</i> <code>PostgreSQL</code> :
+
+<ul class="org-ul">
+<li>User : <code>pg_reader</code>
+</li>
+
+<li>Password : <code>tpinfint</code>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+Vous pouvez désormais saisir des requêtes SQL sur le serveur.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> Ligne de commande :</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+<code>vagrant ssh</code>
+</p>
+
+<p>
+<code>psql -U pg_reader vins</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> FAQ</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> <span class="todo TODO">TODO</span> Quels sont les prérequis</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>un espace disque disponible de (TODO) :
+<ul class="org-ul">
+<li>350 Mo pour DebianBox.box
+</li>
+</ul>
+</li>
+</ul>
+<p>
+TBD
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> <span class="todo TODO">TODO</span> Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+TBD
+</p>
+
+<p>
+Oui : récupérer le nécessaire dans le .zip, &#x2026; install postgres
+perso&#x2026; etc.
+</p>
+
+<p>
+Extraire d'une .box une appliance VirtualBox : tar zxf package.box
+</p>
+
+<p>
+Import applicance dans VirtualBox, configuration redirection de ports,
+etc.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> <span class="todo TODO">TODO</span> J'ai un OS 32 bits, est-ce que ça marchera pour moi ?</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+TBD
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Il y a pleins de messages en verts et rouge quand j'entre la commande vagrant up!</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Ce comportement est tout à fait normal et correspond à l'installation des différents composants utiles pour l'apprentissage du SQL.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Le message de confirmation de mise en place ne s'affiche pas.</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+Reprendre le manuel d'installation depuis le début en vérifiant que toutes les étapes ont été correctement suivies.
+</p>
+
+<p>
+Vérifier notamment que le BoxMOOCSQL est bien orthographié lors de l'utilisation de la commande.
+</p>
+
+<p>
+Se reporter au site du tp pour vérifier que le DebianBox.box et le Vagrantfile sont bien à jour tous les deux. Le cas échéant, télécharger les nouveaux DebianBox.box et Vagrantfile et recommencer l'installation.
+</p>
+
+<p>
+Si le problème persiste, contacter l'auteur du MOOC.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Quand j'utilise la commande vagrant up, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying&#x2026;" ou "default: Warning: Remote connection disconnect. Retrying&#x2026;"</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
+</p>
+
+<p>
+Si l'invite de commande en est rempli, il est conseillé d'interrompre
+la commande (ctrl-C sur UNIX, XXX sur windows) et de recommencer
+l'étape d'installation que vous faisiez.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> <span class="todo TODO">TODO</span> Si le binding de port ne fonctionne pas, que faire (rerédiger en fonction du message d'erreur réel)</h3>
+<div class="outline-text-3" id="text-4-7">
+<p>
+TBD
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Comment me connecter via SSH à la VM vagrant</h3>
+<div class="outline-text-3" id="text-4-8">
+<p>
+<code>ssh -p 2222 vagrant@localhost</code> (mot de passe : <code>vagrant</code>)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Copyright</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+This document is (C) Copyright 2014 by Stephane Germain and Institut
+Mines-Telecoms and is licensed under a Creative Commons
+Attribution-ShareAlike 4.0 International License.
+(<a href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>)
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Olivier Berger</p>
+<p class="date">Created: 2014-08-08 ven. 18:17</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7b)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -45,6 +45,8 @@ apt-get clean
 # wget http://www-tp/~germai_s/interp.html .
 
 # Create and mange the databases
+cd /vagrant/setup-debian
+
 sudo -u postgres psql -f setup.sql
 
 
@@ -71,6 +73,13 @@ sed -ire 's/# allow from all/allow from all/' /etc/apache2/conf.d/phppgadmin
 
 # Restart postgresql services
 /etc/init.d/postgresql reload
+
+
+cp -r /vagrant/appli /var/www/html/
+
+cd /var/www/html/
+mv index.html index.html.old
+cp /vagrant/site/index.html ./
 
 # Restart apache server
 /etc/init.d/apache2 restart 
