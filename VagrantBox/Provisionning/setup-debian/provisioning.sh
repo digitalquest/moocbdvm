@@ -15,7 +15,7 @@ export DEBCONF_NOWARNINGS=yes
 export LANG=C
 
 mv /etc/apt/sources.list /etc/apt/sources.list.bak
-# Don't install non-free applications
+
 cat >/etc/apt/sources.list <<EOF
 deb $debian_mirror/debian jessie main contrib non-free
 deb-src $debian_mirror/debian jessie main contrib non-free 
