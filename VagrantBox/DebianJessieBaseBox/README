@@ -17,3 +17,9 @@ The process is the following :
  - use if as a base box for further VM construction
 
 Tested with Vagrant 1.6.3 (upstream provided Debian packages)
+
+TODO
+----
+ - get rid of the current debian80 box (supposedly made from
+   https://github.com/holms/vagrant-jessie-box), and replace it by our
+   own variant. Probably using bootstrap-vz.
