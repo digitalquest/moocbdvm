@@ -6,7 +6,8 @@ vm:
 	cd Provisionning; vagrant up
 
 box:
-	cd Provisionning; vagrant package --output $(topdir).box --include appli default
+	cd Provisionning; vagrant package --output $(topdir).box --include appli --vagrantfile ../distrib/Vagrantfile default
+	cd Provisionning; md5sum $(topdir).box > $(topdir)_box.md5
 
 dist:	
 	rm -f $(archive).zip $(archive).tgz
