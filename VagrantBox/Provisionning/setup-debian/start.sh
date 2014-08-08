@@ -1,3 +1,6 @@
+
+set -x
+
 # Restart postgresql services
 /etc/init.d/postgresql reload
 
