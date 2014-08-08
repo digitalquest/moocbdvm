@@ -1,6 +1,19 @@
-Plan is :
+Debian Jessie base box, up to date
+----------------------------------
 
-- first update debian80
+This directory contains the bits needed to create an up-to-date base
+box containing a Debian Jessie installation, updated to latest
+versions of the packages.
 
-- re-package it
+Such a box, can be used as a base box for the rest of the developments.
 
+
+The process is the following :
+
+ - create the .box package : make
+
+ - add the box : vagrant box add --name debianjessiebase debianjessiebase-YYYYMMDDHHMM.box
+
+ - use if as a base box for further VM construction
+
+Tested with Vagrant 1.6.3 (upstream provided Debian packages)
