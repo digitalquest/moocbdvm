@@ -34,16 +34,9 @@ apt-get update -q -q
 
 apt-get dist-upgrade -q --yes --force-yes
 
+echo ".cnfiguring french keyboard 'azerty' by default"
+
 /vagrant/setup-debian/french-keyboard.sh
-
-cat >/etc/issue <<EOF
-Debian GNU/Linux jessie/sid \n \l
-
- * Attention : french keayboard 'azerty' *
-
- * You may login with user root/vagrant *
-
-EOF
 
 # Install Apache web server, PGSQL, PHP, JS, Git
 echo ".installing needed applications"
