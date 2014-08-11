@@ -9,7 +9,11 @@ site:
 	cp manuel.html Provisionning/site/index.html
 
 tp:
-	cd Provisionning; rm -fr TP; mkdir TP
+	cd Provisionning; \
+	rm -fr TP; \
+	mkdir TP; \
+	cd TP; \
+	git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git ./
 
 box:
 	cd Provisionning; vagrant package --output $(topdir).box --include appli --vagrantfile ../distrib/Vagrantfile default

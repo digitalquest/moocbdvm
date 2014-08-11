@@ -1,5 +1,8 @@
 #!bin/bash
 
+# TODO change this for appropriate dir
+PathToRepository=http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
+
 mkdir -p /vagrant/TP
 
 cd /vagrant/TP
