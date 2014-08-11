@@ -131,7 +131,7 @@ logiciel libre sur XXX (sous licences XXX).
 ** Accès aux applications pour les TPs
 
 *** Exerciseur de requêtes SQL
-- Une fois la machine installée, ouvrir un navigateur internet et aller sur http://localhost:8080/
+- Une fois la machine installée, ouvrir un navigateur internet et aller sur http://localhost:8080/bdsqlwiz/appli/
 
 - Vous pouvez maintenant commencer votre apprentissage du SQL!
 
@@ -152,6 +152,15 @@ Vous pouvez désormais saisir des requêtes SQL sur le serveur.
 =vagrant ssh=
 
 =psql -U pg_reader vins=
+
+*** TODO Programmation Web / BD en PHP
+
+Un sous-répertoire "=TP/=" est créé dans le répertoire dans lequel
+vous avez lancé la création de la machine virtuelle.
+
+Vous pouvez faire un =git pull= dans ce répertoire.
+
+Le résultat est accessible sur http://localhost:8080/TP/
 
 * FAQ
 
