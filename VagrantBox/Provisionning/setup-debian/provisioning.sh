@@ -94,3 +94,5 @@ cp /vagrant/site/index.html ./
 # Restart apache server
 service apache2 restart 
 
+cp $pathToSetupTp/install-gui.sh /usr/local/sbin/
+

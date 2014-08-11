@@ -182,9 +182,13 @@ Extraire d'une .box une appliance VirtualBox : tar zxf package.box
 Import applicance dans VirtualBox, configuration redirection de ports,
 etc.
 
-** TODO Je n'arrive pas à me connecter depuis la console
+*** TODO Je n'arrive pas à me connecter depuis la console
 
 Attention : clavier azerty par défaut.
+
+*** TODO Comment installer un environnement de bureau sur la VM
+
+=vagrant ssh -c "sudo /usr/local/sbin/install-gui.sh"=
 
 ** TODO J'ai un OS 32 bits, est-ce que ça marchera pour moi ?
 
