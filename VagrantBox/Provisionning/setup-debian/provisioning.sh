@@ -96,3 +96,11 @@ service apache2 restart
 
 cp $pathToSetupTp/install-gui.sh /usr/local/sbin/
 
+# Copy XFCE4 settings to the user's home
+cp -r /vagrant/vagrant_user_config ~vagrant/.config
+chown vagrant:vagrant ~vagrant/.config
+
+# Copy the links on the user's Desktop to its home
+cp -r /vagrant/vagrant_user_Desktop ~vagrant/Desktop
+chown vagrant:vagrant ~vagrant/Desktop
+
