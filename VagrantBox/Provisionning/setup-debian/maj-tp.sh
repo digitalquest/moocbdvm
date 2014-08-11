@@ -1,5 +1,7 @@
 #!bin/bash
 
+mkdir -p /vagrant/TP
+
 cd /vagrant/TP
 
 if [ -d ".git/" ]; then

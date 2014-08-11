@@ -85,7 +85,7 @@ echo ".installing the labs applications"
 # Clone the git repository for the provided website
 git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
 
-cp maj-tp.sh /usr/local/sbin/
+cp maj-tp.sh /usr/local/bin/
 
 # Launch the sheel script used allow the user to use his own php pages. Not finished yet
 $pathToSetupTp/setup-tp.sh
