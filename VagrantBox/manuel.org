@@ -173,6 +173,10 @@ Extraire d'une .box une appliance VirtualBox : tar zxf package.box
 Import applicance dans VirtualBox, configuration redirection de ports,
 etc.
 
+** TODO Je n'arrive pas à me connecter depuis la console
+
+Attention : clavier azerty par défaut.
+
 ** TODO J'ai un OS 32 bits, est-ce que ça marchera pour moi ?
 
 TBD
@@ -204,7 +208,14 @@ l'étape d'installation que vous faisiez.
 TBD
 
 ** Comment me connecter via SSH à la VM vagrant
-=ssh -p 2222 vagrant@localhost= (mot de passe : =vagrant=)
+
+Se connecter avec l'utilisateur =root= et le mot-de-passe =vagrant=
+sur le port 2222
+
+=ssh -p 2222 root@localhost= (mot de passe : =vagrant=)
+
+Normalement, la commande =vagrant ssh= permet de faire cela de façon
+transparente.
 
 * TODOs                                                            :noexport:
 
@@ -216,13 +227,17 @@ TBD
 ** TODO Customiser phppgadmin pour utiliser le français par défaut plutôt que auto pour la langue de l'interface ?
 dans /etc/phppgadmin/config.inc.php :
  $conf['default_lang'] = 'french';
-** TODO Customization de la locale par défaut à français ?
+
+** DONE Customization de la locale par défaut à français ?
+CLOSED: [2014-08-11 lun. 11:14]
 #+BEGIN_example
 cat preseed.txt 
 locales locales/locales_to_be_generated multiselect     en_US.UTF-8 UTF-8 fr_FR.UTF-8 UTF-8
 locales locales/default_environment_locale      select  fr_FR.UTF-8
 DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure locales
 #+END_example
+
+Pas nécessaire : géré par la construction de la box dans bootstrap-vz
 
 ** DONE Customization du miroir par défait sur ftp.fr.debian.org ?
 CLOSED: [2014-08-07 jeu. 09:21]
@@ -238,7 +253,10 @@ deb http://ftp.fr.debian.org/debian jessie-updates main contrib non-free
 deb-src http://ftp.fr.debian.org/debian jessie-updates main contrib non-free 
 #+END_example
 
-** TODO Customization du keymap
+Idem: pas nécessaire : géré par bootstrap-vz dans le manifest .json
+
+** DONE Customization du keymap
+CLOSED: [2014-08-11 lun. 15:00]
 
 #+BEGIN_example
 # cat keymap-preseed.txt 
