@@ -3,6 +3,8 @@
 #download_url=http://www-tp.int-evry.fr/~germai_s/
 #debian_mirror=http://ftp.fr.debian.org
 
+pathToSetupTp="/vagrant/setup-debian/"   
+
 echo "Provisioning the VM"
 
 # Debug mode
@@ -74,7 +76,8 @@ sed -ire 's/# allow from all/allow from all/' /etc/apache2/conf.d/phppgadmin
 git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
 
 # Launch the sheel script used allow the user to use his own php pages. Not finished yet
-./setup-tp.sh
+chmod a+x $pathToSetupTp"setup-tp.sh"
+sh $pathToSetupTp"setup-tp.sh"
 
 # Restart postgresql services
 /etc/init.d/postgresql reload
