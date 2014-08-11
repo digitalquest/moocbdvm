@@ -190,6 +190,14 @@ Attention : clavier azerty par défaut.
 
 =vagrant ssh -c "sudo /usr/local/sbin/install-gui.sh"=
 
+*** TODO Comment installer l'application exerciseur manuellement
+
+Les sources sont disponibles depuis git avec : 
+git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
+
+TBD : archive extractible .zip, dans
+https://fusionforge.int-evry.fr/frs/?group_id=64
+
 ** TODO J'ai un OS 32 bits, est-ce que ça marchera pour moi ?
 
 TBD
