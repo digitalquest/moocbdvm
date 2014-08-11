@@ -26,6 +26,8 @@ A refaire à chaque nouvelle version de la box du MOOC
 $ make vm
 $ make box
 
+Uploader l'image, puis nettoyer :
+
 $ cd Provisionning; vagrant destroy
 
 
