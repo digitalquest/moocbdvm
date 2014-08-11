@@ -44,13 +44,8 @@ apt-get install -q -y apache2 php5 postgresql libapache2-mod-php5 php5-pgsql jav
 
 apt-get clean
 
-# Fetch the SQL scripts (acces: ssh germai_s@ssh)
-# wget http://www-tp/~germai_s/script-vins.sql .
-# wget http://www-tp/~germai_s/script-film.sql .
-# wget http://www-tp/~germai_s/execpostgres.php .
-# wget http://www-tp/~germai_s/interp.html .
 
-# Create and mange the databases
+# Create and populate the databases
 cd /vagrant/setup-debian
 
 sudo -u postgres psql -f setup.sql
