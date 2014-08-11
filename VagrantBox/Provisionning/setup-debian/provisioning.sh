@@ -45,7 +45,7 @@ apt-get install -q -y apache2 php5 postgresql libapache2-mod-php5 php5-pgsql jav
 apt-get clean
 
 # Set vagrant user's password to 'vagrant'
-cat vagrant:vagrant | chpasswd
+echo "vagrant:vagrant" | chpasswd
 
 # Create and populate the databases
 cd /vagrant/setup-debian
