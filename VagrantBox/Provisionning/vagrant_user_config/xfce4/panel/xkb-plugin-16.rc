@@ -1,11 +1,11 @@
-display_type=1
-display_textsize=1
-group_policy=2
+display_type=0
+display_textsize=2
+group_policy=0
 default_group=0
 never_modify_config=false
 model=pc105
-layouts=fr,us
-variants=oss_latin9,alt-intl
+layouts=fr
+variants=
 toggle_option=
 compose_key_position=
 

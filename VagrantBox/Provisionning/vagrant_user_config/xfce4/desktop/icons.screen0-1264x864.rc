@@ -1,9 +1,9 @@
-[Doc VM BDMOOC]
-row=2
-col=3
-
 [slash_vagrant]
 row=2
+col=0
+
+[Doc VM MOOCBD]
+row=3
 col=0
 
 [Système de fichiers]
