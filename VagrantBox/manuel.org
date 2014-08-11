@@ -296,9 +296,11 @@ DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure
 service keyboard-setup restart
 #+END_example
 
-** TODO Faire une version GUI avec env de bureau complet ?
+** DONE Faire une version GUI avec env de bureau complet ?
+CLOSED: [2014-08-11 lun. 22:23]
 peut-être juste une option de vagrant up ?
 
+DONE : fait par ajout d'un script install-gui.sh - Cf. + haut
 
 * Copyright
 
