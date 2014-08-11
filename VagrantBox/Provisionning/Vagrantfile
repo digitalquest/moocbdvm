@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   # Box de base Debian : Debian Jessie amd64 minimal w/ guest additions
 
-  config.vm.box = "debianjessiebase"
+  config.vm.box = "oberger/debianjessiemini"
 
 
   # Setup the containers when the VM is first
