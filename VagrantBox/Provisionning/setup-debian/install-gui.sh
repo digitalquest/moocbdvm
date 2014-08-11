@@ -36,3 +36,6 @@ aptitude install $yes -R midori evince-gtk gedit
 # autologin-user=vagrant
 # autologin-user-timeout=0
 
+apt-get clean
+
+service lightdm restart
