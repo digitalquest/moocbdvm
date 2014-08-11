@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #download_url=http://www-tp.int-evry.fr/~germai_s/
-#debian_mirror=http://ftp.fr.debian.org
+debian_mirror=http://ftp.fr.debian.org
 
 pathToSetupTp=/vagrant/setup-debian
 
@@ -16,19 +16,19 @@ export DEBIAN_PRIORITY=critical
 export DEBCONF_NOWARNINGS=yes
 export LANG=C
 
-# mv /etc/apt/sources.list /etc/apt/sources.list.bak
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
 
-# cat >/etc/apt/sources.list <<EOF
-# deb $debian_mirror/debian jessie main contrib non-free
-# deb-src $debian_mirror/debian jessie main contrib non-free 
+cat >/etc/apt/sources.list <<EOF
+deb $debian_mirror/debian jessie main contrib non-free
+deb-src $debian_mirror/debian jessie main contrib non-free 
 
-# deb http://security.debian.org/ jessie/updates main contrib non-free
-# deb-src http://security.debian.org/ jessie/updates main contrib non-free 
+deb http://security.debian.org/ jessie/updates main contrib non-free
+deb-src http://security.debian.org/ jessie/updates main contrib non-free 
 
-# # jessie-updates, previously known as 'volatile'
-# deb $debian_mirror/debian jessie-updates main contrib non-free
-# deb-src $debian_mirror/debian jessie-updates main contrib non-free
-# EOF
+# jessie-updates, previously known as 'volatile'
+deb $debian_mirror/debian jessie-updates main contrib non-free
+deb-src $debian_mirror/debian jessie-updates main contrib non-free
+EOF
 
 apt-get update -q -q
 
