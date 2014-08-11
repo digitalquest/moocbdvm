@@ -1,25 +1,14 @@
 Debian Jessie base box, up to date
 ----------------------------------
 
-This directory contains the bits needed to create an up-to-date base
-box containing a Debian Jessie installation, updated to latest
-versions of the packages.
+Use boostrap-vz [0] from devlopment branch on testing/jessie to
+generate an image, using the manifest provided in
+bootstrap-vz-manifests/
 
-Such a box, can be used as a base box for the rest of the developments.
+Syntax : sudo ./bootstrap-vz --debug --log logs manifests/virtualbox-vagrant.manifest.yml
 
+Then upload it to vagrantcloud.
 
-The process is the following :
+Cf. oberger/debianjessiemini vagrantcloud image for releases.
 
- - create the .box package : make
-
- - add the box : vagrant box add --name debianjessiebase debianjessiebase-YYYYMMDDHHMM.box
-
- - use if as a base box for further VM construction
-
-Tested with Vagrant 1.6.3 (upstream provided Debian packages)
-
-TODO
-----
- - get rid of the current debian80 box (supposedly made from
-   https://github.com/holms/vagrant-jessie-box), and replace it by our
-   own variant. Probably using bootstrap-vz.
+[0] http://andsens.github.io/bootstrap-vz/
