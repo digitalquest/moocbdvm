@@ -3,7 +3,7 @@
 #download_url=http://www-tp.int-evry.fr/~germai_s/
 #debian_mirror=http://ftp.fr.debian.org
 
-pathToSetupTp="/vagrant/setup-debian/"   
+pathToSetupTp=/vagrant/setup-debian
 
 echo "Provisioning the VM"
 
@@ -76,23 +76,22 @@ sed -ire 's/deny from all/# deny from all/' /etc/apache2/conf.d/phppgadmin
 sed -ire 's/allow from 127.0.0.0/# allow from 127.0.0.0/' /etc/apache2/conf.d/phppgadmin
 sed -ire 's/# allow from all/allow from all/' /etc/apache2/conf.d/phppgadmin
 
-# Clone the git repository for the provided website
-git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
-
-# Launch the sheel script used allow the user to use his own php pages. Not finished yet
-chmod a+x $pathToSetupTp"setup-tp.sh"
-sh $pathToSetupTp"setup-tp.sh"
-
 # Restart postgresql services
 /etc/init.d/postgresql reload
 
 
-cp -r /vagrant/appli /var/www/html/
+echo ".installing the labs applications"
+
+# Clone the git repository for the provided website
+git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
+
+# Launch the sheel script used allow the user to use his own php pages. Not finished yet
+$pathToSetupTp/setup-tp.sh
 
 cd /var/www/html/
 mv index.html index.html.old
 cp /vagrant/site/index.html ./
 
 # Restart apache server
-/etc/init.d/apache2 restart 
+service apache2 restart 
 

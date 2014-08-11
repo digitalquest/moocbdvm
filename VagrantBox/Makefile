@@ -2,11 +2,14 @@ date := $(shell date +%Y%m%d%H%M)
 topdir := moocbdvm-vagrantbox-$(date)
 archive = $(topdir)
 
-vm:	site
+vm:	site tp
 	cd Provisionning; vagrant up
 
 site:
 	cp manuel.html Provisionning/site/index.html
+
+tp:
+	cd Provisionning; rm -fr TP; mkdir TP
 
 box:
 	cd Provisionning; vagrant package --output $(topdir).box --include appli --vagrantfile ../distrib/Vagrantfile default
