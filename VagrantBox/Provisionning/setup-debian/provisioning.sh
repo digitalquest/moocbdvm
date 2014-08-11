@@ -81,6 +81,8 @@ echo ".installing the labs applications"
 
 # Clone the git repository for the provided website
 git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
+sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
+sed -i 's/"whatever"/"tpinfint"/g' /var/www/html/bdsqlwiz/appli/execpostgres.php
 
 cp maj-tp.sh /usr/local/bin/
 
