@@ -111,9 +111,10 @@ git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/
 sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
 sed -i 's/"whatever"/"tpinfint"/g' /var/www/html/bdsqlwiz/appli/execpostgres.php
 
-cp maj-tp.sh /usr/local/bin/
+# Launch the script to pull the update scripts, create aliases and move to /usr/local/bin/
+../update/maj-maj.sh
 
-# Launch the sheel script used allow the user to use his own php pages. Not finished yet
+# Launch the shell script used allow the user to use his own php pages. Not finished yet
 $pathToSetupTp/setup-tp.sh
 
 cd /var/www/html/
