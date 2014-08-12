@@ -1,0 +1,51 @@
+#+TITLE: Prise en main rapide de la Box Vagrant du MOOC BD
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t
+#+OPTIONS: html5-fancy:nil tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7b)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+#+LATEX_HEADER:
+
+* Installation
+
+** Installer Vagrant et VirtualBox
+
+** Initialisation et mise en route
+
+Ouvrir une invit de commande et entrer: 
+- =vagrant init oberger/moccbdvm=
+- =vagrant up=
+
+* Utilisation
+
+** Site
+
+Une fois l'installation terminée, vous pouvez dès à présent tester les requêtes de votre choix sur les bases de données fournies par le MOOC.
+
+Vous n'avez qu'à vous connecter sur http://localhost:8080/bdsqlwiz/appli/.
+
+** Travaux pratiques (à partir de la semaine 6)
+
+Dans le cadre du MOOC, vous serez amenés à utiliser des pages php pour dialoguer avec la base de données.
+
+Vous devez placer vos pages dans le répertoire TP qui a été créé dans le même répertoire où vous avez executé les commandes d'installation.
+
+Elles seront alors accessibles depuis http://localhost:8080/TP/.
+
+* Maintenance
+
+Les enseignants du MOOC ont la possibilité de modifier l'environnement.
+
+Afin de mettre à jour l'environnement, entrez la commande suivante dans une invit de commande:
+- =vagrant ssh -c "sudo update-script"=
+
+* En savoir plus
+
+Une version plus complète de cette documentation est disponible sur http://localhost:8080/.
