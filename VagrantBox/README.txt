@@ -30,6 +30,7 @@ Uploader l'image, puis nettoyer :
 
 $ cd Provisionning; vagrant destroy
 
+Version utilisée : Vagrant 1.6.3 (package Debian non officiel d'upstream).
 
 Publication de la box
 ---------------------

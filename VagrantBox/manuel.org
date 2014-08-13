@@ -1,8 +1,10 @@
 #+TITLE: Manuel de la Box Vagrant du MOOC BD
-#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+AUTHOR: Stéphane Germain, Olivier Berger
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:t
 #+OPTIONS: html-preamble:t html-scripts:t html-style:t
 #+OPTIONS: html5-fancy:nil tex:t
-#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7b)
+#+OPTIONS: num:2 timestamp:t
+#+CREATOR: Copyright (C) 2014, The authors and Institut Mines-Télécom
 #+HTML_CONTAINER: div
 #+HTML_DOCTYPE: xhtml-strict
 #+HTML_HEAD:
@@ -12,131 +14,175 @@
 #+HTML_MATHJAX:
 #+INFOJS_OPT:
 #+LATEX_HEADER:
+#+LANGUAGE: fr
+
+* TL/DR;
+
+*Pour le lecteur pressé, lire : [[./TLDR.html][Prise en main rapide de la Box Vagrant du MOOC BD Télécom SudParis]].*
 
 * Introduction
 
 ** Environnement de travail virtualisé
-Nous fournissons un environnement de travail pour les travaux
-pratiques (TPs) du MOOC bases de données relationnelles, basé sur une
-machine virtuelle.
 
-L'objectif est de faire tourner, sur le poste de l'apprenant, une
-machine virtuelle contenant un environnement Linux (Debian /jessie/),
-dans lequel sont installés :
-- un *serveur de base de donnée* (SGBDR) PostgreSQL préconfiguré, dans
-  lequel des bases de données d'exemples du cours sont chargées.
-- un serveur Web (apache) permettant de fournir des applications Web
+Nous mettons à votre disposition un environnement de travail pour les
+travaux pratiques / travail personnel (TPs) du MOOC Bases de Données
+Relationnelles, basé sur une machine virtuelle.
+
+L'objectif est de faire tourner, sur le poste de l'apprenant (/vous/), une
+machine virtuelle contenant un serveur Linux dans lequel sont installés :
+
+- un *serveur de base de donnée* (SGBDR) /PostgreSQL/ préconfiguré, dans
+  lequel des bases de données d'exemples du cours ont été chargées.
+
+- un serveur Web (Apache) permettant de fournir des applications Web
   locales utiles pour les TPs :
-  - un "*exerciseur*" qui vous guidera dans l'apprentissage des requetes
+
+  - un "*exerciseur*" qui vous guidera dans l'apprentissage des requêtes
     SQL sur les bases de données d'exemples;
+
   - un outil professionnel de requêtage et d'administration des bases
     de données PostgreSQL : *phpPgAdmin*.
 
 L'objectif est que vous soyez autonomes dans l'utilisation de cet
-environnement, installable en local sur votre ordinateur (quelque soit
-votre système d'exploitation, à condition qu'il soit récent), y
-compris sans accès à internet.
+environnement installé en local sur votre ordinateur, y compris /sans
+accès à internet/.
 
-** Architecture technique
+L'utilisation de Vagrant et VirtualBox pour faire tourner cet
+environnement permet en théorie un même fonctionnement quelque soit
+votre système d'exploitation Linux, MacOSX, Windows (à condition qu'il soit relativement
+récent). Consultez cependant attentivement la section [[*Prérequis][Prérequis]].
 
-Bien que cet environnement soit basé sur un système Linux, aucune
-compétence en administration système Unix ne devrait être nécessaire
-pour utiliser cet environnement : l'interaction se déroulera dans
-l'interface Web de votre navigateur, au moins pour les premiers TPs.
+** Compétences requises
+
+Bien que cet environnement techniquement basé sur une machine virtuelle Linux, aucune
+compétence en /administration système/ Unix ne devrait être nécessaire
+pour pouvoir l'utiliser: l'interaction se déroulera principalement 
+*dans l'interface Web* de votre navigateur, au moins pour les premiers TPs.
 
 Cet environnement basé sur des logiciels libres est redistribuable, et
 potentiellement réutilisable dans d'autre contextes, par exemple pour
-votre contexte professionel, au-delà de ce MOOC.
+votre utilisation professionelle, au-delà de ce MOOC (cf. [[*À propos de la Box Vagrant du MOOC][À propos de la Box Vagrant du MOOC]]).
 
-Nous avons essayé de le rendre aussi léger que possible, mais portable
-sur tout système cible 64 bits récent dans lequel le gestionnaire de
-machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
+** Avertissement
 
-** Utilité dans des contextes différents
-
-Bien que les exemples du cours soit relativement simples, nous avons
-essayé de nous baser, pour cet environnement, sur une solution
-réaliste utilisée dans le monde professionnel (Debian, PostreSQL,
-phpPgAdmin, etc.).
-
-Si la solution de virtualisation choisie ne convient pas à vos
-contraintes, mais que vous avez installé un autre environnement
-PostgreSQL + Apache/PHP, il est toujours possible d'installer
-manuellement l'application d'exerciseur que nous avons développée,
-mais nous ne pouvons nous engager à fournir un support sur celle-ci.
+/Nous avons fait de notre mieux pour fournir un environnement fonctionnel, basé sur des logiciels libres, mais vous l'utilisez *à vos risques et périls, sans aucune garantie*. Nous ne pouvons être tenus responsables des dommages qui résulteraient de l'utilisation de cet environnement./
 
 L'ensemble des sources de cet environnement sont disponibles en
 logiciel libre sur XXX (sous licences XXX).
 
+** Glossaire
+
+- box :: paquetage d'installation d'une /machine virtuelle/
+         préconfigurée, qui est pris en charge par l'application
+         /Vagrant/. Les différentes versions des box sont publiées sur
+         Internet (sur =https://vagrantcloud.com/=), afin de faciliter
+         leur mise-à-jour.
+- exerciseur :: application destinée à faciliter l'apprentissage
+- guest :: voir /machine virtuelle/
+- hôte :: votre machine, avec un système d'exploitation 64 bits, sur
+          laquelle est installé le virtualiseur /VirtualBox/ utilisé par
+          /Vagrant/ (c'est par exemple votre système /Windows 7/ habituel).
+- machine virtuelle :: un système d'exploitation /virtualisé/ (ici un
+     /Linux/ sur une machine fictive ayant 2.5 Go de disque et 256 Mo de
+     RAM), qui est donc isolé des autres programmes de votre système
+     /hôte/. Nous l'avons préinstallé avec différents
+     logiciels. VirtualBox et Vagrant font fonctionner cette machine virtuelle:
+     démarrage, arrêt, mise en pause, etc.
+- VM :: /Virtual Machine/ voir /machine virtuelle/
+
 * Installation
 
-** Téléchargement des outils
+** Prérequis
 
-*** TODO Installation de Vagrant
+- Disposer d'une machine moderne avec un système d'exploitation 64
+  bits sur lequel VirtualBox\trade fonctionne[fn:2]
+
+- Avoir un environnement internet à haut débit, le temps de télécharger l'environnement[fn:4]
+
+- Avoir au moins 2 Go de libre sur un disque dur local
+
+- Maîtriser un minimum l'utilisation d'un système d'exploitation,
+  notamment en mode invite de commande (commandes de base DOS ou shell
+  Unix, type =cd=, =ls/dir=, etc.).
+
+** Télécharger et installer Vagrant et VirtualBox
+
+Téléchargez les deux applications depuis leurs sites, ou installez les
+paquetages pour votre distribution (si vous êtes sur Linux).
+
+- Vagrant : http://www.vagrantup.com/downloads.html
+- VirtualBox : https://www.virtualbox.org/wiki/Downloads
+
+
+** Initialisation et mise en route
+
+Choisir un dossier de travail dans lequel Vagrant va installer une
+*machine virtuelle* 64 bits, et où les fichiers des TPs vont résider. Ce dossier
+doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
+stockage libre.
+
 
 # La machine virtuelle prête à l'emploi est sur vagrantcloud
 
-# *** Création de la machine virtuelle
+Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /machine virtuelle/, suivre les étapes suivantes :
 
-# Télécharger
-# [[https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box][debian80.box]]
-# (attention, env. 350 Mo) et le
-# [[http://www-tp.int-evry.fr/~germai_s/Vagrantfile][Vagrantfile]][fn:1]
-# depuis le site de l'INT.
+1. ouvrir un invite de commande[fn:3] dans le dossier de travail choisi (utiliser =cd= pour s'y positionner):
 
-*** Téléchargement de la box vagrant
+2. entrer la commande suivante : 
+   #+BEGIN_example
+   vagrant init oberger/moocbdvm
+   #+END_EXAMPLE
+   un fichier =Vagrantfile= est créé dans le dossier de travail;
 
-# Inutile, vagrant init suffit, et le vagrant up fera le download
-# - =vagrant box add oberger/moocbdvm=
-- =vagrant init oberger/moocbdvm=
+3. entrer la commande suivante :
+   #+BEGIN_example
+   vagrant up
+   #+END_EXAMPLE
+   ceci va télécharger la dernière version de la [[https://vagrantcloud.com/oberger/moocbdvm][/box/ =oberger/moocbdvm=]] depuis Internet
+   (env. 500 Mo), et démarrer une machine virtuelle VirtualBox
+   en tâche de fond, qui fournira l'environnement Web que vous allez utiliser.
 
+*ATTENTION: La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant pas d'une connexion internet haut-débit.*
 
-# ** Installation de la DebianBox.box
+La mise en place est terminée quand s'affiche la ligne "/Successfully created the virtual machine./". Si tout va bien, la machine virtuelle
+est visible dans l'interface d'administration de VirtualBox (et peut
+être démarrée, arrêtée, ou mise en pause comme une machine virtuelle
+ordinaire).
 
-# - Ouvrir un invite de commande dans le dossier où =debian80.box= a été téléchargé.
-# - Entrer la commande suivante si vous avez téléchargé la box :
-# #+BEGIN_example
-# $ vagrant box add debian80.box --name debian80
-# #+END_example
-# Ou cette commande-ci pour que debian80.box soit téléchargée automatiquement:
-# #+BEGIN_example
-# $ vagrant box add https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box --name debian80
-# #+END_example
-
-# - L'installation est terminée quand s'affiche la ligne : =Successfully added box debian80 (v0) for= '=virtualbox=' 
-
-** Mise en place de la machine virtuelle
-
-- Ouvrir un invite de commande dans le dossier où est le Vagrantfile.
-
-- Entrer la commande suivante : =vagrant up=.
-
-/!\ *La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant d'une connexion internet rapide.*
-
-- La mise en place est terminée quand s'affiche la ligne "Successfully created the virtual machine."
-
+Pour une explication des commandes de base de Vagrant,
+consultez
+[[http://docs.vagrantup.com/v2/getting-started/index.html][le guide de démarrage vagrant (en anglais)]].
 
 * Utilisation
 
+La machine virtuelle doit être lancée, en tâche de fond, pour pouvoir
+utiliser l'environnement de travail personnel du MOOC. 
+
 ** Lancement de la machine virtuelle
-- Ouvrir un invite de commande
 
-- Entrer la commande: =vagrant up=
+1. ouvrir un invite de commande dans le dossier de travail;
 
-  - Lors de la première utilisation, téléchargera le fichier de box
-    =oberger/moocbdvm= depuis Internet.
+2. entrer la commande:
+   #+BEGIN_example
+   vagrant up
+   #+END_example
+   la mise en place de la machine est finie quand s'affiche la ligne "...". Si la machine virtuelle était déjà lancée, rien ne se passe, tant mieux.
 
-- La mise en place de la machine est finie quand s'affiche la ligne "..."
+Une fois lancée, elle fournit un serveur HTTP qui est redirigé sur
+l'adresse locale de l'ordinateur /hôte/ =localhost= (=127.0.0.1=), qui
+écoute sur le port =8080= (d'où les URLs ci-dessous commençant par =http://localhost:8080/=).
 
 ** Accès aux applications pour les TPs
 
 *** Exerciseur de requêtes SQL
-- Une fois la machine installée, ouvrir un navigateur internet et aller sur http://localhost:8080/bdsqlwiz/appli/
 
-- Vous pouvez maintenant commencer votre apprentissage du SQL!
+Une fois la machine virtuelle lancée, ouvrir un navigateur Web et aller sur http://localhost:8080/bdsqlwiz/appli/
 
-*** phpPgAdmin
-- Connectez votre navigateur à l'adresse
+Vous pouvez maintenant commencer votre apprentissage du langage SQL !
+
+*** Module Web d'administration PostgreSQL /phpPgAdmin/
+
+- Connectez votre navigateur à l'adresse :
   http://localhost:8080/phppgadmin/
 
 - Connectez-vous au /Serveur/ =PostgreSQL= :
@@ -145,17 +191,45 @@ logiciel libre sur XXX (sous licences XXX).
 
   - Password : =tpinfint=
 
-Vous pouvez désormais saisir des requêtes SQL (de lecture seulement) sur le serveur.
+Vous pouvez désormais saisir des requêtes SQL (de consultation seulement) sur le serveur PostgreSQL.
 
-*** Ligne de commande :
+*** En ligne de commande PostgreSQL
 
-=vagrant ssh=
+Pour exécuter des commandes SQL sur le serveur PostgreSQL présent à l'interieur de la machine virtuelle, procéder comme suit :
 
-=psql -U pg_reader vins=
+1. connectez-vous dans la machine virtuelle dans le compte =vagrant=
+   #+BEGIN_example
+   vagrant ssh
+   #+END_example
+   vous devriez alors voir le /prompt/ du shell Linux (si un client SSH est disponible \--- Cf. [[*=vagrant ssh= échoue, sous Windows][FAQ]]), quelque chose du style :
+   #+BEGIN_example
+   Linux localhost 3.14-2-amd64 #1 SMP Debian 3.14.13-2 (2014-07-24) x86_64
+   
+   The programs included with the Debian GNU/Linux system are free software;
+   the exact distribution terms for each program are described in the
+   individual files in /usr/share/doc/*/copyright.
+   
+   Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+   permitted by applicable law.
+   Last login: Wed Aug 13 13:27:54 2014 from 10.0.2.2
+   vagrant@localhost:~$
+   #+END_example
+
+2. lancez la commande de connexion à PostgreSQL en ligne de commande (connexion à la base =vins= en tant qu'utilisateur PostgreSQL =pg_reader= :
+   #+BEGIN_example
+   psql -U pg_reader vins
+   #+END_example
+   vous devriez alors voir le /prompt/ de l'interface ligne de commandes de PostgreSQL.
+   #+BEGIN_example
+   psql (9.4beta2)
+   Saisissez « help » pour l'aide.
+   
+   vins=>
+   #+END_example
 
 *** Faire des mises à jour dans la base de données
 
-Utilisez phppgadmin (voir ci-dessus), avec l'utilisateur =postgres=,
+Utilisez l'application Web /phppgadmin/ (voir [[*Module Web d'administration PostgreSQL /phpPgAdmin/][ci-dessus]]), avec l'utilisateur =postgres=,
 l'administrateur PostgreSQL qui a tous les droits sur la base de
 données. Son mot-de-passe est aussi =postgres=.
 
@@ -173,31 +247,52 @@ Le résultat est accessible sur http://localhost:8080/TP/
 
 * FAQ
 
-** TODO Quels sont les prérequis
+# ** TODO Quels sont les prérequis
 
-- un espace disque disponible de (TODO) :
-  - 350 Mo pour DebianBox.box
-TBD
+# - un espace disque disponible de (TODO) :
+#   - 350 Mo pour DebianBox.box
+# TBD
 
 ** TODO Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?
 
-TBD
+Il est possible de télécharger une /box/ Vagrant (fichier =.box=) et
+d'en extraire le contenu (c'est en réalité une archive /tar/
+compressée, équivalente à un =.tgz= / =.tar.gz=). Par exemple, sous
+Unix : =tar zxf package.box=.
 
-Oui : récupérer le nécessaire dans le .zip, ... install postgres
-perso... etc.
 
-Extraire d'une .box une appliance VirtualBox : tar zxf package.box
+On peut en extraire un fichier de définition de machine virtuelle
+VirtualBox (=./box.ovf=), ainsi que le fichier d'image de disque
+(=./box-disk1.vmdk=) correspondant.
 
-Import applicance dans VirtualBox, configuration redirection de ports,
-etc.
+Il est alors possible d'importer le tout dans VirtualBox, et de
+redéfinir les redirections de ports appropriées, ou les partages de
+dossiers, etc.
 
-*** TODO Je n'arrive pas à me connecter depuis la console
+*** Je n'arrive pas à me connecter depuis la console affichée par VirtualBox
 
-Attention : clavier azerty par défaut.
+Attention : le clavier configuré par défaut, pour la console de login
+affichée par VirtualBox est en disposition *azerty* (comme rappelé par
+le message d'accueil affiché avant le prompt de /login/).
 
-*** TODO Comment installer un environnement de bureau sur la VM
+Une alternative à l'utilisation de la console affichée par VirtualBox,
+est d'utiliser =vagrant ssh=, qui fonctionnera en principe quelque
+soit votre disposition de clavier.
 
-=vagrant ssh -c "sudo /usr/local/sbin/install-gui.sh"=
+*** Comment installer un environnement de bureau sur la VM
+
+Normalement, vous n'aurez pas besoin d'utiliser la machine virtuelle en mode bureau graphique pour les TPs du MOOC, mais c'est cependant tout-à-fait faisable.
+
+Nous fournissons un script de mise-à-jour permettant d'installer (en
+mode superutilisateur Linux) l'environnement de bureau XFCE4,
+préconfiguré en français avec clavier azerty : =/usr/local/sbin/install-gui.sh=.
+
+Pour le lancer, rentrer la commande suivante :
+#+BEGIN_example
+vagrant ssh -c "sudo /usr/local/sbin/install-gui.sh"
+#+END_example
+
+Attention, ceci fait augmenter substentiellement l'occupation disque de la machine virtuelle.
 
 *** TODO Comment installer l'application exerciseur manuellement
 
@@ -207,25 +302,45 @@ git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
 TBD : archive extractible .zip, dans
 https://fusionforge.int-evry.fr/frs/?group_id=64
 
-** TODO J'ai un OS 32 bits, est-ce que ça marchera pour moi ?
+** J'ai un système 32 bits, est-ce que ça marchera pour moi ?
 
-TBD
+Nous ne fournissons pour l'instant aucun environnement de machine
+virtuelle 32 bits. Vous devrez avoir un système d'exploitation 64 bits
+sur l'hôte pour utiliser notre /box/ 64 bits.
 
-** Il y a pleins de messages en verts et rouge quand j'entre la commande vagrant up!
+** Je n'ai pas accès à Internet en haut débit
 
-Ce comportement est tout à fait normal et correspond à l'installation des différents composants utiles pour l'apprentissage du SQL.
+C'est bien dommage (d'autant que visionner les vidéos du MOOC doit
+être pénible, dans ce cas). Cependant, vous pouvez installer de façon
+indépendantes, les applications que nous avons empaquetées dans la
+/box/.
+
+Notez tout d'abord qu'un environnement d'exerciseur est disponible
+aussi pour les navigateurs basés sur Webkit (Chrome, Safari), sans
+nécessiter l'installation d'un SGBD comme PostgreSQL. (Cf. XXX - TODO)
+
+Autrement, pas besoin de machine virtuelle, si vous savez installer un
+SGBD par vous-même. Si vous avez la possibilité de créer une base de
+données PostgreSQL localement, les scripts de création de base sont
+disponibles dans XXX TODO.
+
+# ** Il y a plein de messages en verts et rouge quand j'entre la commande =vagrant up= !
+
+# Ce comportement est tout à fait normal et correspond à l'installation des différents composants utiles pour l'apprentissage du SQL.
 
 ** Le message de confirmation de mise en place ne s'affiche pas.
 
-Reprendre le manuel d'installation depuis le début en vérifiant que toutes les étapes ont été correctement suivies.
+Reprendre les instuctions d'installation depuis le début en vérifiant que toutes les étapes ont été correctement suivies.
 
-Vérifier notamment que le BoxMOOCSQL est bien orthographié lors de l'utilisation de la commande.
+# Vérifier notamment que le BoxMOOCSQL est bien orthographié lors de l'utilisation de la commande.
 
-Se reporter au site du tp pour vérifier que le DebianBox.box et le Vagrantfile sont bien à jour tous les deux. Le cas échéant, télécharger les nouveaux DebianBox.box et Vagrantfile et recommencer l'installation.
+# Se reporter au site du tp pour vérifier que le DebianBox.box et le Vagrantfile sont bien à jour tous les deux. Le cas échéant, télécharger les nouveaux DebianBox.box et Vagrantfile et recommencer l'installation.
 
-Si le problème persiste, contacter l'auteur du MOOC.
+Il peut être nécessaire de mettre à jour la box (commandes =vagrant box outdated=, etc.). Veuillez vous reporter à la documentation Vagrant.
 
-** Quand j'utilise la commande vagrant up, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying..." ou "default: Warning: Remote connection disconnect. Retrying..."
+Si le problème persiste, contactez-nous via les forums du MOOC.
+
+** Quand j'utilise la commande =vagrant up=, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying..." ou "default: Warning: Remote connection disconnect. Retrying..."
 
 Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
 
@@ -237,17 +352,43 @@ l'étape d'installation que vous faisiez.
 
 TBD
 
+Le démarrage de la machine virtuelle effectue une redirection du port
+80 du /guest/ vers le port 8080 de l'/hôte/. Il se peut qu'une telle
+redirection soit interdite (firewall) ou impossible (une autre
+application de l'hôte utilise déjà le port 8080).
+
+Il est alors possible de modifier le fichier =Vagrantfile= (qui a été
+généré dans le dossier de travail par =vagrant init=) pour utiliser un
+autre port, par exemple 8081. Il faudra alors adapter toutes les URLs
+pour utiliser à la place =http://localhost:8081=
+
+** =vagrant ssh= échoue, sous Windows
+
+En plus de l'installation de Vagrant et VirtualBox, il est nécessaire
+d'installer un client SSH que Vagrant pourra utiliser pour se
+connecter (avec une clé privée particulière) de façon transparente à
+l'intérieur du /guest/.
+
+Sur les systèmes Windows, il est probable qu'aucun client SSH ne sera
+installé par défaut.
+
+Ceci est une FAQ Vagrant, pour laquelle de nombreuses ressources
+Internet sont disponibles. Contactez les forums du MOOC si vous n'y
+arrivez pas par vous-même.
+
 ** Comment me connecter via SSH à la VM vagrant
-
-Se connecter avec l'utilisateur =root= et le mot-de-passe =vagrant=
-sur le port 2222
-
-=ssh -p 2222 root@localhost= (mot de passe : =vagrant=)
 
 Normalement, la commande =vagrant ssh= permet de faire cela de façon
 transparente.
 
+Sinon, n'importe quel client SSH fera l'affaire : se connecter avec
+l'utilisateur =vagrant= et le mot-de-passe =vagrant= sur le port 2222
+de l'/hôte/ (redirigé vers le port 22 du /guest/) : =ssh -p 2222 vagrant@localhost= (mot de passe : =vagrant=)
+
+
 ** TODO J'ai écrasé la base de données, que faire
+
+** Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
 
 * TODOs                                                            :noexport:
 
@@ -313,15 +454,51 @@ peut-être juste une option de vagrant up ?
 
 DONE : fait par ajout d'un script install-gui.sh - Cf. + haut
 
+* À propos de la Box Vagrant du MOOC
+
+** Architecture technique
+
+La machine virtuelle déployée par la /box/ Vagrant est basée sur un
+système GNU/Linux ([[http://www.debian.org/][Debian]] /jessie/).
+
+Nous avons essayé de le rendre aussi léger que possible, mais portable
+sur tout système cible 64 bits récent dans lequel le gestionnaire de
+machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
+
+La fabrication de la box Vagrant repose sur l'utilisation de
+[[http://andsens.github.io/bootstrap-vz/][bootstrap-vz]] pour l'installation du système Debian de base, complétée
+par des scripts de /provisionning/ que nous avons développés
+(disponibles sur ...)
+
+** Utilité dans des contextes différents
+
+Bien que les exemples du cours soit relativement simples, nous avons
+essayé de nous baser, pour cet environnement, sur une solution
+réaliste utilisée dans le monde professionnel (Debian, PostreSQL,
+phpPgAdmin, etc.).
+
+Si la solution de virtualisation choisie ne convient pas à vos
+contraintes, mais que vous avez installé un autre environnement
+PostgreSQL + Apache/PHP, il est toujours possible d'installer
+manuellement l'application d'exerciseur que nous avons développée,
+mais nous ne pouvons nous engager à fournir un support sur celle-ci.
+
 * Copyright
 
-This document is (C) Copyright 2014 by Stephane Germain and Institut
-Mines-Telecoms and is licensed under a Creative Commons
-Attribution-ShareAlike 4.0 International License.
-(http://creativecommons.org/licenses/by-sa/4.0/)
+/This document is (C) Copyright 2014 by Stephane Germain and Institut Mines-Telecom and is licensed under a/ [[http://creativecommons.org/licenses/by-sa/4.0/][/Creative Commons Attribution-ShareAlike 4.0 International License/]].
 
 * Footnotes
 
 [fn:1] Disponible dans le repository dans =Provisionning/Vagrantfile=
 
+[fn:2] Nous avons réalisé nos tests sur des ordinateurs portables
+professionnels en systèmes GNU/Linux ou Microsoft Windows 7
+professional.
 
+[fn:3] autrement appelé /terminal/, /shell/, selon les systèmes d'exploitation
+
+[fn:4] Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
+
+# Local Variables:
+# org-html-postamble-format: (("fr" "<p class=\"author\">Auteur: %a</p>\n<p class=\"date\">Date: %C</p>\n<p class=\"creator\">%c</p>"))
+# End:
