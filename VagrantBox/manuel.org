@@ -145,13 +145,22 @@ logiciel libre sur XXX (sous licences XXX).
 
   - Password : =tpinfint=
 
-Vous pouvez désormais saisir des requêtes SQL sur le serveur.
+Vous pouvez désormais saisir des requêtes SQL (de lecture seulement) sur le serveur.
 
 *** Ligne de commande :
 
 =vagrant ssh=
 
 =psql -U pg_reader vins=
+
+*** Faire des mises à jour dans la base de données
+
+Utilisez phppgadmin (voir ci-dessus), avec l'utilisateur =postgres=,
+l'administrateur PostgreSQL qui a tous les droits sur la base de
+données. Son mot-de-passe est aussi =postgres=.
+
+Bien entendu, tout est possible quand on est administrateur, donc
+attention avant de tout casser.
 
 *** TODO Programmation Web / BD en PHP
 
@@ -237,6 +246,8 @@ sur le port 2222
 
 Normalement, la commande =vagrant ssh= permet de faire cela de façon
 transparente.
+
+** TODO J'ai écrasé la base de données, que faire
 
 * TODOs                                                            :noexport:
 
