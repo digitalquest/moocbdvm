@@ -1,5 +1,8 @@
 #!bin/bash
 
+#FIXME
+#cd .... ???
+
 # TODO change this for appropriate dir
 PathToRepository=http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
 
@@ -24,4 +27,5 @@ cp maj-maj.sh /usr/locale/bin/
 cp maj-site.sh /usr/locale/bin/
 cp maj-tp.sh /usr/locale/bin/
 
-c
+# FIXME : ???
+#c

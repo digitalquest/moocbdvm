@@ -112,7 +112,7 @@ sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
 sed -i 's/"whatever"/"tpinfint"/g' /var/www/html/bdsqlwiz/appli/execpostgres.php
 
 # Launch the script to pull the update scripts, create aliases and move to /usr/local/bin/
-../update/maj-maj.sh
+#/vagrant/update/maj-maj.sh
 
 # Launch the shell script used allow the user to use his own php pages. Not finished yet
 $pathToSetupTp/setup-tp.sh
