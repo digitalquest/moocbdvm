@@ -90,6 +90,12 @@ sed -ire 's/local [ \t]*all [ \t]*all [ \t]*peer/local all all trust/' $PathToCo
 # Cleaning-up
 rm config.txt
 
+# Set password for PostgreSQL user postgres to postgres (not postgres Unix user)
+cd /tmp; sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';" postgres 
+
+# Allow user postgres to connect to phppgadmin
+sed -i 's/\(^.*conf\[.extra_login_security.\] =\) true/\1 false/' /etc/phppgadmin/config.inc.php
+
 # Tell apache to read from conf.d
 # sed -i '$a\Include conf.d/' > /etc/apache2/apache2.conf
 ln -s /etc/apache2/conf.d/phppgadmin /etc/apache2/conf-enabled/phppgadmin.conf
