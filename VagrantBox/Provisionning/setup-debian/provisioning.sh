@@ -59,7 +59,7 @@ apt-get update -q -q
 
 apt-get dist-upgrade -q --yes --force-yes
 
-echo ".cnfiguring french keyboard 'azerty' by default"
+echo ".configuring french keyboard 'azerty' by default"
 
 /vagrant/setup-debian/french-keyboard.sh
 
@@ -78,7 +78,6 @@ echo "vagrant:vagrant" | chpasswd
 cd /vagrant/setup-debian
 
 sudo -u postgres psql -f setup.sql
-
 
 # Get the path to pg_hba.conf
 sudo -u postgres psql -c "SHOW hba_file" > config.txt
