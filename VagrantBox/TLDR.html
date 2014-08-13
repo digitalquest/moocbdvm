@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Prise en main rapide de la Box Vagrant du MOOC BD</title>
-<!-- 2014-08-12 mar. 17:01 -->
+<!-- 2014-08-13 mer. 16:10 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -137,57 +137,68 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Prise en main rapide de la Box Vagrant du MOOC BD</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#sec-1">1. Installation</a>
-<ul>
-<li><a href="#sec-1-1">1.1. Installer Vagrant et VirtualBox</a></li>
-<li><a href="#sec-1-2">1.2. Initialisation et mise en route</a></li>
-</ul>
-</li>
-<li><a href="#sec-2">2. Utilisation</a>
-<ul>
-<li><a href="#sec-2-1">2.1. Site</a></li>
-<li><a href="#sec-2-2">2.2. Travaux pratiques (à partir de la semaine 6)</a></li>
-</ul>
-</li>
-<li><a href="#sec-3">3. Maintenance</a></li>
-<li><a href="#sec-4">4. En savoir plus</a></li>
-</ul>
-</div>
-</div>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Installation</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Prérequis</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Installer Vagrant et VirtualBox</h3>
-</div>
-
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Initialisation et mise en route</h3>
-<div class="outline-text-3" id="text-1-2">
-<p>
-Ouvrir une invit de commande et entrer: 
-</p>
 <ul class="org-ul">
-<li><code>vagrant init oberger/moccbdvm</code>
+<li>Disposer d'une machine avec un système d'exploitation moderne 64
+bits sur lequel VirtualBox&trade; fonctionne
 </li>
-<li><code>vagrant up</code>
+
+<li>Avoir au moins 2 Go de libre sur un disque dur local
+</li>
+
+<li>Maîtriser un minimum l'utilisation d'un système d'exploitation,
+notamment en mode invite de commande (commandes de base DOS ou shell
+Unix, type <code>cd</code>, <code>ls/dir</code>, etc.).
 </li>
 </ul>
-</div>
 </div>
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Utilisation</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> Installation</h2>
 <div class="outline-text-2" id="text-2">
 </div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Site</h3>
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> Installer Vagrant et VirtualBox</h3>
 <div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Vagrant : <a href="http://www.vagrantup.com/downloads.html">http://www.vagrantup.com/downloads.html</a>
+</li>
+<li>VirtualBox : <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Initialisation et mise en route</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Choisir un dossier de travail dans lequel vagrant va installer une
+machine virtuelle, et où les fichiers des TPs vont résider. Ce dossier
+doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
+stockage libre.
+</p>
+
+<p>
+Ouvrir une invite de commande dans ce dossier et entrer :
+</p>
+<pre class="example">
+vagrant init oberger/moccbdvm
+vagrant up
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Utilisation</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Site</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 Une fois l'installation terminée, vous pouvez dès à présent tester les requêtes de votre choix sur les bases de données fournies par le MOOC.
 </p>
@@ -198,9 +209,9 @@ Vous n'avez qu'à vous connecter sur <a href="http://localhost:8080/bdsqlwiz/app
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Travaux pratiques (à partir de la semaine 6)</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Travaux pratiques (à partir de la semaine 6)</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 Dans le cadre du MOOC, vous serez amenés à utiliser des pages php pour dialoguer avec la base de données.
 </p>
@@ -216,36 +227,44 @@ Elles seront alors accessibles depuis <a href="http://localhost:8080/TP/">http:/
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Maintenance</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-Les enseignants du MOOC ont la possibilité de modifier l'environnement.
-</p>
-
-<p>
-Afin de mettre à jour l'environnement, entrez la commande suivante dans une invit de commande:
-</p>
-<ul class="org-ul">
-<li>=vagrant ssh -c "sudo update-script"=
-</li>
-</ul>
-</div>
-</div>
-
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> En savoir plus</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Maintenance</h2>
 <div class="outline-text-2" id="text-4">
+<p>
+Les enseignants du MOOC ont la possibilité de modifier l'environnement
+modèle qui sert de référence à la machine virtuelle.
+</p>
+
+<p>
+Afin de mettre à jour l'environnement déjà installé dans une machine
+virtuelle, pour prendre en compte les évolutions de l'environnement
+modèle des enseignants, entrez la commande suivante dans une invite de
+commande:
+</p>
+
+<pre class="example">
+vagrant ssh -c "sudo update-script"
+</pre>
+
+<p>
+<b>TODO</b> Attention: ceci nécessite d'avoir installé un client SSH (cf. <i>&#x2026;FAQ</i>)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> En savoir plus et résolutions des problèmes</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Une version plus complète de cette documentation est disponible sur <a href="http://localhost:8080/">http://localhost:8080/</a>.
 </p>
+
+<p>
+En cas de problème, référez-vous aux forums du MOOC, sur
+<a href="http://mooc.telecom-sudparis.eu/">http://mooc.telecom-sudparis.eu/</a>
+</p>
 </div>
 </div>
-</div>
-<div id="postamble" class="status">
-<p class="date">Created: 2014-08-12 mar. 17:01</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7b)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

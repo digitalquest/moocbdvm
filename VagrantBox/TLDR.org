@@ -1,8 +1,10 @@
 #+TITLE: Prise en main rapide de la Box Vagrant du MOOC BD
-#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:nil
 #+OPTIONS: html-preamble:t html-scripts:t html-style:t
 #+OPTIONS: html5-fancy:nil tex:t
-#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7b)
+#+OPTIONS: toc:nil
+#+CREATOR:
+#+AUTHOR:
 #+HTML_CONTAINER: div
 #+HTML_DOCTYPE: xhtml-strict
 #+HTML_HEAD:
@@ -13,15 +15,36 @@
 #+INFOJS_OPT:
 #+LATEX_HEADER:
 
+* Prérequis
+
+- Disposer d'une machine avec un système d'exploitation moderne 64
+  bits sur lequel VirtualBox\trade fonctionne
+
+- Avoir au moins 2 Go de libre sur un disque dur local
+
+- Maîtriser un minimum l'utilisation d'un système d'exploitation,
+  notamment en mode invite de commande (commandes de base DOS ou shell
+  Unix, type =cd=, =ls/dir=, etc.).
+
 * Installation
 
-** Installer Vagrant et VirtualBox
+** TODO Installer Vagrant et VirtualBox
+
+- Vagrant : http://www.vagrantup.com/downloads.html
+- VirtualBox : https://www.virtualbox.org/wiki/Downloads
 
 ** Initialisation et mise en route
 
-Ouvrir une invit de commande et entrer: 
-- =vagrant init oberger/moccbdvm=
-- =vagrant up=
+Choisir un dossier de travail dans lequel vagrant va installer une
+machine virtuelle, et où les fichiers des TPs vont résider. Ce dossier
+doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
+stockage libre.
+
+Ouvrir une invite de commande dans ce dossier et entrer :
+#+BEGIN_example
+vagrant init oberger/moccbdvm
+vagrant up
+#+END_example
 
 * Utilisation
 
@@ -41,11 +64,24 @@ Elles seront alors accessibles depuis http://localhost:8080/TP/.
 
 * Maintenance
 
-Les enseignants du MOOC ont la possibilité de modifier l'environnement.
+Les enseignants du MOOC ont la possibilité de modifier l'environnement
+modèle qui sert de référence à la machine virtuelle.
 
-Afin de mettre à jour l'environnement, entrez la commande suivante dans une invit de commande:
-- =vagrant ssh -c "sudo update-script"=
+Afin de mettre à jour l'environnement déjà installé dans une machine
+virtuelle, pour prendre en compte les évolutions de l'environnement
+modèle des enseignants, entrez la commande suivante dans une invite de
+commande:
 
-* En savoir plus
+#+BEGIN_example
+vagrant ssh -c "sudo update-script"
+#+END_example
+
+*TODO* Attention: ceci nécessite d'avoir installé un client SSH (cf. [[...FAQ]])
+
+* En savoir plus et résolutions des problèmes
 
 Une version plus complète de cette documentation est disponible sur http://localhost:8080/.
+
+En cas de problème, référez-vous aux forums du MOOC, sur
+http://mooc.telecom-sudparis.eu/
+

@@ -40,6 +40,11 @@ vagrantcloud.
 
 TODO: Renseigner le MD5sum pour éviter des problèmes de transferts
 
+Documentation
+-------------
+
+Documentation utilisateur initiale : TLDR.[org|html]
 
 Cf. manuel.org pour plus de documentation.
+
 
