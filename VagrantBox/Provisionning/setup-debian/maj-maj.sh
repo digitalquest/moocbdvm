@@ -1,11 +1,7 @@
-#!/bin/bash
-
-# This script is a wrapper for the other update scripts. It is to be in /usr/local/bin/ and call the other scripts in a different directory
+#!bin/bash
 
 # TODO change this for appropriate dir
 PathToRepository=http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
-
-cd /vagrant/update
 
 if [ -d ".git/" ]; then
  # Git was initiated in a previous call, we can pull the sources
@@ -17,7 +13,15 @@ else
 
     git clone $PathToRepository ./
 
+# Create aliases to ease the use of the scripts
+    cat "alias update-site='maj-site.sh'" >> ~/.bashrc
+    cat "alias update-tp='maj-tp.sh'" >> ~/.bashrc
+    cat "alias update-script='maj-maj.sh'" >> ~/.bashrc
+
 fi
 
 cp maj-maj.sh /usr/local/bin/
+cp maj-site.sh /usr/local/bin/
+cp maj-tp.sh /usr/local/bin/
+
 
