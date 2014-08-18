@@ -18,10 +18,10 @@ export LANG=C
 
 mv /etc/apt/sources.list /etc/apt/sources.list.bak
 
-# We'll do apt pinning in order to install postgresql-common and
-# postgresql-client-common version >= 160 from unstable
-# to fix bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=757612 present in testing until 2014/08/16
-# See COMMENT_ME below
+# # We'll do apt pinning in order to install postgresql-common and
+# # postgresql-client-common version >= 160 from unstable
+# # to fix bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=757612 present in testing until 2014/08/16
+# # See COMMENT_ME below
 
 cat >/etc/apt/sources.list <<EOF
 deb $debian_mirror/debian jessie main contrib non-free
@@ -35,25 +35,25 @@ deb $debian_mirror/debian jessie-updates main contrib non-free
 deb-src $debian_mirror/debian jessie-updates main contrib non-free
 EOF
 
-# COMMENT_ME comment-out the following after 2014/08/16 (see above)
-cat > /etc/apt/sources.list.d/unstable.list <<EOF
-deb http://ftp.fr.debian.org/debian unstable main contrib non-free
-EOF
+# # COMMENT_ME comment-out the following after 2014/08/16 (see above)
+# cat > /etc/apt/sources.list.d/unstable.list <<EOF
+# deb http://ftp.fr.debian.org/debian unstable main contrib non-free
+# EOF
 
-# COMMENT_ME comment-out the following after 2014/08/16 (see above)
-echo 'APT::Default-Release "jessie";' > /etc/apt/apt.conf.d/jessie
+# # COMMENT_ME comment-out the following after 2014/08/16 (see above)
+# echo 'APT::Default-Release "jessie";' > /etc/apt/apt.conf.d/jessie
 
-# COMMENT_ME comment-out the following after 2014/08/16 (see above)
-cat > /etc/apt/preferences.d/pinning-unstable-postgresql <<EOF
-Package: *
-Pin: release a=jessie
-Pin-Priority: 900
+# # COMMENT_ME comment-out the following after 2014/08/16 (see above)
+# cat > /etc/apt/preferences.d/pinning-unstable-postgresql <<EOF
+# Package: *
+# Pin: release a=jessie
+# Pin-Priority: 900
 
-Package: postgresql-common postgresql-client-common
-Pin: release a=unstable
-Pin-Priority: 800
+# Package: postgresql-common postgresql-client-common
+# Pin: release a=unstable
+# Pin-Priority: 800
 
-EOF
+# EOF
 
 apt-get update -q -q
 
@@ -65,9 +65,9 @@ echo ".configuring french keyboard 'azerty' by default"
 
 # Install Apache web server, PGSQL, PHP, JS, Git
 echo ".installing needed applications"
-# COMMENT_ME revert to the commented-out line below, after 2014/08/16 (see above)
-# apt-get install -q -y apache2 php5 postgresql-common postgresql-client-common postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
-apt-get install -q -y apache2 php5 postgresql-common/unstable postgresql-client-common/unstable postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
+# # COMMENT_ME revert to the commented-out line below, after 2014/08/16 (see above)
+# apt-get install -q -y apache2 php5 postgresql-common/unstable postgresql-client-common/unstable postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
+apt-get install -q -y apache2 php5 postgresql-common postgresql-client-common postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
 
 apt-get clean
 
