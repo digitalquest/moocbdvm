@@ -17,17 +17,6 @@ Vagrant.configure("2") do |config|
   # Forward port to access the guest machine
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
-  # Setting up synced folders so that students can use their own php pages
-
-#   config.vm.synced_folder "./appli", "/var/www/html/"
-
-
-#  config.vm.synced_folder "./setup-debian","/home/vagrant"
-
-  # Make sure the correct processes are running
-  # every time we start the VM.
-  # config.vm.provision "shell", run: "always", path:""
-
   # Uncomment the following to access the GUI
   # config.vm.provider "virtualbox" do |v|
   #   v.gui = true
