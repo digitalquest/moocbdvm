@@ -5,7 +5,7 @@ Use boostrap-vz [0] from devlopment branch on testing/jessie to
 generate an image, using the manifest provided in
 bootstrap-vz-manifests/
 
-Syntax : sudo ./bootstrap-vz --debug --log logs manifests/virtualbox-vagrant.manifest.yml
+Syntax : sudo ./bootstrap-vz --debug --log logs bootstrap-vz-manifests/virtualbox-vagrant.manifest.yml
 
 Then upload it to vagrantcloud.
 
