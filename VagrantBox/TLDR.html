@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
 <title>Prise en main rapide de la Box Vagrant du MOOC BD Télécom SudParis</title>
-<!-- 2014-08-13 mer. 16:33 -->
+<!-- 2014-08-18 lun. 13:47 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Équipe du MOOC Bases de données relationnelles de Télécom-SudParis" />
@@ -143,11 +143,11 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> Prérequis</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>Disposer d'une machine moderne avec un système d'exploitation 64
-bits sur lequel VirtualBox&trade; fonctionne<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
+<li>Disposer d'une machine moderne avec un système d'exploitation (64
+bits<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>) sur lequel VirtualBox&trade; fonctionne<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </li>
 
-<li>Avoir un environnement internet à haut débit pour le téléchargement de l'environnement<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
+<li>Avoir un environnement internet à haut débit pour le téléchargement de l'environnement<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>
 </li>
 
 <li>Avoir au moins 2 Go de libre sur un disque dur local
@@ -201,7 +201,7 @@ stockage libre.
 </p>
 
 <p>
-Ouvrir une invite de commande<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup> dans ce dossier et entrer :
+Ouvrir une invite de commande<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup> dans ce dossier et entrer :
 </p>
 <pre class="example">
 vagrant init oberger/moccbdvm
@@ -210,7 +210,7 @@ vagrant up
 
 <p>
 Cela va télécharger la <i>box</i> Vagrant depuis Internet (env. 500 Mo), et
-lancer une machine virtuelle VirtualBox<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup> en tâche de fond, qui
+lancer une machine virtuelle VirtualBox<sup><a id="fnr.5" name="fnr.5" class="footref" href="#fn.5">5</a></sup> en tâche de fond, qui
 fournira l'environnement Web que vous allez utiliser.
 </p>
 
@@ -305,20 +305,24 @@ En cas de problème, référez-vous aux forums du MOOC, sur
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+Si votre système est en 32 bits, référez-vous à la <a href="./manuel.html#FAQ">FAQ</a>.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
 Nous avons réalisé nos tests sur des ordinateurs portables
 professionnels en systèmes GNU/Linux ou Microsoft Windows 7
 professional.
 </p></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
 Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
 </p></div>
 
-<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
 autrement appelé <i>terminal</i>, <i>shell</i>, selon les systèmes d'exploitation
 </p></div>
 
-<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.5" name="fn.5" class="footnum" href="#fnr.5">5</a></sup> <p class="footpara">
 la machine virtuelle fait fonctionner un système GNU/Linux <i>Debian</i> minimal avec <i>Apache</i>, <i>PHP</i> et <i>PostgreSQL</i>
 </p></div>
 

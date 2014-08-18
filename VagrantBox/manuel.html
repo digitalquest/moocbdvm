@@ -310,7 +310,7 @@ leur mise-à-jour.
 </dd>
 <dt> guest </dt><dd>voir <i>machine virtuelle</i>
 </dd>
-<dt> hôte </dt><dd>votre machine, avec un système d'exploitation 64 bits, sur
+<dt> hôte </dt><dd>votre machine, avec un système d'exploitation, sur
 laquelle est installé le virtualiseur <i>VirtualBox</i> utilisé par
 <i>Vagrant</i> (c'est par exemple votre système <i>Windows 7</i> habituel).
 </dd>
@@ -336,10 +336,10 @@ démarrage, arrêt, mise en pause, etc.
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Disposer d'une machine moderne avec un système d'exploitation 64
-bits sur lequel VirtualBox&trade; fonctionne<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
+bits (ou 32 bits<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>) sur lequel VirtualBox&trade; fonctionne<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </li>
 
-<li>Avoir un environnement internet à haut débit, le temps de télécharger l'environnement<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
+<li>Avoir un environnement internet à haut débit, le temps de télécharger l'environnement<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>
 </li>
 
 <li>Avoir au moins 2 Go de libre sur un disque dur local
@@ -376,7 +376,7 @@ paquetages pour votre distribution (si vous êtes sur Linux).
 <div class="outline-text-3" id="text-3-3">
 <p>
 Choisir un dossier de travail dans lequel Vagrant va installer une
-<b>machine virtuelle</b> 64 bits, et où les fichiers des TPs vont résider. Ce dossier
+<b>machine virtuelle</b>, et où les fichiers des TPs vont résider. Ce dossier
 doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
 stockage libre.
 </p>
@@ -387,7 +387,7 @@ Pour télécharger la <i>box</i> Vagrant et procéder au premier lancement de de
 </p>
 
 <ol class="org-ol">
-<li>ouvrir un invite de commande<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup> dans le dossier de travail choisi (utiliser <code>cd</code> pour s'y positionner):
+<li>ouvrir un invite de commande<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup> dans le dossier de travail choisi (utiliser <code>cd</code> pour s'y positionner):
 </li>
 
 <li>entrer la commande suivante : 
@@ -405,7 +405,7 @@ vagrant up
 </pre>
 <p>
 ceci va télécharger la dernière version de la <a href="https://vagrantcloud.com/oberger/moocbdvm"><i>box</i> <code>oberger/moocbdvm</code></a> depuis Internet
-(env. 500 Mo), et démarrer une machine virtuelle VirtualBox
+(env. 350 Mo), et démarrer une machine virtuelle VirtualBox
 en tâche de fond, qui fournira l'environnement Web que vous allez utiliser.
 </p>
 </li>
@@ -682,9 +682,20 @@ TBD : archive extractible .zip, dans
 <h3 id="sec-5-2"><span class="section-number-3">5.2</span> J'ai un système 32 bits, est-ce que ça marchera pour moi ?</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
-Nous ne fournissons pour l'instant aucun environnement de machine
-virtuelle 32 bits. Vous devrez avoir un système d'exploitation 64 bits
-sur l'hôte pour utiliser notre <i>box</i> 64 bits.
+La version canonique sur laquelle nous avons basé nos réalisations et
+nos tests de VM est la version 64 bits (architecture Linux <code>amd64</code>), qui
+nécessite un hôte 64 bits.
+</p>
+
+<p>
+Nous mettons également à votre disposition une version 32 bits, mais ayant fait
+l'objet de tests moins poussés. 
+</p>
+
+<p>
+Pour l'utiliser, remplacer
+<code>oberger/moocbdvm</code> par <b><code>oberger/moocbdvm32</code></b> dans les instructions
+<code>vagrant init</code>.
 </p>
 </div>
 </div>
@@ -831,7 +842,7 @@ système GNU/Linux (<a href="http://www.debian.org/">Debian</a> <i>jessie</i>).
 
 <p>
 Nous avons essayé de le rendre aussi léger que possible, mais portable
-sur tout système cible 64 bits récent dans lequel le gestionnaire de
+sur tout système cible récent dans lequel le gestionnaire de
 machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
 </p>
 
@@ -878,16 +889,22 @@ mais nous ne pouvons nous engager à fournir un support sur celle-ci.
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+Si votre système n'est pas 64 bits, attention, certaines
+commandes devront être modifiées pour télécharger la bonne version de
+la box Vagrant. Cf . <a href="#sec-5-2">J'ai un système 32 bits, est-ce que ça marchera pour moi ?</a>.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
 Nous avons réalisé nos tests sur des ordinateurs portables
 professionnels en systèmes GNU/Linux ou Microsoft Windows 7
 professional.
 </p></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
 Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
 </p></div>
 
-<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
 autrement appelé <i>terminal</i>, <i>shell</i>, selon les systèmes d'exploitation
 </p></div>
 

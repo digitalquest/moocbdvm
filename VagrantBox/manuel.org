@@ -139,7 +139,7 @@ Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /
    vagrant up
    #+END_EXAMPLE
    ceci va télécharger la dernière version de la [[https://vagrantcloud.com/oberger/moocbdvm][/box/ =oberger/moocbdvm=]] depuis Internet
-   (env. 500 Mo), et démarrer une machine virtuelle VirtualBox
+   (env. 350 Mo), et démarrer une machine virtuelle VirtualBox
    en tâche de fond, qui fournira l'environnement Web que vous allez utiliser.
 
 *ATTENTION: La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant pas d'une connexion internet haut-débit.*
@@ -399,6 +399,25 @@ de l'/hôte/ (redirigé vers le port 22 du /guest/) : =ssh -p 2222 vagrant@local
 
 
 ** TODO J'ai écrasé la base de données, que faire
+
+** Comment mettre à jour ma machine virtuelle
+
+*** TODO Mise à jour partielle
+Il est possible de metre à jour via internet une partie des scripts et
+applications installés sur la machine
+
+- apt-get dist-upgrade ??
+- maj-maj
+- ...
+
+*** TODO Réinstallation de la machine virtuelle
+
+Pour réinstaller une machine virtuelle complète :
+- suppression du dossier de travail
+- vagrant init oberger/moocbdvm
+- vagrant outdated
+- vagrant box update
+- vagrant up
 
 ** Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
 
