@@ -10,6 +10,10 @@ echo "Provisioning the VM"
 # Debug mode
 set -x
 
+# Diminish grub timeout to speed up boots
+sed -i 's/\(^GRUB_TIMEOUT=\).*/\11/' /etc/default/grub
+update-grub
+
 # Update the guest OS packages
 export DEBIAN_FRONTEND=noninteractive
 export DEBIAN_PRIORITY=critical
@@ -68,6 +72,11 @@ echo ".installing needed applications"
 # # COMMENT_ME revert to the commented-out line below, after 2014/08/16 (see above)
 # apt-get install -q -y apache2 php5 postgresql-common/unstable postgresql-client-common/unstable postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
 apt-get install -q -y apache2 php5 postgresql-common postgresql-client-common postgresql libapache2-mod-php5 php5-pgsql javascript-common phppgadmin git-core
+
+# Cleanup of packages using too much space
+apt-get -y remove linux-headers-$(uname -r) build-essential
+
+apt-get -y autoremove
 
 apt-get clean
 
@@ -147,3 +156,4 @@ chown -R vagrant:vagrant ~vagrant/Desktop
 dd if=/dev/zero of=/EMPTY bs=1M 2>/dev/null || /bin/true
 rm -f /EMPTY
 
+date > /etc/moocbdvm_box_build_time
