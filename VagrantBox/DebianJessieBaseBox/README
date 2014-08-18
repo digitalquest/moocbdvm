@@ -11,4 +11,7 @@ Then upload it to vagrantcloud.
 
 Cf. oberger/debianjessiemini vagrantcloud image for releases.
 
+TODO : use the minimize-size plugin instead of manually trimming the
+disk with zeroes.
+
 [0] http://andsens.github.io/bootstrap-vz/

@@ -142,3 +142,8 @@ chown -R vagrant:vagrant ~vagrant/.config
 cp -r /vagrant/vagrant_user_Desktop ~vagrant/Desktop
 chown -R vagrant:vagrant ~vagrant/Desktop
 
+# Zero out the free space to save space in the final image:
+# TODO : utiliser fstrim ?
+dd if=/dev/zero of=/EMPTY bs=1M 2>/dev/null || /bin/true
+rm -f /EMPTY
+
