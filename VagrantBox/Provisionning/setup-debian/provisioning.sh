@@ -124,7 +124,7 @@ $pathToSetupTp/setup-tp.sh
 
 cd /var/www/html/
 mv index.html index.html.old
-cp /vagrant/site/index.html ./
+cp /vagrant/site/*.html ./
 
 # Make it so apache listens to 8080 inside the VM too, so the docs links are valid there too
 echo "Listen 8080" >> /etc/apache2/ports.conf

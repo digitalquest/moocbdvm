@@ -7,6 +7,7 @@ vm:	site tp
 
 site:
 	cp manuel.html Provisionning/site/index.html
+	cp TLDR.html Provisionning/site/
 
 tp:
 	cd Provisionning; \
