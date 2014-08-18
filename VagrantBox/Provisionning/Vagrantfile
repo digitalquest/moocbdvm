@@ -3,10 +3,22 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure("2") do |config|
 
-  # Box de base Debian : Debian Jessie amd64 minimal w/ guest additions
+  # Debian Jessie base box : Debian Jessie amd64 (by default, or i686 for 32bits) minimal w/ guest additions
 
-  config.vm.box = "oberger/debianjessiemini-amd64"
-
+  config.vm.define "bits32", autostart: false do |bits32|
+    bits32.vm.box = "oberger/debianjessiemini-i686"
+    # workaround the incorrect ostype set by bootstrap-vz
+    bits32.vm.provider "virtualbox" do |vb32|
+      vb32.customize ["modifyvm", :id, "--ostype", "Debian"]
+    end 
+  end
+  
+  config.vm.define "bits64", primary: true do |bits64|
+    bits64.vm.box = "oberger/debianjessiemini-amd64"
+    bits64.vm.provider "virtualbox" do |vb64|
+      vb64.customize ["modifyvm", :id, "--ostype", "Debian_64"]
+    end
+  end
 
   # Setup the containers when the VM is first
   # created
