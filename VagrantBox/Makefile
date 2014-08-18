@@ -1,5 +1,8 @@
 date := $(shell date +%Y%m%d%H%M)
 topdir := moocbdvm-vagrantbox-$(date)
+arch = amd64
+#arch = i686
+boxname := moocbdvm-vagrantbox-$(arch)-$(date)
 archive = $(topdir)
 
 vm:	site tp
@@ -17,8 +20,8 @@ tp:
 	git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git ./
 
 box:
-	cd Provisionning; vagrant package --output $(topdir).box --vagrantfile ../distrib/Vagrantfile default
-	cd Provisionning; md5sum $(topdir).box > $(topdir)_box.md5
+	cd Provisionning; vagrant package --output $(boxname).box --vagrantfile ../distrib/Vagrantfile default
+	#cd Provisionning; md5sum $(boxname).box > $(boxname)_box.md5
 
 dist:	
 	rm -f $(archive).zip $(archive).tgz

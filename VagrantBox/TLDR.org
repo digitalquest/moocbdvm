@@ -18,8 +18,8 @@
 
 * Prérequis
 
-- Disposer d'une machine moderne avec un système d'exploitation 64
-  bits sur lequel VirtualBox\trade fonctionne[fn:2]
+- Disposer d'une machine moderne avec un système d'exploitation (64
+  bits[fn:5]) sur lequel VirtualBox\trade fonctionne[fn:2]
 
 - Avoir un environnement internet à haut débit pour le téléchargement de l'environnement[fn:4]
 
@@ -119,5 +119,7 @@ professional.
 [fn:3] la machine virtuelle fait fonctionner un système GNU/Linux /Debian/ minimal avec /Apache/, /PHP/ et /PostgreSQL/
 
 [fn:4] Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
+
+[fn:5] Si votre système est en 32 bits, référez-vous à la [[./manuel.html#FAQ][FAQ]].
 
 

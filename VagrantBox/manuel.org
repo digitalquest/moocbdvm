@@ -79,7 +79,7 @@ logiciel libre sur XXX (sous licences XXX).
          leur mise-à-jour.
 - exerciseur :: application destinée à faciliter l'apprentissage
 - guest :: voir /machine virtuelle/
-- hôte :: votre machine, avec un système d'exploitation 64 bits, sur
+- hôte :: votre machine, avec un système d'exploitation, sur
           laquelle est installé le virtualiseur /VirtualBox/ utilisé par
           /Vagrant/ (c'est par exemple votre système /Windows 7/ habituel).
 - machine virtuelle :: un système d'exploitation /virtualisé/ (ici un
@@ -95,7 +95,7 @@ logiciel libre sur XXX (sous licences XXX).
 ** Prérequis
 
 - Disposer d'une machine moderne avec un système d'exploitation 64
-  bits sur lequel VirtualBox\trade fonctionne[fn:2]
+  bits (ou 32 bits[fn:5]) sur lequel VirtualBox\trade fonctionne[fn:2]
 
 - Avoir un environnement internet à haut débit, le temps de télécharger l'environnement[fn:4]
 
@@ -117,7 +117,7 @@ paquetages pour votre distribution (si vous êtes sur Linux).
 ** Initialisation et mise en route
 
 Choisir un dossier de travail dans lequel Vagrant va installer une
-*machine virtuelle* 64 bits, et où les fichiers des TPs vont résider. Ce dossier
+*machine virtuelle*, et où les fichiers des TPs vont résider. Ce dossier
 doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
 stockage libre.
 
@@ -246,6 +246,7 @@ Vous pouvez faire un =git pull= dans ce répertoire.
 Le résultat est accessible sur http://localhost:8080/TP/
 
 * FAQ
+<<FAQ>>
 
 # ** TODO Quels sont les prérequis
 
@@ -304,9 +305,20 @@ https://fusionforge.int-evry.fr/frs/?group_id=64
 
 ** J'ai un système 32 bits, est-ce que ça marchera pour moi ?
 
-Nous ne fournissons pour l'instant aucun environnement de machine
-virtuelle 32 bits. Vous devrez avoir un système d'exploitation 64 bits
-sur l'hôte pour utiliser notre /box/ 64 bits.
+# Nous ne fournissons pour l'instant aucun environnement de machine
+# virtuelle 32 bits. Vous devrez avoir un système d'exploitation 64 bits
+# sur l'hôte pour utiliser notre /box/ 64 bits.
+
+La version canonique sur laquelle nous avons basé nos réalisations et
+nos tests de VM est la version 64 bits (architecture Linux =amd64=), qui
+nécessite un hôte 64 bits.
+
+Nous mettons également à votre disposition une version 32 bits, mais ayant fait
+l'objet de tests moins poussés. 
+
+Pour l'utiliser, remplacer
+=oberger/moocbdvm= par *=oberger/moocbdvm32=* dans les instructions
+=vagrant init=.
 
 ** Je n'ai pas accès à Internet en haut débit
 
@@ -462,7 +474,7 @@ La machine virtuelle déployée par la /box/ Vagrant est basée sur un
 système GNU/Linux ([[http://www.debian.org/][Debian]] /jessie/).
 
 Nous avons essayé de le rendre aussi léger que possible, mais portable
-sur tout système cible 64 bits récent dans lequel le gestionnaire de
+sur tout système cible récent dans lequel le gestionnaire de
 machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
 
 La fabrication de la box Vagrant repose sur l'utilisation de
@@ -498,6 +510,10 @@ professional.
 [fn:3] autrement appelé /terminal/, /shell/, selon les systèmes d'exploitation
 
 [fn:4] Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
+
+[fn:5] Si votre système n'est pas 64 bits, attention, certaines
+commandes devront être modifiées pour télécharger la bonne version de
+la box Vagrant. Cf . [[*J'ai un système 32 bits, est-ce que ça marchera pour moi ?][J'ai un système 32 bits, est-ce que ça marchera pour moi ?]].
 
 # Local Variables:
 # org-html-postamble-format: (("fr" "<p class=\"author\">Auteur: %a</p>\n<p class=\"date\">Date: %C</p>\n<p class=\"creator\">%c</p>"))
