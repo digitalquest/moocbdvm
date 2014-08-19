@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
 <title>Manuel de la Box Vagrant du MOOC BD</title>
-<!-- 2014-08-18 lun. 15:09 -->
+<!-- 2014-08-19 mar. 21:39 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Stéphane Germain, Olivier Berger" />
@@ -145,10 +145,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1">1. TL/DR;</a></li>
 <li><a href="#sec-2">2. Introduction</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Environnement de travail virtualisé</a></li>
-<li><a href="#sec-2-2">2.2. Compétences requises</a></li>
-<li><a href="#sec-2-3">2.3. Avertissement</a></li>
-<li><a href="#sec-2-4">2.4. Glossaire</a></li>
+<li><a href="#sec-2-1">2.1. Contexte : Travail Personnel dans le MOOC BD</a></li>
+<li><a href="#sec-2-2">2.2. Environnement de travail virtualisé</a></li>
+<li><a href="#sec-2-3">2.3. Compétences requises</a></li>
+<li><a href="#sec-2-4">2.4. Avertissement</a></li>
+<li><a href="#sec-2-5">2.5. Glossaire</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">3. Installation</a>
@@ -161,15 +162,16 @@ for the JavaScript code in this tag.
 <li><a href="#sec-4">4. Utilisation</a>
 <ul>
 <li><a href="#sec-4-1">4.1. Lancement de la machine virtuelle</a></li>
-<li><a href="#sec-4-2">4.2. Accès aux applications pour les TPs</a>
+<li><a href="#sec-4-2">4.2. Exerciseur de requêtes SQL</a></li>
+<li><a href="#sec-4-3">4.3. Module Web d'administration PostgreSQL <i>phpPgAdmin</i></a>
 <ul>
-<li><a href="#sec-4-2-1">Exerciseur de requêtes SQL</a></li>
-<li><a href="#sec-4-2-2">Module Web d'administration PostgreSQL <i>phpPgAdmin</i></a></li>
-<li><a href="#sec-4-2-3">En ligne de commande PostgreSQL</a></li>
-<li><a href="#sec-4-2-4">Faire des mises à jour dans la base de données</a></li>
-<li><a href="#sec-4-2-5"><span class="todo TODO">TODO</span> Programmation Web / BD en PHP</a></li>
+<li><a href="#sec-4-3-1">Requêtage</a></li>
+<li><a href="#sec-4-3-2">Mises à jour</a></li>
+<li><a href="#sec-4-3-3">Administration</a></li>
 </ul>
 </li>
+<li><a href="#sec-4-4">4.4. En ligne de commande PostgreSQL</a></li>
+<li><a href="#sec-4-5">4.5. <span class="todo TODO">TODO</span> Programmation Web / BD en PHP</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">5. FAQ</a>
@@ -222,17 +224,37 @@ for the JavaScript code in this tag.
 <h2 id="sec-2"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 </div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Environnement de travail virtualisé</h3>
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Contexte : Travail Personnel dans le MOOC BD</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Nous mettons à votre disposition un environnement de travail pour les
-travaux pratiques / travail personnel (TPs) du MOOC Bases de Données
-Relationnelles, basé sur une machine virtuelle.
+travaux pratiques / travail personnel (TPs) du <b>MOOC Bases de Données Relationnelles</b>
+ de <a href="http://mooc.telecom-sudparis.eu/">Télécom SudParis</a>, basé sur une machine virtuelle.
 </p>
 
 <p>
+Cet environnement n'est pas indispensable pour les premiers exercices
+de requêtes SQL en bases de données (semaines 2, 3) : un exerciseur SQL en
+Javascript, s'exécutant dans certains navigateur et ne nécessitant
+aucune installation, devrait être suffisant pour les premiers TPs.
+</p>
+
+<p>
+Pour les cours suivants, portant sur des manipulations avancées, et la
+programmation Web pour les bases de données, il sera nécessaire de
+disposer d'un environnement plus complet, tel que celui basé sur
+<a href="http://www.postgresql.org/">PostgreSQL</a>, que nous vous
+proposons dans cette machine virtuelle.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Environnement de travail virtualisé</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
 L'objectif est de faire tourner, sur le poste de l'apprenant (<i>vous</i>), une
-machine virtuelle contenant un serveur Linux dans lequel sont installés :
+<b>machine virtuelle</b> contenant un serveur Linux dans lequel sont installés :
 </p>
 
 <ul class="org-ul">
@@ -262,7 +284,7 @@ accès à internet</i>.
 </p>
 
 <p>
-L'utilisation de Vagrant et VirtualBox pour faire tourner cet
+L'utilisation de <b>Vagrant</b> et <b>VirtualBox</b> pour faire tourner cet
 environnement permet en théorie un même fonctionnement quelque soit
 votre système d'exploitation Linux, MacOSX, Windows (à condition qu'il soit relativement
 récent). Consultez cependant attentivement la section <a href="#sec-3-1">Prérequis</a>.
@@ -270,11 +292,11 @@ récent). Consultez cependant attentivement la section <a href="#sec-3-1">Prére
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Compétences requises</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Compétences requises</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
-Bien que cet environnement techniquement basé sur une machine virtuelle Linux, aucune
+Bien que cet environnement soit basé sur une machine virtuelle Linux, aucune
 compétence en <i>administration système</i> Unix ne devrait être nécessaire
 pour pouvoir l'utiliser: l'interaction se déroulera principalement 
 <b>dans l'interface Web</b> de votre navigateur, au moins pour les premiers TPs.
@@ -288,23 +310,24 @@ votre utilisation professionelle, au-delà de ce MOOC (cf. <a href="#sec-6">À p
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Avertissement</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Avertissement</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 <i>Nous avons fait de notre mieux pour fournir un environnement fonctionnel, basé sur des logiciels libres, mais vous l'utilisez <b>à vos risques et périls, sans aucune garantie</b>. Nous ne pouvons être tenus responsables des dommages qui résulteraient de l'utilisation de cet environnement.</i>
 </p>
 
 <p>
 L'ensemble des sources de cet environnement sont disponibles en
-logiciel libre sur XXX (sous licences XXX).
+logiciel libre sur XXX (sous licences XXX), y compris les outils ayant
+permis la construction de la machine virtuelle.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Glossaire</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Glossaire</h3>
+<div class="outline-text-3" id="text-2-5">
 <dl class="org-dl">
 <dt> box </dt><dd>paquetage d'installation d'une <i>machine virtuelle</i>
 préconfigurée, qui est pris en charge par l'application
@@ -344,14 +367,11 @@ démarrage, arrêt, mise en pause, etc.
 <li>Disposer d'une machine moderne avec un système d'exploitation 64
 bits (ou 32 bits<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>) sur lequel VirtualBox&trade; fonctionne<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </li>
-
 <li>Avoir un environnement internet à haut débit, le temps de télécharger l'environnement<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>
 </li>
-
-<li>Avoir au moins 2 Go de libre sur un disque dur local
+<li>Avoir au moins 3 Go de libre sur un disque dur local
 </li>
-
-<li>Maîtriser un minimum l'utilisation d'un système d'exploitation,
+<li>Maîtriser un minimum l'utilisation de votre système d'exploitation,
 notamment en mode invite de commande (commandes de base DOS ou shell
 Unix, type <code>cd</code>, <code>ls/dir</code>, etc.).
 </li>
@@ -363,27 +383,33 @@ Unix, type <code>cd</code>, <code>ls/dir</code>, etc.).
 <h3 id="sec-3-2"><span class="section-number-3">3.2</span> Télécharger et installer Vagrant et VirtualBox</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
-Téléchargez les deux applications depuis leurs sites, ou installez les
+Téléchargez les deux applications depuis leurs sites, et installez-les
+(nécessite les privilèges d'administration); ou installez les
 paquetages pour votre distribution (si vous êtes sur Linux).
 </p>
 
 <ul class="org-ul">
-<li>Vagrant : <a href="http://www.vagrantup.com/downloads.html">http://www.vagrantup.com/downloads.html</a>
+<li><b>VirtualBox</b> : <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>
 </li>
-<li>VirtualBox : <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>
+<li><b>Vagrant</b> : <a href="http://www.vagrantup.com/downloads.html">http://www.vagrantup.com/downloads.html</a> (peut nécessiter
+un redémarrage, sur Windows)
 </li>
 </ul>
-</div>
-</div>
 
+<p>
+Vous aurez éventuellement besoin d'installer un <i>client SSH</i> si vous
+n'en avez pas encore installé un. Sur Windows, voir l'<a href="#sec-5-7">entrée de FAQ</a> correspondante.
+</p>
+</div>
+</div>
 
 <div id="outline-container-sec-3-3" class="outline-3">
 <h3 id="sec-3-3"><span class="section-number-3">3.3</span> Initialisation et mise en route</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
-Choisir un dossier de travail dans lequel Vagrant va installer une
+Choisir un <b>dossier de travail</b> dans lequel Vagrant va installer une
 <b>machine virtuelle</b>, et où les fichiers des TPs vont résider. Ce dossier
-doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
+doit être choisi sur une partition disposant d'au moins 1,5 Go d'espace de
 stockage libre.
 </p>
 
@@ -393,10 +419,11 @@ Pour télécharger la <i>box</i> Vagrant et procéder au premier lancement de de
 </p>
 
 <ol class="org-ol">
-<li>ouvrir un invite de commande<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup> dans le dossier de travail choisi (utiliser <code>cd</code> pour s'y positionner):
+<li>ouvrir un invite de commande<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup> dans le dossier de travail
+choisi (utiliser la commande <code>cd</code> pour s'y positionner):
 </li>
 
-<li>entrer la commande suivante : 
+<li>entrer la commande suivante<sup><a id="fnr.5" name="fnr.5" class="footref" href="#fn.5">5</a></sup> : 
 <pre class="example">
 vagrant init oberger/moocbdvm
 </pre>
@@ -412,7 +439,7 @@ vagrant up
 <p>
 ceci va télécharger la dernière version de la <a href="https://vagrantcloud.com/oberger/moocbdvm"><i>box</i> <code>oberger/moocbdvm</code></a> depuis Internet
 (env. 350 Mo), et démarrer une machine virtuelle VirtualBox
-en tâche de fond, qui fournira l'environnement Web que vous allez utiliser.
+en tâche de fond, qui fournira l'environnement que vous allez utiliser.
 </p>
 </li>
 </ol>
@@ -464,37 +491,61 @@ la mise en place de la machine est finie quand s'affiche la ligne "&#x2026;". Si
 </ol>
 
 <p>
-Une fois lancée, elle fournit un serveur HTTP qui est redirigé sur
+Une fois lancée, elle fournit un <b>serveur HTTP</b> qui est redirigé sur
 l'adresse locale de l'ordinateur <i>hôte</i> <code>localhost</code> (<code>127.0.0.1</code>), qui
-écoute sur le port <code>8080</code> (d'où les URLs ci-dessous commençant par <code>http://localhost:8080/</code>).
+écoute sur le <b>port <code>8080</code></b> (d'où les URLs ci-dessous commençant par <b><code>http://localhost:8080/</code></b>).
 </p>
 </div>
 </div>
 
+
 <div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Accès aux applications pour les TPs</h3>
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Exerciseur de requêtes SQL</h3>
 <div class="outline-text-3" id="text-4-2">
-</div><div id="outline-container-sec-4-2-1" class="outline-4">
-<h4 id="sec-4-2-1">Exerciseur de requêtes SQL</h4>
-<div class="outline-text-4" id="text-4-2-1">
 <p>
 Une fois la machine virtuelle lancée, ouvrir un navigateur Web et aller sur <a href="http://localhost:8080/bdsqlwiz/appli/">http://localhost:8080/bdsqlwiz/appli/</a>
 </p>
 
 <p>
-Vous pouvez maintenant commencer votre apprentissage du langage SQL !
+TODO screenshot
+</p>
+
+<p>
+Vous pouvez maintenant commencer votre apprentissage du langage SQL,
+en sélectionnant l'une des deux bases de données disponibles (<i>films</i>
+ou <i>vins), puis en construisant des requêtes SQL à l'aide des outils
+présents dans les différentes /frames</i>.
+</p>
+
+<p>
+Vos requêtes seront transmises au serveur PostgreSQL qui tourne en
+tâche de fond dans la VM, pour être exécutées.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-4-2-2" class="outline-4">
-<h4 id="sec-4-2-2">Module Web d'administration PostgreSQL <i>phpPgAdmin</i></h4>
-<div class="outline-text-4" id="text-4-2-2">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Module Web d'administration PostgreSQL <i>phpPgAdmin</i></h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Le serveur Web intégré dans la VM met aussi à votre disposition
+l'environnement d'administration <b>phpPgAdmin</b>. Cet environnement est
+très complet et fournit notamment des outils permettant la
+manipulation du <i>schéma des bases de données</i> et l'administration du
+SGBD.
+</p>
+
 <ul class="org-ul">
 <li>Connectez votre navigateur à l'adresse :
 <a href="http://localhost:8080/phppgadmin/">http://localhost:8080/phppgadmin/</a>
 </li>
+</ul>
+</div>
 
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1">Requêtage</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<ul class="org-ul">
 <li>Connectez-vous au <i>Serveur</i> <code>PostgreSQL</code> :
 
 <ul class="org-ul">
@@ -513,9 +564,37 @@ Vous pouvez désormais saisir des requêtes SQL (de consultation seulement) sur 
 </div>
 </div>
 
-<div id="outline-container-sec-4-2-3" class="outline-4">
-<h4 id="sec-4-2-3">En ligne de commande PostgreSQL</h4>
-<div class="outline-text-4" id="text-4-2-3">
+
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2">Mises à jour</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<p>
+Connectez-vous avec utilisateur <code>pg_writer</code> au lieu de <code>pg_reader</code>
+(même mot-de-passe).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-3-3" class="outline-4">
+<h4 id="sec-4-3-3">Administration</h4>
+<div class="outline-text-4" id="text-4-3-3">
+<p>
+Connectez-vous en tant qu'utilisateur <i>administrateur</i> du SGBD (login:
+<code>postgres</code>, mot de passe : <code>postgres</code>).
+</p>
+
+<p>
+Bien entendu, tout est possible quand on est administrateur, donc
+attention avant de tout casser.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> En ligne de commande PostgreSQL</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 Pour exécuter des commandes SQL sur le serveur PostgreSQL présent à l'interieur de la machine virtuelle, procéder comme suit :
 </p>
@@ -560,38 +639,23 @@ vins=&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-2-4" class="outline-4">
-<h4 id="sec-4-2-4">Faire des mises à jour dans la base de données</h4>
-<div class="outline-text-4" id="text-4-2-4">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> <span class="todo TODO">TODO</span> Programmation Web / BD en PHP</h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
-Utilisez l'application Web <i>phppgadmin</i> (voir <a href="#sec-4-2-2">ci-dessus</a>), avec l'utilisateur <code>postgres</code>,
-l'administrateur PostgreSQL qui a tous les droits sur la base de
-données. Son mot-de-passe est aussi <code>postgres</code>.
+Un sous-répertoire "<code>TP/</code>" est créé dans le dossier de travail dans lequel
+vous aviez lancé la création de la machine virtuelle.
 </p>
 
 <p>
-Bien entendu, tout est possible quand on est administrateur, donc
-attention avant de tout casser.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-4-2-5" class="outline-4">
-<h4 id="sec-4-2-5"><span class="todo TODO">TODO</span> Programmation Web / BD en PHP</h4>
-<div class="outline-text-4" id="text-4-2-5">
-<p>
-Un sous-répertoire "<code>TP/</code>" est créé dans le répertoire dans lequel
-vous avez lancé la création de la machine virtuelle.
-</p>
-
-<p>
-Vous pouvez faire un <code>git pull</code> dans ce répertoire.
+Vous pouvez faire un <code>git pull</code> dans ce répertoire. Si vous n'avez pas
+installé Git sur votre système hôte, vous pouvez l'utiliser depuis
+l'intérieur de la VM (via une connexion SSH, en travaillant dans <code>/vagrant/TP/</code>).
 </p>
 
 <p>
 Le résultat est accessible sur <a href="http://localhost:8080/TP/">http://localhost:8080/TP/</a>
 </p>
-</div>
 </div>
 </div>
 </div>
@@ -793,7 +857,23 @@ pour utiliser à la place <code>http://localhost:8081</code>
 <h3 id="sec-5-7"><span class="section-number-3">5.7</span> <code>vagrant ssh</code> échoue, sous Windows</h3>
 <div class="outline-text-3" id="text-5-7">
 <p>
-En plus de l'installation de Vagrant et VirtualBox, il est nécessaire
+Si vous n'avez pas installé un client SSH, ou si vous n'avez pas
+configuré sa disponibilité dans le PATH, il y a de fortes chances que
+vous voyiez un message du genre :
+</p>
+<pre class="example">
+`ssh` executable not found in any directories in the %PATH% variable. Is an
+ SSH client installed? Try installing Cygwin, MinGW or Git, all of which
+ contain an SSH client. Or use your favorite SSH client with the following
+ authentication information shown below:
+ Host: 127.0.0.1
+ Port: 2222
+ Username: vagrant
+ Private key: C:/Users/olivier/.vagrant.d/insecure_private_key
+</pre>
+
+<p>
+En effet, comme l'indique ce message, en plus de l'installation de Vagrant et VirtualBox, il est nécessaire
 d'installer un client SSH que Vagrant pourra utiliser pour se
 connecter (avec une clé privée particulière) de façon transparente à
 l'intérieur du <i>guest</i>.
@@ -806,8 +886,21 @@ installé par défaut.
 
 <p>
 Ceci est une FAQ Vagrant, pour laquelle de nombreuses ressources
-Internet sont disponibles. Contactez les forums du MOOC si vous n'y
-arrivez pas par vous-même.
+Internet sont disponibles. 
+</p>
+
+<p>
+Parmi les solutions possibles, nous avons préféré l'installation de
+<a href="http://git-scm.com/download/win">Git pour windows</a>. À
+l'installation, dans le dialogue de configuration "<i>Adjusting your
+PATH environment</i>", choisissez l'option "<i>Use Git from Bash only</i>". Il
+suffira alors de lancer les commandes Vagrant (comme <code>vagrant ssh</code>)
+depuis <i>Git Bash</i> plutôt que depuis l'invite de commandes standard de
+Windows.
+</p>
+
+<p>
+Contactez les forums du MOOC si vous n'y arrivez pas par vous-même.
 </p>
 </div>
 </div>
@@ -862,15 +955,17 @@ applications installés sur la machine
 Pour réinstaller une machine virtuelle complète :
 </p>
 <ul class="org-ul">
-<li>suppression du dossier de travail
+<li><code>vagrant destroy</code> dans le dossier de travail
 </li>
-<li>vagrant init oberger/moocbdvm
+<li><code>suppression du dossier de travail</code>
 </li>
-<li>vagrant outdated
+<li><code>vagrant init oberger/moocbdvm</code>
 </li>
-<li>vagrant box update
+<li><code>vagrant outdated</code> <i>(vérifie sur <code>vagrantcloud.com</code> si une mise-à-jour de la box Vagrant a été publiée)</i>
 </li>
-<li>vagrant up
+<li><code>vagrant box update</code>, si nécessaire <i>(si une mise-à-jour disponible doit effectivement être installée)</i>
+</li>
+<li><code>vagrant up</code>
 </li>
 </ul>
 </div>
@@ -958,7 +1053,13 @@ Une fois l'installation de la box réalisée, l'utilisation de la machine virtue
 </p></div>
 
 <div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
-autrement appelé <i>terminal</i>, <i>shell</i>, selon les systèmes d'exploitation
+autrement appelé <i>terminal</i>, <i>shell</i>, selon les systèmes
+d'exploitation. Sur Windows, on peut aussi utiliser l'outil <i>Windows Powershell</i>, ou
+<i>Git bash</i>, si ce dernier a été installé.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.5" name="fn.5" class="footnum" href="#fnr.5">5</a></sup> <p class="footpara">
+ou bien, sur une machine 32 bits : <code>vagrant init moocbdvm32</code>
 </p></div>
 
 
@@ -966,7 +1067,7 @@ autrement appelé <i>terminal</i>, <i>shell</i>, selon les systèmes d'exploitat
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Stéphane Germain, Olivier Berger</p>
-<p class="date">Date: 2014-08-18 lun. 15:05</p>
+<p class="date">Date: 2014-08-19 mar. 18:05</p>
 <p class="creator">Copyright (C) 2014, The authors and Institut Mines-Télécom</p>
 </div>
 </body>

@@ -22,14 +22,27 @@
 
 * Introduction
 
-** Environnement de travail virtualisé
+** Contexte : Travail Personnel dans le MOOC BD
 
 Nous mettons à votre disposition un environnement de travail pour les
-travaux pratiques / travail personnel (TPs) du MOOC Bases de Données
-Relationnelles, basé sur une machine virtuelle.
+travaux pratiques / travail personnel (TPs) du *MOOC Bases de Données Relationnelles*
+ de [[http://mooc.telecom-sudparis.eu/][Télécom SudParis]], basé sur une machine virtuelle.
+
+Cet environnement n'est pas indispensable pour les premiers exercices
+de requêtes SQL en bases de données (semaines 2, 3) : un exerciseur SQL en
+Javascript, s'exécutant dans certains navigateur et ne nécessitant
+aucune installation, devrait être suffisant pour les premiers TPs.
+
+Pour les cours suivants, portant sur des manipulations avancées, et la
+programmation Web pour les bases de données, il sera nécessaire de
+disposer d'un environnement plus complet, tel que celui basé sur
+[[http://www.postgresql.org/][PostgreSQL]], que nous vous
+proposons dans cette machine virtuelle.
+
+** Environnement de travail virtualisé
 
 L'objectif est de faire tourner, sur le poste de l'apprenant (/vous/), une
-machine virtuelle contenant un serveur Linux dans lequel sont installés :
+*machine virtuelle* contenant un serveur Linux dans lequel sont installés :
 
 - un *serveur de base de donnée* (SGBDR) /PostgreSQL/ préconfiguré, dans
   lequel des bases de données d'exemples du cours ont été chargées.
@@ -47,14 +60,14 @@ L'objectif est que vous soyez autonomes dans l'utilisation de cet
 environnement installé en local sur votre ordinateur, y compris /sans
 accès à internet/.
 
-L'utilisation de Vagrant et VirtualBox pour faire tourner cet
+L'utilisation de *Vagrant* et *VirtualBox* pour faire tourner cet
 environnement permet en théorie un même fonctionnement quelque soit
 votre système d'exploitation Linux, MacOSX, Windows (à condition qu'il soit relativement
 récent). Consultez cependant attentivement la section [[*Prérequis][Prérequis]].
 
 ** Compétences requises
 
-Bien que cet environnement techniquement basé sur une machine virtuelle Linux, aucune
+Bien que cet environnement soit basé sur une machine virtuelle Linux, aucune
 compétence en /administration système/ Unix ne devrait être nécessaire
 pour pouvoir l'utiliser: l'interaction se déroulera principalement 
 *dans l'interface Web* de votre navigateur, au moins pour les premiers TPs.
@@ -68,7 +81,8 @@ votre utilisation professionelle, au-delà de ce MOOC (cf. [[*À propos de la Bo
 /Nous avons fait de notre mieux pour fournir un environnement fonctionnel, basé sur des logiciels libres, mais vous l'utilisez *à vos risques et périls, sans aucune garantie*. Nous ne pouvons être tenus responsables des dommages qui résulteraient de l'utilisation de cet environnement./
 
 L'ensemble des sources de cet environnement sont disponibles en
-logiciel libre sur XXX (sous licences XXX).
+logiciel libre sur XXX (sous licences XXX), y compris les outils ayant
+permis la construction de la machine virtuelle.
 
 ** Glossaire
 
@@ -94,31 +108,35 @@ logiciel libre sur XXX (sous licences XXX).
 
 ** Prérequis
 
+# Disques : env. 1.5 Go pour les logiciels à installer (sur Windows 7) et 1.3 Go
+# pour la VM instanciée
+
 - Disposer d'une machine moderne avec un système d'exploitation 64
   bits (ou 32 bits[fn:5]) sur lequel VirtualBox\trade fonctionne[fn:2]
-
 - Avoir un environnement internet à haut débit, le temps de télécharger l'environnement[fn:4]
-
-- Avoir au moins 2 Go de libre sur un disque dur local
-
-- Maîtriser un minimum l'utilisation d'un système d'exploitation,
+- Avoir au moins 3 Go de libre sur un disque dur local
+- Maîtriser un minimum l'utilisation de votre système d'exploitation,
   notamment en mode invite de commande (commandes de base DOS ou shell
   Unix, type =cd=, =ls/dir=, etc.).
 
 ** Télécharger et installer Vagrant et VirtualBox
 
-Téléchargez les deux applications depuis leurs sites, ou installez les
+Téléchargez les deux applications depuis leurs sites, et installez-les
+(nécessite les privilèges d'administration); ou installez les
 paquetages pour votre distribution (si vous êtes sur Linux).
 
-- Vagrant : http://www.vagrantup.com/downloads.html
-- VirtualBox : https://www.virtualbox.org/wiki/Downloads
+- *VirtualBox* : https://www.virtualbox.org/wiki/Downloads
+- *Vagrant* : http://www.vagrantup.com/downloads.html (peut nécessiter
+  un redémarrage, sur Windows)
 
+Vous aurez éventuellement besoin d'installer un /client SSH/ si vous
+n'en avez pas encore installé un. Sur Windows, voir l'[[*=vagrant ssh= échoue, sous Windows][entrée de FAQ]] correspondante.
 
 ** Initialisation et mise en route
 
-Choisir un dossier de travail dans lequel Vagrant va installer une
+Choisir un *dossier de travail* dans lequel Vagrant va installer une
 *machine virtuelle*, et où les fichiers des TPs vont résider. Ce dossier
-doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
+doit être choisi sur une partition disposant d'au moins 1,5 Go d'espace de
 stockage libre.
 
 
@@ -126,9 +144,10 @@ stockage libre.
 
 Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /machine virtuelle/, suivre les étapes suivantes :
 
-1. ouvrir un invite de commande[fn:3] dans le dossier de travail choisi (utiliser =cd= pour s'y positionner):
+1. ouvrir un invite de commande[fn:3] dans le dossier de travail
+   choisi (utiliser la commande =cd= pour s'y positionner):
 
-2. entrer la commande suivante : 
+2. entrer la commande suivante[fn:6] : 
    #+BEGIN_example
    vagrant init oberger/moocbdvm
    #+END_EXAMPLE
@@ -140,7 +159,7 @@ Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /
    #+END_EXAMPLE
    ceci va télécharger la dernière version de la [[https://vagrantcloud.com/oberger/moocbdvm][/box/ =oberger/moocbdvm=]] depuis Internet
    (env. 350 Mo), et démarrer une machine virtuelle VirtualBox
-   en tâche de fond, qui fournira l'environnement Web que vous allez utiliser.
+   en tâche de fond, qui fournira l'environnement que vous allez utiliser.
 
 *ATTENTION: La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant pas d'une connexion internet haut-débit.*
 
@@ -168,22 +187,37 @@ utiliser l'environnement de travail personnel du MOOC.
    #+END_example
    la mise en place de la machine est finie quand s'affiche la ligne "...". Si la machine virtuelle était déjà lancée, rien ne se passe, tant mieux.
 
-Une fois lancée, elle fournit un serveur HTTP qui est redirigé sur
+Une fois lancée, elle fournit un *serveur HTTP* qui est redirigé sur
 l'adresse locale de l'ordinateur /hôte/ =localhost= (=127.0.0.1=), qui
-écoute sur le port =8080= (d'où les URLs ci-dessous commençant par =http://localhost:8080/=).
+écoute sur le *port =8080=* (d'où les URLs ci-dessous commençant par *=http://localhost:8080/=*).
 
-** Accès aux applications pour les TPs
 
-*** Exerciseur de requêtes SQL
+** Exerciseur de requêtes SQL
 
 Une fois la machine virtuelle lancée, ouvrir un navigateur Web et aller sur http://localhost:8080/bdsqlwiz/appli/
 
-Vous pouvez maintenant commencer votre apprentissage du langage SQL !
+TODO screenshot
 
-*** Module Web d'administration PostgreSQL /phpPgAdmin/
+Vous pouvez maintenant commencer votre apprentissage du langage SQL,
+en sélectionnant l'une des deux bases de données disponibles (/films/
+ou /vins), puis en construisant des requêtes SQL à l'aide des outils
+présents dans les différentes /frames/.
+
+Vos requêtes seront transmises au serveur PostgreSQL qui tourne en
+tâche de fond dans la VM, pour être exécutées.
+
+** Module Web d'administration PostgreSQL /phpPgAdmin/
+
+Le serveur Web intégré dans la VM met aussi à votre disposition
+l'environnement d'administration *phpPgAdmin*. Cet environnement est
+très complet et fournit notamment des outils permettant la
+manipulation du /schéma des bases de données/ et l'administration du
+SGBD.
 
 - Connectez votre navigateur à l'adresse :
   http://localhost:8080/phppgadmin/
+
+*** Requêtage
 
 - Connectez-vous au /Serveur/ =PostgreSQL= :
 
@@ -193,7 +227,22 @@ Vous pouvez maintenant commencer votre apprentissage du langage SQL !
 
 Vous pouvez désormais saisir des requêtes SQL (de consultation seulement) sur le serveur PostgreSQL.
 
-*** En ligne de commande PostgreSQL
+
+*** Mises à jour
+
+Connectez-vous avec utilisateur =pg_writer= au lieu de =pg_reader=
+(même mot-de-passe).
+
+
+*** Administration
+
+Connectez-vous en tant qu'utilisateur /administrateur/ du SGBD (login:
+=postgres=, mot de passe : =postgres=).
+
+Bien entendu, tout est possible quand on est administrateur, donc
+attention avant de tout casser.
+
+** En ligne de commande PostgreSQL
 
 Pour exécuter des commandes SQL sur le serveur PostgreSQL présent à l'interieur de la machine virtuelle, procéder comme suit :
 
@@ -227,32 +276,19 @@ Pour exécuter des commandes SQL sur le serveur PostgreSQL présent à l'interie
    vins=>
    #+END_example
 
-*** Faire des mises à jour dans la base de données
+** TODO Programmation Web / BD en PHP
 
-Utilisez l'application Web /phppgadmin/ (voir [[*Module Web d'administration PostgreSQL /phpPgAdmin/][ci-dessus]]), avec l'utilisateur =postgres=,
-l'administrateur PostgreSQL qui a tous les droits sur la base de
-données. Son mot-de-passe est aussi =postgres=.
+Un sous-répertoire "=TP/=" est créé dans le dossier de travail dans lequel
+vous aviez lancé la création de la machine virtuelle.
 
-Bien entendu, tout est possible quand on est administrateur, donc
-attention avant de tout casser.
-
-*** TODO Programmation Web / BD en PHP
-
-Un sous-répertoire "=TP/=" est créé dans le répertoire dans lequel
-vous avez lancé la création de la machine virtuelle.
-
-Vous pouvez faire un =git pull= dans ce répertoire.
+Vous pouvez faire un =git pull= dans ce répertoire. Si vous n'avez pas
+installé Git sur votre système hôte, vous pouvez l'utiliser depuis
+l'intérieur de la VM (via une connexion SSH, en travaillant dans =/vagrant/TP/=).
 
 Le résultat est accessible sur http://localhost:8080/TP/
 
 * FAQ
 <<FAQ>>
-
-# ** TODO Quels sont les prérequis
-
-# - un espace disque disponible de (TODO) :
-#   - 350 Mo pour DebianBox.box
-# TBD
 
 ** TODO Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?
 
@@ -376,7 +412,21 @@ pour utiliser à la place =http://localhost:8081=
 
 ** =vagrant ssh= échoue, sous Windows
 
-En plus de l'installation de Vagrant et VirtualBox, il est nécessaire
+Si vous n'avez pas installé un client SSH, ou si vous n'avez pas
+configuré sa disponibilité dans le PATH, il y a de fortes chances que
+vous voyiez un message du genre :
+#+BEGIN_example
+`ssh` executable not found in any directories in the %PATH% variable. Is an
+ SSH client installed? Try installing Cygwin, MinGW or Git, all of which
+ contain an SSH client. Or use your favorite SSH client with the following
+ authentication information shown below:
+ Host: 127.0.0.1
+ Port: 2222
+ Username: vagrant
+ Private key: C:/Users/olivier/.vagrant.d/insecure_private_key
+#+END_example
+
+En effet, comme l'indique ce message, en plus de l'installation de Vagrant et VirtualBox, il est nécessaire
 d'installer un client SSH que Vagrant pourra utiliser pour se
 connecter (avec une clé privée particulière) de façon transparente à
 l'intérieur du /guest/.
@@ -385,8 +435,17 @@ Sur les systèmes Windows, il est probable qu'aucun client SSH ne sera
 installé par défaut.
 
 Ceci est une FAQ Vagrant, pour laquelle de nombreuses ressources
-Internet sont disponibles. Contactez les forums du MOOC si vous n'y
-arrivez pas par vous-même.
+Internet sont disponibles. 
+
+Parmi les solutions possibles, nous avons préféré l'installation de
+[[http://git-scm.com/download/win][Git pour windows]]. À
+l'installation, dans le dialogue de configuration "/Adjusting your
+PATH environment/", choisissez l'option "/Use Git from Bash only/". Il
+suffira alors de lancer les commandes Vagrant (comme =vagrant ssh=)
+depuis /Git Bash/ plutôt que depuis l'invite de commandes standard de
+Windows.
+
+Contactez les forums du MOOC si vous n'y arrivez pas par vous-même.
 
 ** Comment me connecter via SSH à la VM vagrant
 
@@ -413,11 +472,12 @@ applications installés sur la machine
 *** TODO Réinstallation de la machine virtuelle
 
 Pour réinstaller une machine virtuelle complète :
-- suppression du dossier de travail
-- vagrant init oberger/moocbdvm
-- vagrant outdated
-- vagrant box update
-- vagrant up
+- =vagrant destroy= dans le dossier de travail
+- =suppression du dossier de travail=
+- =vagrant init oberger/moocbdvm=
+- =vagrant outdated= /(vérifie sur =vagrantcloud.com= si une mise-à-jour de la box Vagrant a été publiée)/
+- =vagrant box update=, si nécessaire /(si une mise-à-jour disponible doit effectivement être installée)/
+- =vagrant up=
 
 ** Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
 
@@ -526,13 +586,17 @@ mais nous ne pouvons nous engager à fournir un support sur celle-ci.
 professionnels en systèmes GNU/Linux ou Microsoft Windows 7
 professional.
 
-[fn:3] autrement appelé /terminal/, /shell/, selon les systèmes d'exploitation
+[fn:3] autrement appelé /terminal/, /shell/, selon les systèmes
+d'exploitation. Sur Windows, on peut aussi utiliser l'outil /Windows Powershell/, ou
+/Git bash/, si ce dernier a été installé.
 
 [fn:4] Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
 
 [fn:5] Si votre système n'est pas 64 bits, attention, certaines
 commandes devront être modifiées pour télécharger la bonne version de
 la box Vagrant. Cf . [[*J'ai un système 32 bits, est-ce que ça marchera pour moi ?][J'ai un système 32 bits, est-ce que ça marchera pour moi ?]].
+
+[fn:6] ou bien, sur une machine 32 bits : =vagrant init moocbdvm32=
 
 # Local Variables:
 # org-html-postamble-format: (("fr" "<p class=\"author\">Auteur: %a</p>\n<p class=\"date\">Date: %C</p>\n<p class=\"creator\">%c</p>"))
