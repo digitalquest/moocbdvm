@@ -126,19 +126,22 @@ normalement être disponibles sur les systèmes d'exploitations les plus
 populaires (Linux, Windows, Mac OS X). Le mode opératoire devrait donc
 être identique pour tous, quelque soit l'OS utilisé.
 
-Téléchargez les versions les plus récentes de ces deux applications
-depuis leurs sites, et installez-les (nécessite les privilèges
-d'administration), ou installez les paquetages de votre
-distribution[fn:7] (si vous êtes sur Linux).
-
-- *VirtualBox* : https://www.virtualbox.org/wiki/Downloads
-- *Vagrant* : http://www.vagrantup.com/downloads.html (peut nécessiter
-  un redémarrage, sur Windows)
-
 /VirtualBox/ servira à faire fonctionner la virtualisation, alors que
 /Vagrant/ se chargera du téléchargement de la dernière version de
 l'image de machine, et de la création automatique de la machine
 virtuelle, correctement paramétrée.
+
+Téléchargez les *versions les plus récentes* de ces deux applications
+depuis leurs sites, et installez-les (nécessite les privilèges
+d'administration). Attention à installer une version récente :
+certains paquetages officiels de distributions peuvent être obsolètes,
+notamment pour Vagrant (voir sur le site de téléchargements du projet
+Vagrant les paquetages pour Linux =.deb) ou =.rpm=).
+
+Sites de téléchargement :
+- *VirtualBox* : https://www.virtualbox.org/wiki/Downloads
+- *Vagrant* : http://www.vagrantup.com/downloads.html (peut nécessiter
+  un redémarrage, sur Windows)
 
 Vous aurez éventuellement besoin d'installer un /client SSH/ si vous
 n'en avez pas encore installé un. Sur Windows, voir l'[[*=vagrant ssh= échoue, sous Windows][entrée de FAQ]] correspondante.
@@ -179,7 +182,7 @@ Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /
 
 *ATTENTION: La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant pas d'une connexion internet haut-débit.*
 
-La mise en place est terminée quand s'affiche les 4 lignes suivantes :
+La mise en place est terminée quand s'affichent les 4 lignes suivantes :
 #+BEGIN_example
 ==> default: Machine booted and ready!
 ==> default: Checking for guest additions in VM...
@@ -538,6 +541,20 @@ Il peut être nécessaire de mettre à jour la box (commandes =vagrant box outda
 
 Si le problème persiste, contactez-nous via les forums du MOOC.
 
+** Le premier lancement signale que la machine est vérouillée
+
+Au premier =vagrant up=, il se peut que Vagrant affiche un message d'erreur du style :
+#+BEGIN_example
+Vagrant can't use the requested machine because it is locked! This
+means that another Vagrant process is currently reading or modifying
+the machine. Please wait for that Vagrant process to end and try
+again. Details about the machine are shown below:
+Name: default
+Provider: virtualbox
+#+END_example
+
+Il semble que cela ne soit pas rédhibitoire : un nouveau =vagrant up= semble pouvoir régler le problème.
+
 ** Quand j'utilise la commande =vagrant up=, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying..." ou "default: Warning: Remote connection disconnect. Retrying..."
 
 Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
@@ -852,9 +869,6 @@ d'exploitation. Sur Windows, on peut aussi utiliser l'outil /Windows Powershell/
 commandes devront être modifiées pour télécharger la bonne version de
 la box Vagrant. Cf . [[*J'ai un système 32 bits, est-ce que ça marchera pour moi ?][J'ai un système 32 bits, est-ce que ça marchera pour moi ?]].
 
-[fn:7] Attention à installer une version récente : certains paquetages
-officiels de distributions peuvent être obsolètes : voir sur le site
-du projet Vagrant pour les paquetages non-officiels.
 
 # Local Variables:
 # org-html-postamble-format: (("fr" "<p class=\"author\">Auteur: %a</p>\n<p class=\"date\">Date: %C</p>\n<p class=\"creator\">%c</p>"))
