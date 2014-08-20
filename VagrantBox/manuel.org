@@ -116,18 +116,29 @@ permis la construction de la machine virtuelle.
 - Avoir un environnement internet à haut débit, le temps de télécharger l'environnement[fn:4]
 - Avoir au moins 3 Go de libre sur un disque dur local
 - Maîtriser un minimum l'utilisation de votre système d'exploitation,
-  notamment en mode invite de commande (commandes de base DOS ou shell
+  notamment en mode invite de commandes (commandes de base DOS ou shell
   Unix, type =cd=, =ls/dir=, etc.).
 
 ** Télécharger et installer Vagrant et VirtualBox
 
-Téléchargez les deux applications depuis leurs sites, et installez-les
-(nécessite les privilèges d'administration); ou installez les
-paquetages pour votre distribution (si vous êtes sur Linux).
+Vous aurez besoin d'installer Vagrant et VirtualBox, qui devraient
+normalement être disponibles sur les systèmes d'exploitations les plus
+populaires (Linux, Windows, Mac OS X). Le mode opératoire devrait donc
+être identique pour tous, quelque soit l'OS utilisé.
+
+Téléchargez les versions les plus récentes de ces deux applications
+depuis leurs sites, et installez-les (nécessite les privilèges
+d'administration), ou installez les paquetages de votre
+distribution[fn:7] (si vous êtes sur Linux).
 
 - *VirtualBox* : https://www.virtualbox.org/wiki/Downloads
 - *Vagrant* : http://www.vagrantup.com/downloads.html (peut nécessiter
   un redémarrage, sur Windows)
+
+/VirtualBox/ servira à faire fonctionner la virtualisation, alors que
+/Vagrant/ se chargera du téléchargement de la dernière version de
+l'image de machine, et de la création automatique de la machine
+virtuelle, correctement paramétrée.
 
 Vous aurez éventuellement besoin d'installer un /client SSH/ si vous
 n'en avez pas encore installé un. Sur Windows, voir l'[[*=vagrant ssh= échoue, sous Windows][entrée de FAQ]] correspondante.
@@ -144,15 +155,20 @@ stockage libre.
 
 Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /machine virtuelle/, suivre les étapes suivantes :
 
-1. ouvrir un invite de commande[fn:3] dans le dossier de travail
+1. ouvrir un /invite de commandes/ [fn:3] dans le dossier de travail
    choisi (utiliser la commande =cd= pour s'y positionner):
-
-2. entrer la commande suivante[fn:6] : 
+2. entrer la commande suivante, selon le profil de votre matériel / système : 
+   | Systèmes =64 bits=              |   | Systèmes =32 bits= (ou virtualisation |
+   |                                 |   | matérielle pas disponible)            |
+   |---------------------------------+---+---------------------------------------|
+   | =vagrant init oberger/moocbdvm= |   | =vagrant init oberger/moocbdvm32=     |
+   un fichier =Vagrantfile= est créé dans le dossier de travail :
    #+BEGIN_example
-   vagrant init oberger/moocbdvm
+   A `Vagrantfile` has been placed in this directory. You are now
+   ready to `vagrant up` your first virtual environment! Please read
+   the comments in the Vagrantfile as well as documentation on
+   `vagrantup.com` for more information on using Vagrant.
    #+END_EXAMPLE
-   un fichier =Vagrantfile= est créé dans le dossier de travail;
-
 3. entrer la commande suivante :
    #+BEGIN_example
    vagrant up
@@ -163,7 +179,15 @@ Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /
 
 *ATTENTION: La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant pas d'une connexion internet haut-débit.*
 
-La mise en place est terminée quand s'affiche la ligne "/Successfully created the virtual machine./". Si tout va bien, la machine virtuelle
+La mise en place est terminée quand s'affiche les 4 lignes suivantes :
+#+BEGIN_example
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+==> default: Mounting shared folders...
+    default: /vagrant => ...CHEMIN DE VOTRE DOSSIER DE TRAVAIL...
+#+END_EXAMPLE
+
+Si tout va bien, la machine virtuelle
 est visible dans l'interface d'administration de VirtualBox (et peut
 être démarrée, arrêtée, ou mise en pause comme une machine virtuelle
 ordinaire).
@@ -174,18 +198,26 @@ consultez
 
 * Utilisation
 
-La machine virtuelle doit être lancée, en tâche de fond, pour pouvoir
+La machine virtuelle doit être lancée, en tâche de fond dans VirtualBox, pour pouvoir
 utiliser l'environnement de travail personnel du MOOC. 
 
 ** Lancement de la machine virtuelle
 
-1. ouvrir un invite de commande dans le dossier de travail;
+1. ouvrir un invite de commandes dans le dossier de travail;
 
 2. entrer la commande:
    #+BEGIN_example
    vagrant up
    #+END_example
    la mise en place de la machine est finie quand s'affiche la ligne "...". Si la machine virtuelle était déjà lancée, rien ne se passe, tant mieux.
+
+   Il se peut qu'un message affiche un avertissement si une nouvelle version de la box a été publiée depuis l'installation :
+   #+BEGIN_example
+   ==> default: A newer version of the box 'oberger/moocbdvm' is available! You currently
+   ==> default: have version '0.1.0'. The latest is version '42.0'. Run
+   ==> default: `vagrant box update` to update.
+   #+END_example
+   vous pouvez probablement ignorer ce message. Dans la plupart des cas, il est peu probable qu'une réinstallation de la box soit nécessaire : cf. [[*Comment mettre à jour ma machine virtuelle][Comment mettre à jour ma machine virtuelle]].
 
 Une fois lancée, elle fournit un *serveur HTTP* qui est redirigé sur
 l'adresse locale de l'ordinateur /hôte/ =localhost= (=127.0.0.1=), qui
@@ -276,37 +308,90 @@ Pour exécuter des commandes SQL sur le serveur PostgreSQL présent à l'interie
    vins=>
    #+END_example
 
-** TODO Programmation Web / BD en PHP
+** Programmation Web / BD en PHP
 
-Un sous-répertoire "=TP/=" est créé dans le dossier de travail dans lequel
-vous aviez lancé la création de la machine virtuelle.
+*** Structure de l'environnement d'exécution PHP
 
-Vous pouvez faire un =git pull= dans ce répertoire. Si vous n'avez pas
-installé Git sur votre système hôte, vous pouvez l'utiliser depuis
-l'intérieur de la VM (via une connexion SSH, en travaillant dans =/vagrant/TP/=).
+Les exercices de programmation de pages Web en PHP nécessitent un
+serveur Web et l'interpréteur PHP. La VM contient un tel environnement
+(Apache + mod_php).
 
-Le résultat est accessible sur http://localhost:8080/TP/
+Pour tester vos programmes, il faudra donc placer des fichier =.php=
+dans un répertoire accessible par le serveur Web Apache.
+
+Nous avons configuré le serveur Apache de la VM de façon à ce qu'il
+puisse exécuter des scripts PHP présents dans le répertoire
+=/vagrant/TP/= de la VM, le résultat devenant accessible sur
+http://localhost:8080/TP/.
+
+*** Montage d'un dossier partagé =/vagrant/TP/=
+
+La box Vagrant est configurée de façon à ce que ce répertoire de tests
+PHP corresponde au sous-répertoire "=TP/=" qui a normalement été créé
+dans le dossier de travail lorsque vous avez lancé la création de la
+machine virtuelle (=vagrant up= initial).
+
+Tout le contenu du dossier de travail de l'hôte est en effet /monté/
+en tant que =/vagrant/= dans la VM, comme /dossier partagé/
+VirtualBox.
+
+Par exemple, sur Windows le contenu de =C:\Users\olivier\vagrant\= serait directement
+monté en tant que =/vagrant/=.
+
+L'avantage d'un tel montage est de permettre l'édition des fichiers
+*depuis l'hôte*, avec l'éditeur de texte ou l'/IDE/ préféré dans
+l'environnement de bureau natif de votre système habituel, tout en
+permettant les tests *en direct à l'intérieur de la VM*, sans besoin de
+recopie entre les deux systèmes.
+
+*** Mise à jour des squelettes PHP
+
+Le sous-répertoire =TP/= devrait normalement contenir un ensemble de
+squelettes de départ servant de base pour les TPs, image du contenu
+mis en ligne par les enseignants. Vous pourrez faire un =git pull=
+dans ce répertoire pour récupérer des mises-à-jour. Si vous n'avez pas
+installé Git sur votre système hôte, vous pourrez toutefois l'utiliser depuis
+l'intérieur de la VM (via une connexion SSH, en travaillant dans
+=/vagrant/TP/=).
+
 
 * FAQ
 <<FAQ>>
 
-** TODO Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?
+** Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?
 
 Il est possible de télécharger une /box/ Vagrant (fichier =.box=) et
 d'en extraire le contenu (c'est en réalité une archive /tar/
-compressée, équivalente à un =.tgz= / =.tar.gz=). Par exemple, sous
-Unix : =tar zxf package.box=.
+compressée, équivalente à un =.tgz= / =.tar.gz=).
 
+Pour télécharger le fichier, =.box=, consultez
+https://vagrantcloud.com/oberger/moocbdvm/versions et récupérez l'URL
+du fichier =.box= de la dernière version.
+#+BEGIN_example
+$ wget https://vagrantcloud.com/oberger/moocbdvm/version/.../provider/virtualbox.box
+#+END_example
+
+Pour extraire le contenu, utilisez par exemple =tar=, sous
+Unix : =tar zxf virtualbox.box=.
+
+#+BEGIN_example
+$ tar ztf virtualbox.box
+./Vagrantfile
+./box.ovf
+./include/
+./include/_Vagrantfile
+./box-disk1.vmdk
+#+END_example
 
 On peut en extraire un fichier de définition de machine virtuelle
 VirtualBox (=./box.ovf=), ainsi que le fichier d'image de disque
 (=./box-disk1.vmdk=) correspondant.
 
-Il est alors possible d'importer le tout dans VirtualBox, et de
+Il est alors possible d'*importer* le fichier =.ovf= dans VirtualBox, et de
 redéfinir les redirections de ports appropriées, ou les partages de
-dossiers, etc.
+dossiers (=/vagrant/=), etc.
 
-*** Je n'arrive pas à me connecter depuis la console affichée par VirtualBox
+** Je n'arrive pas à me connecter depuis la console affichée par VirtualBox
 
 Attention : le clavier configuré par défaut, pour la console de login
 affichée par VirtualBox est en disposition *azerty* (comme rappelé par
@@ -316,7 +401,7 @@ Une alternative à l'utilisation de la console affichée par VirtualBox,
 est d'utiliser =vagrant ssh=, qui fonctionnera en principe quelque
 soit votre disposition de clavier.
 
-*** Comment installer un environnement de bureau sur la VM
+** Comment installer un environnement de bureau sur la VM
 
 Normalement, vous n'aurez pas besoin d'utiliser la machine virtuelle en mode bureau graphique pour les TPs du MOOC, mais c'est cependant tout-à-fait faisable.
 
@@ -331,7 +416,7 @@ vagrant ssh -c "sudo /usr/local/sbin/install-gui.sh"
 
 Attention, ceci fait augmenter substentiellement l'occupation disque de la machine virtuelle.
 
-*** TODO Comment installer l'application exerciseur manuellement
+** TODO Comment installer l'application exerciseur manuellement
 
 Les sources sont disponibles depuis git avec : 
 git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
@@ -350,11 +435,52 @@ nos tests de VM est la version 64 bits (architecture Linux =amd64=), qui
 nécessite un hôte 64 bits.
 
 Nous mettons également à votre disposition une version 32 bits, mais ayant fait
-l'objet de tests moins poussés. 
+l'objet de tests moins poussés.
 
 Pour l'utiliser, remplacer
 =oberger/moocbdvm= par *=oberger/moocbdvm32=* dans les instructions
-=vagrant init=.
+=vagrant init= :
+
+#+BEGIN_example
+vagrant init oberger/moocbdvm32
+#+END_EXAMPLE
+
+
+** TODO VirtualBox se plaint d'un problème de virtualisation matérielle
+
+Il se peut que vous voyiez un des messages suivants dans VirtualBox :
+#+BEGIN_example
+"La virtualisation matérielle VT-x/AMD-V n'est pas disponible sur votre système. L'invité 64 bits ne détectera pas un processeur 64 bits et ne pourra pas démarrer."
+#+END_example
+ou
+#+BEGIN_example
+La virtualisation matérielle VT-x/AMD-V a été sélectionnée, mais n'est 
+pas active. L'invité 64 bits ne détectera pas un processeur 64 bits et 
+ne pourra probablement pas démarrer.
+
+Assurez-vous que vous avez bien activé le VT-x/AMD-V dans le BIOS de 
+votre ordinateur hôte.
+#+END_example
+et le message suivant affiché dans l'invite de commandes par Vagrant :
+#+BEGIN_example
+The guest machine entered an invalid state while waiting for it
+to boot. Valid states are 'starting, running'. The machine is in the
+'paused' state. Please verify everything is configured
+properly and try again.
+
+If the provider you're using has a GUI that comes with it,
+it is often helpful to open that and watch the machine, since the
+GUI often has more helpful error messages than Vagrant can retrieve.
+For example, if you're using VirtualBox, run `vagrant up` while the
+VirtualBox GUI is open.
+#+END_example
+
+Ceci signifie en général que vous avez essayé de lancer une VM pour la
+box 64 bits alors que votre système est en 32 bits, ou que votre
+processeur ne dispose pas des fonctionnalités suffisantes.
+
+Réessayez avec la box *32 bits* : =oberger/moocbdvm32= (cf. 
+[[*J'ai un système 32 bits, est-ce que ça marchera pour moi ?][J'ai un système 32 bits, est-ce que ça marchera pour moi ?]]).
 
 ** Je n'ai pas accès à Internet en haut débit
 
@@ -376,6 +502,30 @@ disponibles dans XXX TODO.
 
 # Ce comportement est tout à fait normal et correspond à l'installation des différents composants utiles pour l'apprentissage du SQL.
 
+** TODO Vagrant ne trouve pas de /box/ =oberger/moocbdvm=
+
+La commande =vagrant up= renvoit un message du style :
+#+BEGIN_example
+There was a problem with the configuration of Vagrant. The error message(s)
+are printed below:
+
+vm:
+  The box 'oberger/moocbdvm' could not be found.
+#+END_example
+ou bien un message du type :
+#+BEGIN_example
+[vagrant] Downloading with Vagrant::Downloaders::File...
+[vagrant] Copying box to temporary location...
+[vagrant] Extracting box...
+[vagrant] Cleaning up downloaded box...
+Failed to untar the box file. This is usually because you're
+attempting to add a box that isn't a valid box file. Please
+double check that the box file is properly packaged.
+#+END_example
+
+Vous utilisez probablement une version trop ancienne de Vagrant, alors que nous recommandons une version >= 1.6.3
+(vérifiez avec =vagrant --version=).
+
 ** Le message de confirmation de mise en place ne s'affiche pas.
 
 Reprendre les instuctions d'installation depuis le début en vérifiant que toutes les étapes ont été correctement suivies.
@@ -384,7 +534,7 @@ Reprendre les instuctions d'installation depuis le début en vérifiant que tout
 
 # Se reporter au site du tp pour vérifier que le DebianBox.box et le Vagrantfile sont bien à jour tous les deux. Le cas échéant, télécharger les nouveaux DebianBox.box et Vagrantfile et recommencer l'installation.
 
-Il peut être nécessaire de mettre à jour la box (commandes =vagrant box outdated=, etc.). Veuillez vous reporter à la documentation Vagrant.
+Il peut être nécessaire de mettre à jour la box (commandes =vagrant box outdated=, etc.). Veuillez vous reporter [[*Réinstallation de la machine virtuelle][Réinstallation de la machine virtuelle]].
 
 Si le problème persiste, contactez-nous via les forums du MOOC.
 
@@ -392,23 +542,118 @@ Si le problème persiste, contactez-nous via les forums du MOOC.
 
 Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
 
-Si l'invite de commande en est rempli, il est conseillé d'interrompre
+Si l'invite de commandes en est rempli, il est conseillé d'interrompre
 la commande (ctrl-C sur UNIX, XXX sur windows) et de recommencer
 l'étape d'installation que vous faisiez.
 
-** TODO Si le binding de port ne fonctionne pas, que faire (rerédiger en fonction du message d'erreur réel)
+** Le lancement de la VM affiche un problème de versions des /guest additions/
 
-TBD
+Il se peut qu'au démarrage de la VM, un message soit affiché, du style :
+#+BEGIN_example
+Checking for guest additions in VM...
+The guest additions on this VM do not match the installed version of
+VirtualBox! In most cases this is fine, but in rare cases it can
+prevent things such as shared folders from working properly. If you see
+shared folder errors, please make sure the guest additions within the
+virtual machine match the version of VirtualBox you have installed on
+your host and reload your VM.
 
-Le démarrage de la machine virtuelle effectue une redirection du port
-80 du /guest/ vers le port 8080 de l'/hôte/. Il se peut qu'une telle
-redirection soit interdite (firewall) ou impossible (une autre
-application de l'hôte utilise déjà le port 8080).
+Guest Additions Version: 4.3.14
+VirtualBox Version: 4.1
+#+END_example
 
-Il est alors possible de modifier le fichier =Vagrantfile= (qui a été
-généré dans le dossier de travail par =vagrant init=) pour utiliser un
-autre port, par exemple 8081. Il faudra alors adapter toutes les URLs
-pour utiliser à la place =http://localhost:8081=
+A priori, ce n'est pas gênant pour le bon fonctionnement de la VM.
+
+** La machine virtuelle est lancée, mais les pages Web sur le port 8080 ne donnent pas les résultats escomptés
+
+Normalement, au démarrage de la machine virtuelle, Vagrant configure
+une redirection (/forward/) du port =80= (HTTP) du /guest/, vers le
+port =8080= de l'/hôte/, et respectivement, du port =22= (SSH) vers le
+port =2222=. Il se peut qu'une telle redirection soit impossible (par
+exemple si une autre application de l'hôte utilise déjà le port
+=8080=, ou si une autre machine virtuelle a déjà été lancée avec une
+telle redirection).
+
+Dans ce cas, il est probable qu'un autre port aura été utilisé pour la
+redirection, que =8080=.
+
+Dans un tel cas, =vagrant up= affiche des messages su style :
+#+BEGIN_example
+==> default: Fixed port collision for 80 => 8080. Now on port 2200.
+==> default: Fixed port collision for 22 => 2222. Now on port 2201.
+...
+==> default: Forwarding ports...
+    default: 80 => 2200 (adapter 1)
+    default: 22 => 2201 (adapter 1)
+#+END_example
+
+On voit ici que le port =2200= a été utilisé au lieu de =8080=. Il
+faudrait alors adapter toutes les URLs de ce document, pour utiliser à
+la place =http://localhost:2200=. De façon similaire, il faudrait
+configurer le client SSH pour se connecter au port =2201= (=ssh -p 2201 vagrant@localhost=).
+
+# SUPPRIMÉ, car ne devrait plus poser de pbm sur le port 8080 du fait du 'auto_correct: true' :
+
+# ** Si la redirection de de ports ne fonctionne pas, que faire ?
+
+# Le démarrage de la machine virtuelle effectue une redirection
+# (/forward/)du port =80= (HTTP) du /guest/, vers le port =8080= de
+# l'/hôte/, et respectivement, du port =22= (SSH) vers le port
+# =2222=. Il se peut qu'une telle redirection soit interdite
+# (/firewall/) ou impossible (par exemple si une autre application de
+# l'hôte utilise déjà le port =8080=).
+
+# #+BEGIN_example
+# Vagrant cannot forward the specified ports on this VM, since they
+# would collide with some other application that is already listening
+# on these ports. The forwarded port to 8080 is already in use
+# on the host machine.
+
+# To fix this, modify your current projects Vagrantfile to use another
+# port. Example, where '1234' would be replaced by a unique host port:
+
+#   config.vm.network :forwarded_port, guest: 80, host: 1234
+
+# Sometimes, Vagrant will attempt to auto-correct this for you. In this
+# case, Vagrant was unable to. This is usually because the guest machine
+# is in a state which doesn't allow modifying port forwarding.
+# #+END_example
+
+# # Il est alors possible de modifier le fichier =Vagrantfile= (qui a été
+# # généré dans le dossier de travail lors du =vagrant init=) pour
+# # utiliser un autre port, par exemple =8081=. Il faudra alors adapter
+# # toutes les URLs de ce document, pour utiliser à la place
+# # =http://localhost:8081=. De façon similaire, il faudra configurer le
+# # client SSH pour se connecter au port =2223= (=ssh -p 2223 vagrant@localhost=).
+
+# # Pour cela :
+# # 1. éditer le fichier =Vagrantfile= et chercher la section commentée suivante :
+# #    #+BEGIN_example
+# #    # Create a forwarded port mapping which allows access to a specific port
+# #    # within the machine from a port on the host machine. In the example below,
+# #    # accessing "localhost:8080" will access port 80 on the guest machine.
+# #    # config.vm.network "forwarded_port", guest: 80, host: 8080
+# #    #+END_example
+
+# # 2. après cette section, insérer une nouvelle ligne de la forme :
+# #    #+BEGIN_example
+# #    config.vm.network :forwarded_port, guest: 80, host: 8081
+# #    config.vm.network :forwarded_port, guest: 22, host: 2223
+# #    #+END_example
+
+# # 3. relancer =vagrant up=
+
+# Il est alors possible de modifier la machine virtuelle qui vient
+# d'être créée, depuis VirtualBox, pour utiliser un autre port, par
+# exemple =8081=.
+
+# La configuration se fait dans le dialogue de /Configuration/ de la
+# machine virtuelle, dans la section /Réseau/, sous /Avancé/
+# *Redirection de ports*.
+
+# Il faudra donc adapter toutes les URLs de ce document, pour utiliser
+# à la place =http://localhost:8081=. De façon similaire, il faudra
+# configurer le client SSH pour se connecter au port =2223= (=ssh -p 2223 vagrant@localhost=).
 
 ** =vagrant ssh= échoue, sous Windows
 
@@ -461,6 +706,8 @@ de l'/hôte/ (redirigé vers le port 22 du /guest/) : =ssh -p 2222 vagrant@local
 
 ** Comment mettre à jour ma machine virtuelle
 
+Dans la plupart des cas, il n'est pas nécessaire de réinstaller la VM à partir d'une nouvelle version de la box : une mise à jour partielle sera suffisante.
+
 *** TODO Mise à jour partielle
 Il est possible de metre à jour via internet une partie des scripts et
 applications installés sur la machine
@@ -475,11 +722,20 @@ Pour réinstaller une machine virtuelle complète :
 - =vagrant destroy= dans le dossier de travail
 - =suppression du dossier de travail=
 - =vagrant init oberger/moocbdvm=
-- =vagrant outdated= /(vérifie sur =vagrantcloud.com= si une mise-à-jour de la box Vagrant a été publiée)/
+- =vagrant box outdated= 
+
+  Vérifie sur =vagrantcloud.com= si une mise-à-jour de la box Vagrant
+  a été publiée :
+  #+BEGIN_example
+  Checking if box 'oberger/moocbdvm' is up to date...
+  A newer version of the box 'oberger/moocbdvm' is available! You currently
+  have version '0.1.0'. The latest is version '42.0'. Run
+  `vagrant box update` to update.
+  #+END_example
 - =vagrant box update=, si nécessaire /(si une mise-à-jour disponible doit effectivement être installée)/
 - =vagrant up=
 
-** Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
+** TODO Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
 
 * TODOs                                                            :noexport:
 
@@ -596,7 +852,9 @@ d'exploitation. Sur Windows, on peut aussi utiliser l'outil /Windows Powershell/
 commandes devront être modifiées pour télécharger la bonne version de
 la box Vagrant. Cf . [[*J'ai un système 32 bits, est-ce que ça marchera pour moi ?][J'ai un système 32 bits, est-ce que ça marchera pour moi ?]].
 
-[fn:6] ou bien, sur une machine 32 bits : =vagrant init moocbdvm32=
+[fn:7] Attention à installer une version récente : certains paquetages
+officiels de distributions peuvent être obsolètes : voir sur le site
+du projet Vagrant pour les paquetages non-officiels.
 
 # Local Variables:
 # org-html-postamble-format: (("fr" "<p class=\"author\">Auteur: %a</p>\n<p class=\"date\">Date: %C</p>\n<p class=\"creator\">%c</p>"))
