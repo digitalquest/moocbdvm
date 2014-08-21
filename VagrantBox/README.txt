@@ -54,4 +54,12 @@ Documentation utilisateur initiale : TLDR.[org|html]
 
 Cf. manuel.org pour plus de documentation.
 
+Scripts de mises-à-jour
+-----------------------
+
+Un deuxième repository (public) est utilisé dans le projet fusionforge:
+git+ssh://...@fusionforge.int-evry.fr//var/lib/gforge/chroot/scmrepos/git/moocbdvm/update-scripts.git
+il contient les scripts qui seront téléchargés, par git, via les
+scripts de mise-à-jour de la VM (maj-maj.sh etc.), via un git pull sur
+http://fusionforge.int-evry.fr/anonscm/git/moocbdvm/update-scripts.git
 
