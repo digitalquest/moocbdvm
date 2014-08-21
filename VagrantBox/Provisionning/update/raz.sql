@@ -15,11 +15,11 @@ DROP DATABASE films;
 CREATE DATABASE vins;
 CREATE DATABASE films;
 
-/* Grant USAGE to pg_reader and pg_admin */
+/* Grant USAGE to pg_reader and pg_writer */
 GRANT USAGE ON SCHEMA public to pg_reader;
 GRANT USAGE ON SCHEMA public to pg_writer;
 
-/* Grant connect rights to pg_reader and pg_admin */
+/* Grant connect rights to pg_reader and pg_writer */
 GRANT CONNECT ON DATABASE vins TO pg_reader;
 GRANT CONNECT ON DATABASE films TO pg_reader;
 

@@ -754,6 +754,55 @@ Pour réinstaller une machine virtuelle complète :
 
 ** TODO Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
 
+** Je suis sous Windows et je rencontre un problème d'encodage
+Si vous rencontrez un message du type
+#+BEGIN_example
+Chemin/Vers/Vagrant/embedded/gems/gems/childprocess-0.3.9/lib/childprocess/wind
+ows/process_builder.rb:63:in `join': incompatible character encodings: CP850 and
+ Windows-1252 (Encoding::CompatibilityError)
+#+END_example
+
+- Ouvrir une invit de commande et entrer la commande =SET VAGRANT_HOME=X:/Chemin/De/Votre/Choix= où X correspond au disque de votre choix (C ou D par exemple).
+*ATTENTION: Il est nécessaire de refaire cette manipulation après chaque démarrage de la machine si vous souhaitez utiliser vagrant*
+
+- Ouvrir le fichier X:\Chemin\Vers\Vagrant\embedded\gems\gems\vagrant-1.6.3\bin\vagrant avec un éditeur de texte. Le bloc-note est déconseillé car il rend l'édition difficile.
+
+-Une fois le fichier ouvert, rajouter ces deux lignes après la première ligne du fichier:
+# A tenir à jour avec l'encodage par défault de windows
+#+BEGIN_example
+Encoding.default_external = Encoding.find('Windows-1252')
+Encoding.default_internal = Encoding.find('Windows-1252')
+#+END_example
+
+- Enregistrer le fichier, c'est bon, vous pouvez reprendre votre utilisation de vagrant.
+
+** Vagrant indique que la machine est entrée dans un état non autorisé et conseille d'utiliser VirtualBox pour régler le bug.
+
+- Si jamais VirtualBox n'a pas été démarré automatiquement, démarrer le et lancer la machine virtuelle.
+
+- Au démarrage de la machine virtuelle, VirtualBox présente un fenêtre d'erreur avec le texte:
+#+BEGIN_example
+La virtualisation matérielle VT-x/AMD-V a été sélectionnée, mais n'est pas active. L'invité 64 bits ne détectera pas un processeur 64 bits et ne pourra probablement pas démarrer.
+Assurez-vous que vous avez bien activé le VT-x/AMD-V dans le BIOS de votre ordinateur hôte.
+#+END_example
+
+*Si vous êtes un utilisateur novice et/ou que vous ne voulez pas vous compliquer la vie*
+
+- Utiliser la version 32 bits de la machine virtuelle, disponible grâce à =vagrant init oberger/moocbdvm32=.
+
+*Si vous êtes un utilisateur expérimenté*
+
+- Vérifier que votre processeur supporte la virtualisation d'OS 64bits (site du frabricant etc.)
+
+- S'il le supporte, aller dans le bios et vérifier que l'option de virtualisation est bien cochée.
+
+- Sinon, utiliser la version 32 bits de la machine virtuelle, utilisable grâce à =vagrant init oberger/moocbdvm32.
+
+** Vagrant indique que la machine est verrouillée.
+
+- Il suffit juste de refaire un =vagrant up=.
+
+
 * TODOs                                                            :noexport:
 
 ** TODO Documenter la publication de la box
