@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
 <title>Manuel de la Box Vagrant du MOOC BD</title>
-<!-- 2014-08-21 jeu. 10:58 -->
+<!-- 2014-08-21 jeu. 15:19 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Stéphane Germain, Olivier Berger" />
@@ -246,22 +246,8 @@ for the JavaScript code in this tag.
 <li><a href="#sec-5-17-2"><span class="todo TODO">TODO</span> Réinstallation de la machine virtuelle</a></li>
 </ul>
 </li>
-<<<<<<< HEAD
 <li><a href="#sec-5-18">5.18. <span class="todo TODO">TODO</span> Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</a></li>
-=======
-<li><a href="#sec-5-2">5.2. J'ai un système 32 bits, est-ce que ça marchera pour moi ?</a></li>
-<li><a href="#sec-5-3">5.3. Je n'ai pas accès à Internet en haut débit</a></li>
-<li><a href="#sec-5-4">5.4. Le message de confirmation de mise en place ne s'affiche pas.</a></li>
-<li><a href="#sec-5-5">5.5. Quand j'utilise la commande <code>vagrant up</code>, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying&#x2026;" ou "default: Warning: Remote connection disconnect. Retrying&#x2026;"</a></li>
-<li><a href="#sec-5-6">5.6. <span class="todo TODO">TODO</span> Si le binding de port ne fonctionne pas, que faire (rerédiger en fonction du message d'erreur réel)</a></li>
-<li><a href="#sec-5-7">5.7. <code>vagrant ssh</code> échoue, sous Windows</a></li>
-<li><a href="#sec-5-8">5.8. Comment me connecter via SSH à la VM vagrant</a></li>
-<li><a href="#sec-5-9">5.9. <span class="todo TODO">TODO</span> J'ai écrasé la base de données, que faire</a></li>
-<li><a href="#sec-5-10">5.10. Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</a></li>
-<li><a href="#sec-5-11">5.11. Je suis sous Windows et je rencontre un problème d'encodage</a></li>
-<li><a href="#sec-5-12">5.12. Vagrant indique que la machine est entrée dans un état non autorisé et conseille d'utiliser VirtualBox pour régler le bug.</a></li>
-<li><a href="#sec-5-13">5.13. Vagrant indique que la machine est verrouillée.</a></li>
->>>>>>> Add error cases to the manual
+<li><a href="#sec-5-19">5.19. Je suis sous Windows et je rencontre un problème d'encodage</a></li>
 </ul>
 </li>
 <li><a href="#sec-6">6. À propos de la Box Vagrant du MOOC</a>
@@ -1354,9 +1340,9 @@ have version '0.1.0'. The latest is version '42.0'. Run
 <h3 id="sec-5-18"><span class="section-number-3">5.18</span> <span class="todo TODO">TODO</span> Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</h3>
 </div>
 
-<div id="outline-container-sec-5-11" class="outline-3">
-<h3 id="sec-5-11"><span class="section-number-3">5.11</span> Je suis sous Windows et je rencontre un problème d'encodage</h3>
-<div class="outline-text-3" id="text-5-11">
+<div id="outline-container-sec-5-19" class="outline-3">
+<h3 id="sec-5-19"><span class="section-number-3">5.19</span> Je suis sous Windows et je rencontre un problème d'encodage</h3>
+<div class="outline-text-3" id="text-5-19">
 <p>
 Si vous rencontrez un message du type
 </p>
@@ -1393,59 +1379,7 @@ Encoding.default_internal = Encoding.find('Windows-1252')
 </ul>
 </div>
 </div>
-
-<div id="outline-container-sec-5-12" class="outline-3">
-<h3 id="sec-5-12"><span class="section-number-3">5.12</span> Vagrant indique que la machine est entrée dans un état non autorisé et conseille d'utiliser VirtualBox pour régler le bug.</h3>
-<div class="outline-text-3" id="text-5-12">
-<ul class="org-ul">
-<li>Si jamais VirtualBox n'a pas été démarré automatiquement, démarrer le et lancer la machine virtuelle.
-</li>
-
-<li>Au démarrage de la machine virtuelle, VirtualBox présente un fenêtre d'erreur avec le texte:
-</li>
-</ul>
-<pre class="example">
-La virtualisation matérielle VT-x/AMD-V a été sélectionnée, mais n'est pas active. L'invité 64 bits ne détectera pas un processeur 64 bits et ne pourra probablement pas démarrer.
-Assurez-vous que vous avez bien activé le VT-x/AMD-V dans le BIOS de votre ordinateur hôte.
-</pre>
-
-<p>
-<b>Si vous êtes un utilisateur novice et/ou que vous ne voulez pas vous compliquer la vie</b>
-</p>
-
-<ul class="org-ul">
-<li>Utiliser la version 32 bits de la machine virtuelle, disponible grâce à <code>vagrant init oberger/moocbdvm32</code>.
-</li>
-</ul>
-
-<p>
-<b>Si vous êtes un utilisateur expérimenté</b>
-</p>
-
-<ul class="org-ul">
-<li>Vérifier que votre processeur supporte la virtualisation d'OS 64bits (site du frabricant etc.)
-</li>
-
-<li>S'il le supporte, aller dans le bios et vérifier que l'option de virtualisation est bien cochée.
-</li>
-
-<li>Sinon, utiliser la version 32 bits de la machine virtuelle, utilisable grâce à =vagrant init oberger/moocbdvm32.
-</li>
-</ul>
 </div>
-</div>
-
-<div id="outline-container-sec-5-13" class="outline-3">
-<h3 id="sec-5-13"><span class="section-number-3">5.13</span> Vagrant indique que la machine est verrouillée.</h3>
-<div class="outline-text-3" id="text-5-13">
-<ul class="org-ul">
-<li>Il suffit juste de refaire un <code>vagrant up</code>.
-</li>
-</ul>
-</div>
-</div>
-</div>
-
 
 <div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6"><span class="section-number-2">6</span> À propos de la Box Vagrant du MOOC</h2>
@@ -1533,11 +1467,7 @@ d'exploitation. Sur Windows, on peut aussi utiliser l'outil <i>Windows Powershel
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Stéphane Germain, Olivier Berger</p>
-<<<<<<< HEAD
-<p class="date">Date: 2014-08-20 mer. 16:08</p>
-=======
-<p class="date">Date: 2014-08-21 jeu. 10:58</p>
->>>>>>> Add error cases to the manual
+<p class="date">Date: 2014-08-21 jeu. 15:18</p>
 <p class="creator">Copyright (C) 2014, The authors and Institut Mines-Télécom</p>
 </div>
 </body>

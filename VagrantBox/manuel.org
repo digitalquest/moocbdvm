@@ -776,33 +776,6 @@ Encoding.default_internal = Encoding.find('Windows-1252')
 
 - Enregistrer le fichier, c'est bon, vous pouvez reprendre votre utilisation de vagrant.
 
-** Vagrant indique que la machine est entrée dans un état non autorisé et conseille d'utiliser VirtualBox pour régler le bug.
-
-- Si jamais VirtualBox n'a pas été démarré automatiquement, démarrer le et lancer la machine virtuelle.
-
-- Au démarrage de la machine virtuelle, VirtualBox présente un fenêtre d'erreur avec le texte:
-#+BEGIN_example
-La virtualisation matérielle VT-x/AMD-V a été sélectionnée, mais n'est pas active. L'invité 64 bits ne détectera pas un processeur 64 bits et ne pourra probablement pas démarrer.
-Assurez-vous que vous avez bien activé le VT-x/AMD-V dans le BIOS de votre ordinateur hôte.
-#+END_example
-
-*Si vous êtes un utilisateur novice et/ou que vous ne voulez pas vous compliquer la vie*
-
-- Utiliser la version 32 bits de la machine virtuelle, disponible grâce à =vagrant init oberger/moocbdvm32=.
-
-*Si vous êtes un utilisateur expérimenté*
-
-- Vérifier que votre processeur supporte la virtualisation d'OS 64bits (site du frabricant etc.)
-
-- S'il le supporte, aller dans le bios et vérifier que l'option de virtualisation est bien cochée.
-
-- Sinon, utiliser la version 32 bits de la machine virtuelle, utilisable grâce à =vagrant init oberger/moocbdvm32.
-
-** Vagrant indique que la machine est verrouillée.
-
-- Il suffit juste de refaire un =vagrant up=.
-
-
 * TODOs                                                            :noexport:
 
 ** TODO Documenter la publication de la box
