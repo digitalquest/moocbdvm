@@ -120,14 +120,15 @@ sed -ire 's/# allow from all/allow from all/' /etc/apache2/conf.d/phppgadmin
 
 echo ".installing the labs applications"
 
+# Clone the repository to pull the update scripts and move to /usr/local/bin/
+git clone http://fusionforge.int-evry.fr/anonscm/git/moocbdvm/update-scripts.git /home/vagrant/moocbdvm-scripts
+cp /home/vagrant/moocbdvm-scripts/update/maj-maj.sh /usr/local/bin/
+chown -R vagrant:vagrant /home/vagrant/moocbdvm-scripts
+
 # Clone the git repository for the provided website
 git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
 sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
 sed -i 's/"whatever"/"tpinfint"/g' /var/www/html/bdsqlwiz/appli/execpostgres.php
-
-# Clone the repository to pull the update scripts and move to /usr/local/bin/
-mkdir ../update
-git clone http://fusionforge.int-evry.fr/anonscm/git/moocbdvm/update-scripts.git ../update/
 
 # Launch the shell script used allow the user to use his own php pages. Not finished yet
 $pathToSetupTp/setup-tp.sh
