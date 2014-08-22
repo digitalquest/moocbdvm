@@ -125,8 +125,9 @@ git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/
 sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
 sed -i 's/"whatever"/"tpinfint"/g' /var/www/html/bdsqlwiz/appli/execpostgres.php
 
-# Launch the script to pull the update scripts, create aliases and move to /usr/local/bin/
-#/vagrant/update/maj-maj.sh
+# Clone the repository to pull the update scripts and move to /usr/local/bin/
+mkdir ../update
+git clone http://fusionforge.int-evry.fr/anonscm/git/moocbdvm/update-scripts.git ../update/
 
 # Launch the shell script used allow the user to use his own php pages. Not finished yet
 $pathToSetupTp/setup-tp.sh
