@@ -31,3 +31,6 @@ volume:
 packages: {}
 plugins:
   vagrant: {}
+  minimize_size : {
+    zerofree: true
+    }
