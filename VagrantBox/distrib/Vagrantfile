@@ -5,6 +5,15 @@ Vagrant.configure("2") do |config|
 
   # Box de base Debian : Debian Jessie amd64 minimal w/ guest additions
   config.vm.box = "oberger/moocbdvm"
+  # Provision stuff, including what is needed in /vagrant
+  #config.vm.provision "shell", path:"/usr/local/bin/maj-maj.sh"
+
+  $script = <<SCRIPT
+/usr/local/bin/maj-maj.sh
+SCRIPT
+
+  config.vm.provision "shell", inline: $script, privileged: true
+
 
   # config.vm.network "private_network", ip: "192.168.50.40"
 
