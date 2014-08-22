@@ -130,9 +130,9 @@ git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/
 sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
 sed -i 's/"whatever"/"tpinfint"/g' /var/www/html/bdsqlwiz/appli/execpostgres.php
 
-# That won't do : should be run at final provisioning time, for user's vagrant up, not here at build time
-# Launch the shell script used allow the user to use his own php pages. Not finished yet
-#$pathToSetupTp/setup-tp.sh
+
+# Configure apache to make sure /vagrant/TP is available
+$pathToSetupTp/setup-tp.sh
 #sudo -u vagrant /home/vagrant/moocbdvm-scripts/update/maj-tp.sh
 
 cd /var/www/html/
