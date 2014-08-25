@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
 <title>Manuel de la Box Vagrant du MOOC BD</title>
-<!-- 2014-08-25 lun. 11:48 -->
+<!-- 2014-08-25 lun. 14:27 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Stéphane Germain, Olivier Berger" />
@@ -239,7 +239,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-5-8">5.8. Vagrant ne trouve pas de <i>box</i> <code>oberger/moocbdvm</code></a></li>
 <li><a href="#sec-5-9">5.9. Le message de confirmation de mise en place ne s'affiche pas.</a></li>
 <li><a href="#sec-5-10">5.10. Le premier lancement signale que la machine est vérouillée</a></li>
-<li><a href="#sec-5-11">5.11. Quand j'utilise la commande <code>vagrant up</code>, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying&#x2026;" ou "default: Warning: Remote connection disconnect. Retrying&#x2026;"</a></li>
+<li><a href="#sec-5-11">5.11. Quand j'utilise la commande <code>vagrant up</code>, je reçois un message d'erreur après de nombreuses tentatives de connection.</a></li>
 <li><a href="#sec-5-12">5.12. Le lancement de la VM affiche un problème de versions des <i>guest additions</i></a></li>
 <li><a href="#sec-5-13">5.13. La machine virtuelle est lancée, mais les pages Web sur le port 8080 ne donnent pas les résultats escomptés</a></li>
 <li><a href="#sec-5-14">5.14. <code>vagrant ssh</code> échoue, sous Windows</a></li>
@@ -1175,8 +1175,16 @@ Il semble que cela ne soit pas rédhibitoire : un nouveau <code>vagrant up</code
 </div>
 
 <div id="outline-container-sec-5-11" class="outline-3">
-<h3 id="sec-5-11"><span class="section-number-3">5.11</span> Quand j'utilise la commande <code>vagrant up</code>, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying&#x2026;" ou "default: Warning: Remote connection disconnect. Retrying&#x2026;"</h3>
+<h3 id="sec-5-11"><span class="section-number-3">5.11</span> Quand j'utilise la commande <code>vagrant up</code>, je reçois un message d'erreur après de nombreuses tentatives de connection.</h3>
 <div class="outline-text-3" id="text-5-11">
+<p>
+Si vous recevez un message d'erreur de ce genre:
+</p>
+
+<p>
+<a href="timeout.png">Message d'erreur d'un timeout</a>
+</p>
+
 <p>
 Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
 </p>
@@ -1549,7 +1557,7 @@ d'exploitation. Sur Windows, on peut aussi utiliser l'outil <i>Windows Powershel
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Stéphane Germain, Olivier Berger</p>
-<p class="date">Date: 2014-08-25 lun. 11:47</p>
+<p class="date">Date: 2014-08-25 lun. 14:26</p>
 <p class="creator">Copyright (C) 2014, The authors and Institut Mines-Télécom</p>
 </div>
 </body>

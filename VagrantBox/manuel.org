@@ -593,11 +593,7 @@ Si vous recevez un message d'erreur de ce genre:
 
 [[file:timeout.png][Message d'erreur d'un timeout]]
 
-Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
-
-Si l'invite de commandes en est rempli, il est conseillé d'interrompre
-la commande (ctrl-C sur UNIX, XXX sur windows) et de recommencer
-l'étape d'installation que vous faisiez.
+Refaire un =vagrant up=. Si le problème persiste, veuillez vous diriger vers les forums du MOOC pour résoudre le problème.
 
 ** Le lancement de la VM affiche un problème de versions des /guest additions/
 
