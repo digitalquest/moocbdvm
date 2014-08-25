@@ -18,6 +18,8 @@
 
 * TL/DR;
 
+(/Too Long/ / /Didn't Read/;)
+
 *Pour le lecteur pressé, lire : [[./TLDR.html][Prise en main rapide de la Box Vagrant du MOOC BD Télécom SudParis]].*
 
 * Introduction
