@@ -113,37 +113,40 @@ permis la construction de la machine virtuelle.
 
 - Disposer d'une machine moderne avec un système d'exploitation 64
   bits (ou 32 bits[fn:5]) sur lequel VirtualBox\trade fonctionne[fn:2]
-- Avoir un environnement internet à haut débit, le temps de télécharger l'environnement[fn:4]
+- Avoir un environnement internet à haut débit, le temps de
+  télécharger et installer l'environnement[fn:4]
 - Avoir au moins 3 Go de libre sur un disque dur local
 - Maîtriser un minimum l'utilisation de votre système d'exploitation,
-  notamment en mode invite de commandes (commandes de base DOS ou shell
-  Unix, type =cd=, =ls/dir=, etc.).
+  notamment en mode /invite de commandes/ (commandes de base /DOS/ ou /shell Unix/, type =cd=, =ls/dir=, etc.).
 
 ** Télécharger et installer Vagrant et VirtualBox
 
 Vous aurez besoin d'installer Vagrant et VirtualBox, qui devraient
 normalement être disponibles sur les systèmes d'exploitations les plus
 populaires (Linux, Windows, Mac OS X). Le mode opératoire devrait donc
-être identique pour tous, quelque soit l'OS utilisé.
+être identique pour tous, quelque soit l'OS utilisé. Attention à
+sélectionner si besoin la version correspondant à l'architecture 
+(/32 bits/ ou /64 bits/) correspondant à la variante de votre système d'exploitation.
 
 /VirtualBox/ servira à faire fonctionner la virtualisation, alors que
 /Vagrant/ se chargera du téléchargement de la dernière version de
-l'image de machine, et de la création automatique de la machine
+l'image de machine (/box/), et de la création automatique de la machine
 virtuelle, correctement paramétrée.
 
 Téléchargez les *versions les plus récentes* de ces deux applications
 depuis leurs sites, et installez-les (nécessite les privilèges
 d'administration). Attention à installer une version récente :
 certains paquetages officiels de distributions peuvent être obsolètes,
-notamment pour Vagrant (voir sur le site de téléchargements du projet
-Vagrant les paquetages pour Linux =.deb) ou =.rpm=).
+notamment pour Vagrant (utiliser dans ce cas les paquetages pour Linux
+=.deb= ou =.rpm= récupérés sur le site de téléchargements du projet
+Vagrant).
 
-Sites de téléchargement :
+*Sites de téléchargement* :
 - *VirtualBox* : https://www.virtualbox.org/wiki/Downloads
 - *Vagrant* : http://www.vagrantup.com/downloads.html (peut nécessiter
   un redémarrage, sur Windows)
 
-Vous aurez éventuellement besoin d'installer un /client SSH/ si vous
+Vous aurez éventuellement besoin d'installer aussi un /client SSH/ si vous
 n'en avez pas encore installé un. Sur Windows, voir l'[[*=vagrant ssh= échoue, sous Windows][entrée de FAQ]] correspondante.
 
 ** Initialisation et mise en route
@@ -172,39 +175,44 @@ Pour télécharger la /box/ Vagrant et procéder au premier lancement de de la /
    the comments in the Vagrantfile as well as documentation on
    `vagrantup.com` for more information on using Vagrant.
    #+END_EXAMPLE
-3. entrer la commande suivante :
+3. entrer la commande suivante (en étant toujours connecté à Internet):
    #+BEGIN_example
    vagrant up
    #+END_EXAMPLE
    ceci va télécharger la dernière version de la [[https://vagrantcloud.com/oberger/moocbdvm][/box/ =oberger/moocbdvm=]] depuis Internet
-   (env. 350 Mo), et démarrer une machine virtuelle VirtualBox
-   en tâche de fond, qui fournira l'environnement que vous allez utiliser.
+   (env. 350 Mo), démarrer une machine virtuelle VirtualBox qui
+   fournira l'environnement que vous allez utiliser, puis mettre à
+   jour les scripts de configuration et créer l'environnement de tests
+   pour les TPs.
 
 *ATTENTION: La mise en place peut être longue et prendre du temps sur les machines peu puissantes et/ou ne disposant pas d'une connexion internet haut-débit.*
 
-La mise en place est terminée quand s'affichent les 4 lignes suivantes :
+La mise en place est terminée quand s'affichent les lignes suivantes
+s'affichent :
 #+BEGIN_example
 ==> default: Machine booted and ready!
 ==> default: Checking for guest additions in VM...
 ==> default: Mounting shared folders...
     default: /vagrant => ...CHEMIN DE VOTRE DOSSIER DE TRAVAIL...
+==> default: Running provisioner: shell...
+    default: Running: inline script
+==> default: Mise à jour depuis internet, des scripts de mise-à-jour de la VM...
+==> default: [Already up-to-date | ...]
+==> default: Mise à jour de l'application Web : /home/vagrant/moocbdvm-scripts/update/maj-site.sh
+==> default: Clonage dans '.'...
+==> default: Mise à jour des supports de TP dans /vagrant : /home/vagrant/moocbdvm-scripts/update/maj-tp.sh
+==> default: Clonage dans '.'...
+==> default: Mise à jour de /usr/local/bin/maj-maj.sh
 #+END_EXAMPLE
-
-Si tout va bien, la machine virtuelle
-est visible dans l'interface d'administration de VirtualBox (et peut
-être démarrée, arrêtée, ou mise en pause comme une machine virtuelle
-ordinaire).
-
-Pour une explication des commandes de base de Vagrant,
-consultez
-[[http://docs.vagrantup.com/v2/getting-started/index.html][le guide de démarrage vagrant (en anglais)]].
 
 * Utilisation
 
 La machine virtuelle doit être lancée, en tâche de fond dans VirtualBox, pour pouvoir
-utiliser l'environnement de travail personnel du MOOC. 
+utiliser l'environnement de travail personnel du MOOC.
 
-** Lancement de la machine virtuelle
+** Contrôle de la machine virtuelle
+
+*** Démarrage de la machine virtuelle
 
 1. ouvrir un invite de commandes dans le dossier de travail;
 
@@ -212,7 +220,13 @@ utiliser l'environnement de travail personnel du MOOC.
    #+BEGIN_example
    vagrant up
    #+END_example
-   la mise en place de la machine est finie quand s'affiche la ligne "...". Si la machine virtuelle était déjà lancée, rien ne se passe, tant mieux.
+   la machine virtuelle démarre si nécessaire. La mise en place est finie quand s'affichent les
+   lignes suivantes :
+   #+BEGIN_example
+   ==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+   ==> default: to force provisioning. Provisioners marked to run always will still run.
+   #+END_example
+   Si la machine virtuelle était déjà lancée, rien ne se passe (/VirtualBox VM is already running/), tant mieux.
 
    Il se peut qu'un message affiche un avertissement si une nouvelle version de la box a été publiée depuis l'installation :
    #+BEGIN_example
@@ -226,6 +240,22 @@ Une fois lancée, elle fournit un *serveur HTTP* qui est redirigé sur
 l'adresse locale de l'ordinateur /hôte/ =localhost= (=127.0.0.1=), qui
 écoute sur le *port =8080=* (d'où les URLs ci-dessous commençant par *=http://localhost:8080/=*).
 
+*** Arrêt et autres opérations
+La machine virtuelle peut être contrôlée par la ligne de commande Vagrant, par exemple pour libérer des
+ressources CPU :
+
+- arrêt : =vagrant halt=
+- redémarrage : =vagrant up=
+- ...
+
+Pour une explication des commandes de base de Vagrant,
+consultez
+[[http://docs.vagrantup.com/v2/getting-started/index.html][le guide de démarrage vagrant (en anglais)]].
+
+La machine virtuelle est aussi visible dans l'interface
+d'administration de VirtualBox si vous préférez l'interface
+graphique. Elle peut alors être arrêtée, mise en pause ou redémarrée,
+comme une machine virtuelle ordinaire.
 
 ** Exerciseur de requêtes SQL
 
@@ -317,7 +347,7 @@ Pour exécuter des commandes SQL sur le serveur PostgreSQL présent à l'interie
 
 Les exercices de programmation de pages Web en PHP nécessitent un
 serveur Web et l'interpréteur PHP. La VM contient un tel environnement
-(Apache + mod_php).
+(Apache + =mod_php=).
 
 Pour tester vos programmes, il faudra donc placer des fichier =.php=
 dans un répertoire accessible par le serveur Web Apache.
@@ -419,13 +449,15 @@ vagrant ssh -c "sudo /usr/local/sbin/install-gui.sh"
 
 Attention, ceci fait augmenter substentiellement l'occupation disque de la machine virtuelle.
 
-** TODO Comment installer l'application exerciseur manuellement
+** Comment installer l'application exerciseur manuellement
 
 Les sources sont disponibles depuis git avec : 
-git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git
+=git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git=
 
-TBD : archive extractible .zip, dans
-https://fusionforge.int-evry.fr/frs/?group_id=64
+Il est alors possible d'installer cette application dans une
+environnement PostgreSQL + Apache + PHP installé manuellement, en
+adaptant les variables de connexion, les nom de login et mot-de-passe
+de connexion.
 
 ** J'ai un système 32 bits, est-ce que ça marchera pour moi ?
 
@@ -449,7 +481,7 @@ vagrant init oberger/moocbdvm32
 #+END_EXAMPLE
 
 
-** TODO VirtualBox se plaint d'un problème de virtualisation matérielle
+** VirtualBox se plaint d'un problème de virtualisation matérielle
 
 Il se peut que vous voyiez un des messages suivants dans VirtualBox :
 #+BEGIN_example
@@ -494,7 +526,7 @@ indépendantes, les applications que nous avons empaquetées dans la
 
 Notez tout d'abord qu'un environnement d'exerciseur est disponible
 aussi pour les navigateurs basés sur Webkit (Chrome, Safari), sans
-nécessiter l'installation d'un SGBD comme PostgreSQL. (Cf. XXX - TODO)
+nécessiter l'installation d'un SGBD comme PostgreSQL. (Cf. instructions du MOOC XXX - TODO)
 
 Autrement, pas besoin de machine virtuelle, si vous savez installer un
 SGBD par vous-même. Si vous avez la possibilité de créer une base de
@@ -505,7 +537,7 @@ disponibles dans XXX TODO.
 
 # Ce comportement est tout à fait normal et correspond à l'installation des différents composants utiles pour l'apprentissage du SQL.
 
-** TODO Vagrant ne trouve pas de /box/ =oberger/moocbdvm=
+** Vagrant ne trouve pas de /box/ =oberger/moocbdvm=
 
 La commande =vagrant up= renvoit un message du style :
 #+BEGIN_example
@@ -725,34 +757,59 @@ de l'/hôte/ (redirigé vers le port 22 du /guest/) : =ssh -p 2222 vagrant@local
 
 Dans la plupart des cas, il n'est pas nécessaire de réinstaller la VM à partir d'une nouvelle version de la box : une mise à jour partielle sera suffisante.
 
-*** TODO Mise à jour partielle
-Il est possible de metre à jour via internet une partie des scripts et
-applications installés sur la machine
+*** Mise à jour partielle
+Il est possible de metre à jour, via Internet, une partie des scripts et
+applications installés sur la machine:
 
-- apt-get dist-upgrade ??
-- maj-maj
-- ...
+# - apt-get dist-upgrade ??
 
-*** TODO Réinstallation de la machine virtuelle
+1. se connecter à la machine virtuelle : =vagrant ssh=
+2. une fois connecté, entrer la commande : =maj-maj.sh=
+   
+   Certains scripts sont mis à jour depuis leurs référentiels /Git/,
+   afin de contenir les dernières versions disponibles :
+   #+BEGIN_example
+   Mise à jour depuis internet, des scripts de mise-à-jour de la VM...
+   [ Already up-to-date | ... ]
+   Mise à jour de l'application Web : /home/vagrant/moocbdvm-scripts/update/maj-site.sh
+   [ Already up-to-date. | ... ]
+   Mise à jour des supports de TP dans /vagrant : /home/vagrant/moocbdvm-scripts/update/maj-tp.sh
+   [ Already up-to-date. | ... ]
+   Mise à jour de /usr/local/bin/maj-maj.sh
+   #+END_example
 
-Pour réinstaller une machine virtuelle complète :
-- =vagrant destroy= dans le dossier de travail
-- =suppression du dossier de travail=
-- =vagrant init oberger/moocbdvm=
-- =vagrant box outdated= 
+*** Réinstallation de la machine virtuelle
 
-  Vérifie sur =vagrantcloud.com= si une mise-à-jour de la box Vagrant
-  a été publiée :
-  #+BEGIN_example
-  Checking if box 'oberger/moocbdvm' is up to date...
-  A newer version of the box 'oberger/moocbdvm' is available! You currently
-  have version '0.1.0'. The latest is version '42.0'. Run
-  `vagrant box update` to update.
-  #+END_example
-- =vagrant box update=, si nécessaire /(si une mise-à-jour disponible doit effectivement être installée)/
-- =vagrant up=
+Pour réinstaller une machine virtuelle complète, effectuer les opérations suivantes :
+1. lancer un invite de commande dans le dossier de travail
+2. entrer la commande =vagrant destroy= : supprime la machine virtuelle 
+3. supprimer du dossier de travail les dossiers =TP/=, =.vagrant= et le fichier =Vagrantfile=
+4. récréer le fichier Vagrantfile : =vagrant init oberger/moocbdvm=
+5. vérifier si une mise à jour de la box est nécessaire : =vagrant box outdated= 
 
-** TODO Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
+   Vérifie sur =vagrantcloud.com= si une mise-à-jour de la box Vagrant
+   a été publiée :
+   #+BEGIN_example
+   Checking if box 'oberger/moocbdvm' is up to date...
+   A newer version of the box 'oberger/moocbdvm' is available! You currently
+   have version '0.1.0'. The latest is version '42.0'. Run
+   `vagrant box update` to update.
+   #+END_example
+6. entrer : =vagrant box update=, si nécessaire /(si une mise-à-jour disponible doit effectivement être installée)/
+7. démarrer la création de la machine virtuelle : =vagrant up=
+
+** Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?
+
+Les /box/ vagrant publiées sur =http://vagrantcloud.com/= sont
+récupérables, afin d'en extraire le fichier d'image de disques
+=.vmdk=, qui peut théoriquement être converti afin d'exécuter la
+machine virtuelle dans un autre environnement de virtualisation
+(cf. [[*Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?][Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?]]).
+
+Certaines fonctionnalités seront probablement manquantes, et les
+instructions devront être adaptées dans ce cas : port 80 redirigé sur
+le port 8080, partage du dossier =TP/= entre hôte et machine
+virtuelle, etc.
 
 ** Je suis sous Windows et je rencontre un problème d'encodage
 Si vous rencontrez un message du type
@@ -866,7 +923,7 @@ phpPgAdmin, etc.).
 Si la solution de virtualisation choisie ne convient pas à vos
 contraintes, mais que vous avez installé un autre environnement
 PostgreSQL + Apache/PHP, il est toujours possible d'installer
-manuellement l'application d'exerciseur que nous avons développée,
+manuellement l'application d'exerciseur que nous avons développée (Cf. [[*Comment installer l'application exerciseur manuellement][Comment installer l'application exerciseur manuellement]]),
 mais nous ne pouvons nous engager à fournir un support sur celle-ci.
 
 * Copyright
