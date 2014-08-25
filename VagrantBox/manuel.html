@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
 <title>Manuel de la Box Vagrant du MOOC BD</title>
-<!-- 2014-08-21 jeu. 15:19 -->
+<!-- 2014-08-25 lun. 11:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Stéphane Germain, Olivier Berger" />
@@ -203,7 +203,12 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-4">4. Utilisation</a>
 <ul>
-<li><a href="#sec-4-1">4.1. Lancement de la machine virtuelle</a></li>
+<li><a href="#sec-4-1">4.1. Contrôle de la machine virtuelle</a>
+<ul>
+<li><a href="#sec-4-1-1">Démarrage de la machine virtuelle</a></li>
+<li><a href="#sec-4-1-2">Arrêt et autres opérations</a></li>
+</ul>
+</li>
 <li><a href="#sec-4-2">4.2. Exerciseur de requêtes SQL</a></li>
 <li><a href="#sec-4-3">4.3. Module Web d'administration PostgreSQL <i>phpPgAdmin</i></a>
 <ul>
@@ -227,11 +232,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-5-1">5.1. Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?</a></li>
 <li><a href="#sec-5-2">5.2. Je n'arrive pas à me connecter depuis la console affichée par VirtualBox</a></li>
 <li><a href="#sec-5-3">5.3. Comment installer un environnement de bureau sur la VM</a></li>
-<li><a href="#sec-5-4">5.4. <span class="todo TODO">TODO</span> Comment installer l'application exerciseur manuellement</a></li>
+<li><a href="#sec-5-4">5.4. Comment installer l'application exerciseur manuellement</a></li>
 <li><a href="#sec-5-5">5.5. J'ai un système 32 bits, est-ce que ça marchera pour moi ?</a></li>
-<li><a href="#sec-5-6">5.6. <span class="todo TODO">TODO</span> VirtualBox se plaint d'un problème de virtualisation matérielle</a></li>
+<li><a href="#sec-5-6">5.6. VirtualBox se plaint d'un problème de virtualisation matérielle</a></li>
 <li><a href="#sec-5-7">5.7. Je n'ai pas accès à Internet en haut débit</a></li>
-<li><a href="#sec-5-8">5.8. <span class="todo TODO">TODO</span> Vagrant ne trouve pas de <i>box</i> <code>oberger/moocbdvm</code></a></li>
+<li><a href="#sec-5-8">5.8. Vagrant ne trouve pas de <i>box</i> <code>oberger/moocbdvm</code></a></li>
 <li><a href="#sec-5-9">5.9. Le message de confirmation de mise en place ne s'affiche pas.</a></li>
 <li><a href="#sec-5-10">5.10. Le premier lancement signale que la machine est vérouillée</a></li>
 <li><a href="#sec-5-11">5.11. Quand j'utilise la commande <code>vagrant up</code>, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying&#x2026;" ou "default: Warning: Remote connection disconnect. Retrying&#x2026;"</a></li>
@@ -242,11 +247,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-5-16">5.16. <span class="todo TODO">TODO</span> J'ai écrasé la base de données, que faire</a></li>
 <li><a href="#sec-5-17">5.17. Comment mettre à jour ma machine virtuelle</a>
 <ul>
-<li><a href="#sec-5-17-1"><span class="todo TODO">TODO</span> Mise à jour partielle</a></li>
-<li><a href="#sec-5-17-2"><span class="todo TODO">TODO</span> Réinstallation de la machine virtuelle</a></li>
+<li><a href="#sec-5-17-1">Mise à jour partielle</a></li>
+<li><a href="#sec-5-17-2">Réinstallation de la machine virtuelle</a></li>
 </ul>
 </li>
-<li><a href="#sec-5-18">5.18. <span class="todo TODO">TODO</span> Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</a></li>
+<li><a href="#sec-5-18">5.18. Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</a></li>
 <li><a href="#sec-5-19">5.19. Je suis sous Windows et je rencontre un problème d'encodage</a></li>
 </ul>
 </li>
@@ -417,13 +422,13 @@ démarrage, arrêt, mise en pause, etc.
 <li>Disposer d'une machine moderne avec un système d'exploitation 64
 bits (ou 32 bits<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>) sur lequel VirtualBox&trade; fonctionne<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </li>
-<li>Avoir un environnement internet à haut débit, le temps de télécharger l'environnement<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>
+<li>Avoir un environnement internet à haut débit, le temps de
+télécharger et installer l'environnement<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>
 </li>
 <li>Avoir au moins 3 Go de libre sur un disque dur local
 </li>
 <li>Maîtriser un minimum l'utilisation de votre système d'exploitation,
-notamment en mode invite de commandes (commandes de base DOS ou shell
-Unix, type <code>cd</code>, <code>ls/dir</code>, etc.).
+notamment en mode <i>invite de commandes</i> (commandes de base <i>DOS</i> ou <i>shell Unix</i>, type <code>cd</code>, <code>ls/dir</code>, etc.).
 </li>
 </ul>
 </div>
@@ -436,13 +441,15 @@ Unix, type <code>cd</code>, <code>ls/dir</code>, etc.).
 Vous aurez besoin d'installer Vagrant et VirtualBox, qui devraient
 normalement être disponibles sur les systèmes d'exploitations les plus
 populaires (Linux, Windows, Mac OS X). Le mode opératoire devrait donc
-être identique pour tous, quelque soit l'OS utilisé.
+être identique pour tous, quelque soit l'OS utilisé. Attention à
+sélectionner si besoin la version correspondant à l'architecture 
+(<i>32 bits</i> ou <i>64 bits</i>) correspondant à la variante de votre système d'exploitation.
 </p>
 
 <p>
 <i>VirtualBox</i> servira à faire fonctionner la virtualisation, alors que
 <i>Vagrant</i> se chargera du téléchargement de la dernière version de
-l'image de machine, et de la création automatique de la machine
+l'image de machine (<i>box</i>), et de la création automatique de la machine
 virtuelle, correctement paramétrée.
 </p>
 
@@ -451,12 +458,13 @@ Téléchargez les <b>versions les plus récentes</b> de ces deux applications
 depuis leurs sites, et installez-les (nécessite les privilèges
 d'administration). Attention à installer une version récente :
 certains paquetages officiels de distributions peuvent être obsolètes,
-notamment pour Vagrant (voir sur le site de téléchargements du projet
-Vagrant les paquetages pour Linux <code>.deb) ou =.rpm</code>).
+notamment pour Vagrant (utiliser dans ce cas les paquetages pour Linux
+<code>.deb</code> ou <code>.rpm</code> récupérés sur le site de téléchargements du projet
+Vagrant).
 </p>
 
 <p>
-Sites de téléchargement :
+<b>Sites de téléchargement</b> :
 </p>
 <ul class="org-ul">
 <li><b>VirtualBox</b> : <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>
@@ -467,7 +475,7 @@ un redémarrage, sur Windows)
 </ul>
 
 <p>
-Vous aurez éventuellement besoin d'installer un <i>client SSH</i> si vous
+Vous aurez éventuellement besoin d'installer aussi un <i>client SSH</i> si vous
 n'en avez pas encore installé un. Sur Windows, voir l'<a href="#sec-5-14">entrée de FAQ</a> correspondante.
 </p>
 </div>
@@ -534,14 +542,16 @@ the comments in the Vagrantfile as well as documentation on
 `vagrantup.com` for more information on using Vagrant.
 </pre>
 </li>
-<li>entrer la commande suivante :
+<li>entrer la commande suivante (en étant toujours connecté à Internet):
 <pre class="example">
 vagrant up
 </pre>
 <p>
 ceci va télécharger la dernière version de la <a href="https://vagrantcloud.com/oberger/moocbdvm"><i>box</i> <code>oberger/moocbdvm</code></a> depuis Internet
-(env. 350 Mo), et démarrer une machine virtuelle VirtualBox
-en tâche de fond, qui fournira l'environnement que vous allez utiliser.
+(env. 350 Mo), démarrer une machine virtuelle VirtualBox qui
+fournira l'environnement que vous allez utiliser, puis mettre à
+jour les scripts de configuration et créer l'environnement de tests
+pour les TPs.
 </p>
 </li>
 </ol>
@@ -551,27 +561,24 @@ en tâche de fond, qui fournira l'environnement que vous allez utiliser.
 </p>
 
 <p>
-La mise en place est terminée quand s'affichent les 4 lignes suivantes :
+La mise en place est terminée quand s'affichent les lignes suivantes
+s'affichent :
 </p>
 <pre class="example">
 ==&gt; default: Machine booted and ready!
 ==&gt; default: Checking for guest additions in VM...
 ==&gt; default: Mounting shared folders...
     default: /vagrant =&gt; ...CHEMIN DE VOTRE DOSSIER DE TRAVAIL...
+==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+==&gt; default: Mise à jour depuis internet, des scripts de mise-à-jour de la VM...
+==&gt; default: [Already up-to-date | ...]
+==&gt; default: Mise à jour de l'application Web : /home/vagrant/moocbdvm-scripts/update/maj-site.sh
+==&gt; default: Clonage dans '.'...
+==&gt; default: Mise à jour des supports de TP dans /vagrant : /home/vagrant/moocbdvm-scripts/update/maj-tp.sh
+==&gt; default: Clonage dans '.'...
+==&gt; default: Mise à jour de /usr/local/bin/maj-maj.sh
 </pre>
-
-<p>
-Si tout va bien, la machine virtuelle
-est visible dans l'interface d'administration de VirtualBox (et peut
-être démarrée, arrêtée, ou mise en pause comme une machine virtuelle
-ordinaire).
-</p>
-
-<p>
-Pour une explication des commandes de base de Vagrant,
-consultez
-<a href="http://docs.vagrantup.com/v2/getting-started/index.html">le guide de démarrage vagrant (en anglais)</a>.
-</p>
 </div>
 </div>
 </div>
@@ -581,13 +588,16 @@ consultez
 <div class="outline-text-2" id="text-4">
 <p>
 La machine virtuelle doit être lancée, en tâche de fond dans VirtualBox, pour pouvoir
-utiliser l'environnement de travail personnel du MOOC. 
+utiliser l'environnement de travail personnel du MOOC.
 </p>
 </div>
 
 <div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Lancement de la machine virtuelle</h3>
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Contrôle de la machine virtuelle</h3>
 <div class="outline-text-3" id="text-4-1">
+</div><div id="outline-container-sec-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1">Démarrage de la machine virtuelle</h4>
+<div class="outline-text-4" id="text-4-1-1">
 <ol class="org-ol">
 <li>ouvrir un invite de commandes dans le dossier de travail;
 </li>
@@ -597,7 +607,15 @@ utiliser l'environnement de travail personnel du MOOC.
 vagrant up
 </pre>
 <p>
-la mise en place de la machine est finie quand s'affiche la ligne "&#x2026;". Si la machine virtuelle était déjà lancée, rien ne se passe, tant mieux.
+la machine virtuelle démarre si nécessaire. La mise en place est finie quand s'affichent les
+lignes suivantes :
+</p>
+<pre class="example">
+==&gt; default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==&gt; default: to force provisioning. Provisioners marked to run always will still run.
+</pre>
+<p>
+Si la machine virtuelle était déjà lancée, rien ne se passe (<i>VirtualBox VM is already running</i>), tant mieux.
 </p>
 
 <p>
@@ -622,6 +640,38 @@ l'adresse locale de l'ordinateur <i>hôte</i> <code>localhost</code> (<code>127.
 </div>
 </div>
 
+<div id="outline-container-sec-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2">Arrêt et autres opérations</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+La machine virtuelle peut être contrôlée par la ligne de commande Vagrant, par exemple pour libérer des
+ressources CPU :
+</p>
+
+<ul class="org-ul">
+<li>arrêt : <code>vagrant halt</code>
+</li>
+<li>redémarrage : <code>vagrant up</code>
+</li>
+<li>&#x2026;
+</li>
+</ul>
+
+<p>
+Pour une explication des commandes de base de Vagrant,
+consultez
+<a href="http://docs.vagrantup.com/v2/getting-started/index.html">le guide de démarrage vagrant (en anglais)</a>.
+</p>
+
+<p>
+La machine virtuelle est aussi visible dans l'interface
+d'administration de VirtualBox si vous préférez l'interface
+graphique. Elle peut alors être arrêtée, mise en pause ou redémarrée,
+comme une machine virtuelle ordinaire.
+</p>
+</div>
+</div>
+</div>
 
 <div id="outline-container-sec-4-2" class="outline-3">
 <h3 id="sec-4-2"><span class="section-number-3">4.2</span> Exerciseur de requêtes SQL</h3>
@@ -772,7 +822,7 @@ vins=&gt;
 <p>
 Les exercices de programmation de pages Web en PHP nécessitent un
 serveur Web et l'interpréteur PHP. La VM contient un tel environnement
-(Apache + mod<sub>php</sub>).
+(Apache + <code>mod_php</code>).
 </p>
 
 <p>
@@ -936,16 +986,18 @@ Attention, ceci fait augmenter substentiellement l'occupation disque de la machi
 </div>
 
 <div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><span class="section-number-3">5.4</span> <span class="todo TODO">TODO</span> Comment installer l'application exerciseur manuellement</h3>
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Comment installer l'application exerciseur manuellement</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Les sources sont disponibles depuis git avec : 
-git clone <a href="http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git">http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git</a>
+<code>git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git</code>
 </p>
 
 <p>
-TBD : archive extractible .zip, dans
-<a href="https://fusionforge.int-evry.fr/frs/?group_id=64">https://fusionforge.int-evry.fr/frs/?group_id=64</a>
+Il est alors possible d'installer cette application dans une
+environnement PostgreSQL + Apache + PHP installé manuellement, en
+adaptant les variables de connexion, les nom de login et mot-de-passe
+de connexion.
 </p>
 </div>
 </div>
@@ -978,7 +1030,7 @@ vagrant init oberger/moocbdvm32
 
 
 <div id="outline-container-sec-5-6" class="outline-3">
-<h3 id="sec-5-6"><span class="section-number-3">5.6</span> <span class="todo TODO">TODO</span> VirtualBox se plaint d'un problème de virtualisation matérielle</h3>
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> VirtualBox se plaint d'un problème de virtualisation matérielle</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 Il se peut que vous voyiez un des messages suivants dans VirtualBox :
@@ -1039,7 +1091,7 @@ indépendantes, les applications que nous avons empaquetées dans la
 <p>
 Notez tout d'abord qu'un environnement d'exerciseur est disponible
 aussi pour les navigateurs basés sur Webkit (Chrome, Safari), sans
-nécessiter l'installation d'un SGBD comme PostgreSQL. (Cf. XXX - TODO)
+nécessiter l'installation d'un SGBD comme PostgreSQL. (Cf. instructions du MOOC XXX - TODO)
 </p>
 
 <p>
@@ -1052,7 +1104,7 @@ disponibles dans XXX TODO.
 </div>
 
 <div id="outline-container-sec-5-8" class="outline-3">
-<h3 id="sec-5-8"><span class="section-number-3">5.8</span> <span class="todo TODO">TODO</span> Vagrant ne trouve pas de <i>box</i> <code>oberger/moocbdvm</code></h3>
+<h3 id="sec-5-8"><span class="section-number-3">5.8</span> Vagrant ne trouve pas de <i>box</i> <code>oberger/moocbdvm</code></h3>
 <div class="outline-text-3" id="text-5-8">
 <p>
 La commande <code>vagrant up</code> renvoit un message du style :
@@ -1283,38 +1335,52 @@ Dans la plupart des cas, il n'est pas nécessaire de réinstaller la VM à parti
 </div>
 
 <div id="outline-container-sec-5-17-1" class="outline-4">
-<h4 id="sec-5-17-1"><span class="todo TODO">TODO</span> Mise à jour partielle</h4>
+<h4 id="sec-5-17-1">Mise à jour partielle</h4>
 <div class="outline-text-4" id="text-5-17-1">
 <p>
-Il est possible de metre à jour via internet une partie des scripts et
-applications installés sur la machine
+Il est possible de metre à jour, via Internet, une partie des scripts et
+applications installés sur la machine:
 </p>
 
-<ul class="org-ul">
-<li>apt-get dist-upgrade ??
+<ol class="org-ol">
+<li>se connecter à la machine virtuelle : <code>vagrant ssh</code>
 </li>
-<li>maj-maj
+<li>une fois connecté, entrer la commande : <code>maj-maj.sh</code>
+
+<p>
+Certains scripts sont mis à jour depuis leurs référentiels <i>Git</i>,
+afin de contenir les dernières versions disponibles :
+</p>
+<pre class="example">
+Mise à jour depuis internet, des scripts de mise-à-jour de la VM...
+[ Already up-to-date | ... ]
+Mise à jour de l'application Web : /home/vagrant/moocbdvm-scripts/update/maj-site.sh
+[ Already up-to-date. | ... ]
+Mise à jour des supports de TP dans /vagrant : /home/vagrant/moocbdvm-scripts/update/maj-tp.sh
+[ Already up-to-date. | ... ]
+Mise à jour de /usr/local/bin/maj-maj.sh
+</pre>
 </li>
-<li>&#x2026;
-</li>
-</ul>
+</ol>
 </div>
 </div>
 
 <div id="outline-container-sec-5-17-2" class="outline-4">
-<h4 id="sec-5-17-2"><span class="todo TODO">TODO</span> Réinstallation de la machine virtuelle</h4>
+<h4 id="sec-5-17-2">Réinstallation de la machine virtuelle</h4>
 <div class="outline-text-4" id="text-5-17-2">
 <p>
-Pour réinstaller une machine virtuelle complète :
+Pour réinstaller une machine virtuelle complète, effectuer les opérations suivantes :
 </p>
-<ul class="org-ul">
-<li><code>vagrant destroy</code> dans le dossier de travail
+<ol class="org-ol">
+<li>lancer un invite de commande dans le dossier de travail
 </li>
-<li><code>suppression du dossier de travail</code>
+<li>entrer la commande <code>vagrant destroy</code> : supprime la machine virtuelle 
 </li>
-<li><code>vagrant init oberger/moocbdvm</code>
+<li>supprimer du dossier de travail les dossiers <code>TP/</code>, <code>.vagrant</code> et le fichier <code>Vagrantfile</code>
 </li>
-<li><code>vagrant box outdated</code> 
+<li>récréer le fichier Vagrantfile : <code>vagrant init oberger/moocbdvm</code>
+</li>
+<li>vérifier si une mise à jour de la box est nécessaire : <code>vagrant box outdated</code> 
 
 <p>
 Vérifie sur <code>vagrantcloud.com</code> si une mise-à-jour de la box Vagrant
@@ -1327,17 +1393,33 @@ have version '0.1.0'. The latest is version '42.0'. Run
 `vagrant box update` to update.
 </pre>
 </li>
-<li><code>vagrant box update</code>, si nécessaire <i>(si une mise-à-jour disponible doit effectivement être installée)</i>
+<li>entrer : <code>vagrant box update</code>, si nécessaire <i>(si une mise-à-jour disponible doit effectivement être installée)</i>
 </li>
-<li><code>vagrant up</code>
+<li>démarrer la création de la machine virtuelle : <code>vagrant up</code>
 </li>
-</ul>
+</ol>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-5-18" class="outline-3">
-<h3 id="sec-5-18"><span class="section-number-3">5.18</span> <span class="todo TODO">TODO</span> Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</h3>
+<h3 id="sec-5-18"><span class="section-number-3">5.18</span> Si j'ai déjà un autre virtualiseur, puis-je convertir la VM ?</h3>
+<div class="outline-text-3" id="text-5-18">
+<p>
+Les <i>box</i> vagrant publiées sur <code>http://vagrantcloud.com/</code> sont
+récupérables, afin d'en extraire le fichier d'image de disques
+<code>.vmdk</code>, qui peut théoriquement être converti afin d'exécuter la
+machine virtuelle dans un autre environnement de virtualisation
+(cf. <a href="#sec-5-1">Si je n'ai que VirtualBox, puis-je me passer de l'installation de Vagrant ?</a>).
+</p>
+
+<p>
+Certaines fonctionnalités seront probablement manquantes, et les
+instructions devront être adaptées dans ce cas : port 80 redirigé sur
+le port 8080, partage du dossier <code>TP/</code> entre hôte et machine
+virtuelle, etc.
+</p>
+</div>
 </div>
 
 <div id="outline-container-sec-5-19" class="outline-3">
@@ -1421,7 +1503,7 @@ phpPgAdmin, etc.).
 Si la solution de virtualisation choisie ne convient pas à vos
 contraintes, mais que vous avez installé un autre environnement
 PostgreSQL + Apache/PHP, il est toujours possible d'installer
-manuellement l'application d'exerciseur que nous avons développée,
+manuellement l'application d'exerciseur que nous avons développée (Cf. <a href="#sec-5-4">Comment installer l'application exerciseur manuellement</a>),
 mais nous ne pouvons nous engager à fournir un support sur celle-ci.
 </p>
 </div>
@@ -1467,7 +1549,7 @@ d'exploitation. Sur Windows, on peut aussi utiliser l'outil <i>Windows Powershel
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Stéphane Germain, Olivier Berger</p>
-<p class="date">Date: 2014-08-21 jeu. 15:18</p>
+<p class="date">Date: 2014-08-25 lun. 11:47</p>
 <p class="creator">Copyright (C) 2014, The authors and Institut Mines-Télécom</p>
 </div>
 </body>
