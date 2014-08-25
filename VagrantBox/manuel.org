@@ -587,7 +587,11 @@ Provider: virtualbox
 
 Il semble que cela ne soit pas rédhibitoire : un nouveau =vagrant up= semble pouvoir régler le problème.
 
-** Quand j'utilise la commande =vagrant up=, je vois de nombreuses lignes "default: Warning: Connection timeout. Retrying..." ou "default: Warning: Remote connection disconnect. Retrying..."
+** Quand j'utilise la commande =vagrant up=, je reçois un message d'erreur après de nombreuses tentatives de connection.
+
+Si vous recevez un message d'erreur de ce genre:
+
+[[file:timeout.png][Message d'erreur d'un timeout]]
 
 Tout d'abord, ces lignes sont tout à fait normales si leur nombre est peu élevé et correspondent au temps de démarrage de la machine.
 
