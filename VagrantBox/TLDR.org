@@ -31,17 +31,18 @@
 
 ** Avertissement
 
-/Nous avons fait de notre mieux pour fournir un environnement fonctionnel, basé sur des logiciels libres, mais vous l'utilisez *à vos risques et périls, sans aucune garantie*. Nous ne pouvons être tenus responsables des dommages qui résulteraient de l'utilisation de cet environnement./
+/Nous avons fait de notre mieux pour fournir un environnement fonctionnel, basé sur des logiciels libres, mais vous l'utilisez *à vos risques et périls, sans aucune garantie*. Nous ne pouvons être tenus responsables des dommages qui résulteraient de l'utilisation de cet environnement./ 
 
 * Installation
 
-** TODO Installer Vagrant et VirtualBox
+** TODO Installer VirtualBox puis Vagrant
 
 Téléchargez les deux applications depuis leurs sites, ou installez les
 paquetages pour votre distribution (si vous êtes sur Linux).
 
-- Vagrant : http://www.vagrantup.com/downloads.html
 - VirtualBox : https://www.virtualbox.org/wiki/Downloads
+- Vagrant : http://www.vagrantup.com/downloads.html
+
 
 ** Initialisation et mise en route
 
