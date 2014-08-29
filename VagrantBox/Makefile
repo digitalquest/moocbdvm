@@ -14,19 +14,26 @@ boxes: box box32
 box32:
 	$(MAKE) box arch=i686 vagruparg=bits32 date=$(date)
 
-vm:	site tp
+#vm:	site tp
+vm:	site
 	cd Provisionning; vagrant up $(vagruparg)
 
 site:
 	cp manuel.html Provisionning/site/index.html
 	cp TLDR.html Provisionning/site/
 
-tp:
-	cd Provisionning; \
-	rm -fr TP; \
-	mkdir TP; \
-	cd TP; \
-	git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git ./
+# Mis en ligne dans https://fusionforge.int-evry.fr/www/moocbdvm/
+#publish-site:
+#	scp manuel.html USER@fusionforge.int-evry.fr:/var/lib/gforge/chroot/home/groups/moocbdvm/htdocs/index.html
+#	scp TLDR.html USER@fusionforge.int-evry.fr:/var/lib/gforge/chroot/home/groups/moocbdvm/htdocs/
+
+#Unused : pulled from repo at provisioning time
+# tp:
+# 	cd Provisionning; \
+# 	rm -fr TP; \
+# 	mkdir TP; \
+# 	cd TP; \
+# 	git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git ./
 
 box:	vm
 	cd Provisionning; \

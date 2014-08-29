@@ -125,6 +125,7 @@ git clone http://fusionforge.int-evry.fr/anonscm/git/moocbdvm/update-scripts.git
 cp /home/vagrant/moocbdvm-scripts/update/maj-maj.sh /usr/local/bin/
 chown -R vagrant:vagrant /home/vagrant/moocbdvm-scripts
 
+# TODO : replace this by maj-site.sh
 # Clone the git repository for the provided website
 git clone http://fusionforge.int-evry.fr/anonscm/git/bdsqlwiz/bdsqlwiz.git /var/www/html/bdsqlwiz
 sed -i "s/'test'/'pg_reader'/g" /var/www/html/bdsqlwiz/appli/execpostgres.php
@@ -142,6 +143,8 @@ cp /vagrant/site/*.html ./
 # Make it so apache listens to 8080 inside the VM too, so the docs links are valid there too
 echo "Listen 8080" >> /etc/apache2/ports.conf
 
+# TODO : configure less spawned apache forks
+
 # Restart apache server
 service apache2 restart 
 
@@ -156,7 +159,7 @@ cp -r /vagrant/vagrant_user_Desktop ~vagrant/Desktop
 chown -R vagrant:vagrant ~vagrant/Desktop
 
 # Zero out the free space to save space in the final image:
-# TODO : utiliser fstrim ?
+# TODO : utiliser zerofree ?
 dd if=/dev/zero of=/EMPTY bs=1M 2>/dev/null || /bin/true
 rm -f /EMPTY
 
