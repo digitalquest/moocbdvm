@@ -1,5 +1,5 @@
 #+TITLE: Prise en main rapide de la Box Vagrant du MOOC BD Télécom SudParis
-#+OPTIONS: html-link-use-abs-url:nil html-postamble:nil
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:t
 #+OPTIONS: html-preamble:t html-scripts:t html-style:t
 #+OPTIONS: html5-fancy:nil tex:t
 #+OPTIONS: toc:nil
@@ -17,8 +17,10 @@
 #+LANGUAGE: fr
 
 Ceci constitue une documentation succincte de prise en main de la Box
-Vagrant du MOOC BD Télécom SudParis. Une version plus détaillée est
-disponible séparément.
+Vagrant du MOOC BD Télécom SudParis. 
+
+Une version plus détaillée est disponible séparément, et des vidéos
+accessibles depuis le MOOC illustrent les étapes ci-dessous.
 
 * Prérequis
 
@@ -65,16 +67,25 @@ configuration système qui ne relèvent pas des objectifs de ce cours.
 
 * Installation des logiciels de base
 
-# ** TODO Installer Vagrant et VirtualBox
+Téléchargez les paquetages d'installation de /Oracle VirtualBox/ et
+/Vagrant/ : si vous utilisez Windows ou MacOSX, installez les
+paquetages fournis par l'éditeur depuis les liens ci-dessous
+(attention, les sites sont en anglais); si vous êtes sous Linux, vous
+pouvez préférer l'installation des paquetages natifs pour votre
+distribution.
 
-Téléchargez puis installez chacune des deux applications ci-dessous,
-si vous utilisez Windows ou MacOSX, depuis le site de l'éditeur. Si
-vous êtes sous Linux, vous pouvez préférer l'installation des
-paquetages pour votre distribution.
+Liens de *téléchargement* :
+1. VirtualBox : https://www.virtualbox.org/wiki/Downloads (les
+   extensions pour VirtualBox ne sont pas nécessaires)
+2. Vagrant : http://www.vagrantup.com/downloads.html
 
-- VirtualBox : https://www.virtualbox.org/wiki/Downloads
-- Vagrant : http://www.vagrantup.com/downloads.html
+Puis effectuez l'*installation* de chacune des deux applications,
+dans l'ordre suivant :
+1. d'abord /VirtualBox/;
+2. ensuite /Vagrant/.
 
+Il est possible que cette installation nécessite un redémarrage de
+votre ordinateur : suivez les indications fournies lors de l'installation.
 
 * Première mise en route
 
@@ -112,15 +123,15 @@ paquetages pour votre distribution.
    2) créer une nouvelle machine virtuelle VirtualBox à partir de
       cette box
 
-   3) démarrer cette machine virtuelle nouvellement créée en tâche de
-      fond, qui fournira l'environnement Web et bases de données que
-      vous allez utiliser[fn:3].
+   3) démarrer cette machine virtuelle nouvellement créée, qui
+      fournira l'environnement Web et bases de données que vous allez
+      utiliser[fn:3].
 
    Si tout va bien, la machine virtuelle est créée et démarrée et vous
-   voyez sa console de connexion s'afficher, et Vagrant confirme que
+   voyez sa /console de connexion/ Linux s'afficher, et Vagrant confirme que
    la machine virtuelle est bien démarrée.
 
-   Si une des étapes échoue, reportez-vous à la FAQ de la
+   Si une des étapes échoue, reportez-vous à la /FAQ/ de la
    documentation complète pour des pistes de résolution, ou
    contactez-nous via les forums du MOOC.
 
@@ -201,6 +212,10 @@ machine virtuelle, ou accessible depuis le site du cours sur http://mooc.telecom
 
 En cas de problème, posez vos questions dans les forums du MOOC.
 
+* Copyright
+
+/This document is (C) Copyright 2014 by Stephane Germain and Institut Mines-Telecom and is licensed under a/ [[http://creativecommons.org/licenses/by-sa/4.0/][/Creative Commons Attribution-ShareAlike 4.0 International License/]].
+
 [fn:1] autrement appelé /terminal/, /shell/, selon les systèmes d'exploitation
 
 [fn:2] Nous avons réalisé nos tests sur des ordinateurs portables
@@ -215,3 +230,6 @@ professional.
 version complète de la documentation.
 
 
+# Local Variables:
+# org-html-postamble-format: (("fr" "<p class=\"author\">Auteur: %a</p>\n<p class=\"date\">Date: %C</p>\n<p class=\"creator\">%c</p>"))
+# End:
