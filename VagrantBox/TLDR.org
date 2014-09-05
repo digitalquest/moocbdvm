@@ -16,65 +16,150 @@
 #+LATEX_HEADER:
 #+LANGUAGE: fr
 
+Ceci constitue une documentation succincte de prise en main de la Box
+Vagrant du MOOC BD Télécom SudParis. Une version plus détaillée est
+disponible séparément.
+
 * Prérequis
 
-- Disposer d'une machine moderne avec un système d'exploitation (64
-  bits[fn:5]) sur lequel VirtualBox\trade fonctionne[fn:2]
+- Disposer d'un ordinateur de bureau moderne avec un système d'exploitation
+  Windows, Linux ou MacOSX dans une version récente[fn:2] (les
+  instructions ci-dessous concerne les versions 64 bits[fn:5]);
 
-- Avoir un environnement internet à haut débit pour le téléchargement de l'environnement[fn:4]
+- Avoir un environnement internet à haut débit pour le téléchargement de l'environnement[fn:4];
 
-- Avoir au moins 2 Go de libre sur un disque dur local
+- Avoir au moins 2 Go de libre sur un disque dur local;
 
-- Maîtriser un minimum l'utilisation d'un système d'exploitation,
-  notamment en mode invite de commande (commandes de base DOS ou shell
-  Unix, type =cd=, =ls/dir=, etc.).
+- Maîtriser un minimum l'utilisation du système d'exploitation,
+  notamment en mode /invite de commande/ (i.e. commandes de base DOS
+  sous Windows, ou shell Unix sous MacOS et Linux, type =cd=, =ls/dir=, etc.);
+
+- Être administrateur du poste de travail (pouvoir installer de
+  nouveaux logiciels).
 
 ** Avertissement
 
 /Nous avons fait de notre mieux pour fournir un environnement fonctionnel, basé sur des logiciels libres, mais vous l'utilisez *à vos risques et périls, sans aucune garantie*. Nous ne pouvons être tenus responsables des dommages qui résulteraient de l'utilisation de cet environnement./ 
 
-* Installation
+* Objectifs
 
-** TODO Installer VirtualBox puis Vagrant
+Cet environnement est destiné aux travaux pratiques *avancés*, et aux
+modules d'ouverture du MOOC BD, nécessitant la connexion à un serveur
+de bases de données : manipulation du schéma de la base, contraintes
+d'intégrité avancée, protection, couplage BD et Web, etc.
 
-Téléchargez les deux applications depuis leurs sites, ou installez les
-paquetages pour votre distribution (si vous êtes sur Linux).
+L'environnement permet de faire fonctionner un serveur Web et un
+serveur de bases de données *en local*, dans une machine virtuelle,
+plutôt que de devoir se connecter à un serveur accessible sur Internet
+(ou sur le réseau interne de Télécom SudParis).
+
+Notre objectif, en fournissant un tel environnement, est de faciliter
+l'installation d'un environnement de travaux pratiques intégrant un
+serveur de bases de données déjà opérationnel, et des bases de données
+déjà remplies. 
+
+Nous espérons qu'il vous permettra de vous concentrer sur la
+compréhension des fonctionnalités d'un serveur de bases de données professionnel,
+sans investir trop d'énergie dans des opérations d'installation et de
+configuration système qui ne relèvent pas des objectifs de ce cours.
+
+* Installation des logiciels de base
+
+# ** TODO Installer Vagrant et VirtualBox
+
+Téléchargez puis installez chacune des deux applications ci-dessous,
+si vous utilisez Windows ou MacOSX, depuis le site de l'éditeur. Si
+vous êtes sous Linux, vous pouvez préférer l'installation des
+paquetages pour votre distribution.
 
 - VirtualBox : https://www.virtualbox.org/wiki/Downloads
 - Vagrant : http://www.vagrantup.com/downloads.html
 
 
-** Initialisation et mise en route
+* Première mise en route
 
-Choisir un dossier de travail dans lequel Vagrant va installer une
-*machine virtuelle*, et où les fichiers des TPs vont résider. Ce dossier
-doit être choisi sur une partition disposant d'au moins 2 Go d'espace de
-stockage libre.
+1. une fois Vagrant et VirtualBox installés, *créez un nouveau dossier de
+   travail* dans votre dossier utilisateur.
 
-Ouvrir une invite de commande[fn:1] dans ce dossier et entrer :
-#+BEGIN_example
-vagrant init oberger/moccbdvm
-vagrant up
-#+END_example
+   C'est dans ce dossier que Vagrant installera une *machine
+   virtuelle*, et où les fichiers des TPs devront résider. Ce dossier
+   doit être choisi sur une partition disposant d'au moins 2 Go
+   d'espace de stockage libre.
 
-Cela va télécharger la /box/ Vagrant depuis Internet (env. 500 Mo), et
-lancer une machine virtuelle VirtualBox[fn:3] en tâche de fond, qui
-fournira l'environnement Web que vous allez utiliser.
+2. ouvrez une /invite de commande/ [fn:1] et positionnez-vous dans ce
+   dossier de travail (utilisez la commande =cd= pour vous déplacer
+   jusqu'à l'intérieur du dossier de travail)
+
+3. Entrez la commande suivante dans l'invite de commande :
+   #+BEGIN_example
+   vagrant init oberger/moocbdvm
+   #+END_example
+
+   Un nouveau fichier =Vagrantfile= est créé dans le dossier de
+   travail
+
+4. Entrez la commande suivante dans l'invite de commande, en étant
+   connecté à Internet (réseau haut-débit de préférence):
+
+   #+BEGIN_example
+   vagrant up
+   #+END_example
+
+   ceci va exécuter plusieurs actions :
+
+   1) télécharger la /box/ Vagrant depuis Internet (env. 350 Mo),
+
+   2) créer une nouvelle machine virtuelle VirtualBox à partir de
+      cette box
+
+   3) démarrer cette machine virtuelle nouvellement créée en tâche de
+      fond, qui fournira l'environnement Web et bases de données que
+      vous allez utiliser[fn:3].
+
+   Si tout va bien, la machine virtuelle est créée et démarrée et vous
+   voyez sa console de connexion s'afficher, et Vagrant confirme que
+   la machine virtuelle est bien démarrée.
+
+   Si une des étapes échoue, reportez-vous à la FAQ de la
+   documentation complète pour des pistes de résolution, ou
+   contactez-nous via les forums du MOOC.
+
+Cette étape de mise en route de la machine virtuelle n'est à effectuer
+qu'une seule fois. Ensuite, la machine est présente et sauvegardée
+dans VirtualBox, et sera de nouveau accessible au cours des prochaines
+semaines. Vous pourrez la mettre en pause, la redémarrer, et
+éventuellement la supprimer, soit depuis l'interface graphique de
+/Oracle VirtualBox/, soit via des commandes Vagrant.
 
 Pour une explication des commandes de base de Vagrant,
 consultez
 [[http://docs.vagrantup.com/v2/getting-started/index.html][le guide de démarrage vagrant (en anglais)]].
 
-* Utilisation
+* Utilisation de la machine virtuelle pour les travaux pratiques
+
+Si la première mise en route s'est bien passée, il suffira de relancer
+la commande =vagrant up= dans le dossier de travail pour s'assurer que
+la machine virtuelle est bien redémarrée.
+
+Une fois la machine virtuelle démarrée, les applications suivantes
+sont disponibles :
 
 ** Exerciseur pour les requêtes SQL (semaine 3)
 
-Une fois l'installation terminée, vous pouvez dès à présent tester des
-requêtes SQL sur les bases de données fournies pour le MOOC.
+Vous pourrez vous connecter sur cette application Web qui est fournie
+par la machine virtuelle en vous connectant à l'adresse :
+=http://localhost:8080/bdsqlwiz/appli/=
 
-Vous n'avez qu'à vous connecter sur l'application Web fournie par la machine virtuelle : http://localhost:8080/bdsqlwiz/appli/
+Elle permet de tester des requêtes SQL sur les bases de données
+fournies pour le MOOC (vins, films), avec une interface graphique
+similaire à l'environnement de requêtage dans le navigateur qui a été introduit
+en semaine 2, mais cette fois-ci en interrogeant un /vrai serveur de bases de données/ PostGreSQL, 
+et pas seulement une base de données stockée dans le cache du
+navigateur Chrome ou Safari, qui ne sauvegarde pas les modifications
+de façon persistente.
 
-** Travaux pratiques (à partir de la semaine 6)
+
+** Travaux pratiques BD et Web en PHP (à partir de la semaine 6)
 
 Dans le cadre du MOOC, vous serez amenés à réaliser des pages PHP pour
 dialoguer avec la base de données.
@@ -83,33 +168,38 @@ Vous devez placer vos pages dans le sous-répertoire =TP/= qui aura été
 créé dans le répertoire de travail où vous avez executé les commandes
 d'installation.
 
-Les pages PHP seront alors accessibles depuis http://localhost:8080/TP/
+Les pages PHP seront alors accessibles depuis =http://localhost:8080/TP/=
 
-* Maintenance
+** Administration d'un serveur PostgreSQL
 
-Les enseignants du MOOC pourront éventuellement publier des
-mises-à-jour de l'environnement modèle qui sert de référence à la
-machine virtuelle.
+En vous connectant sur =http://localhost:8080/phppgadmin/= vous aurez
+accès à un outil professionnel de requêtage et d'administration des
+bases de données PostgreSQL : *phpPgAdmin*.
 
-Afin de mettre à jour l'environnement déjà installé dans une machine
-virtuelle, pour prendre en compte les évolutions de l'environnement
-modèle des enseignants, entrez la commande suivante dans une invite de
-commande:
+# * Maintenance
 
-#+BEGIN_example
-vagrant ssh -c "sudo update-script"
-#+END_example
+# Les enseignants du MOOC pourront éventuellement publier des
+# mises-à-jour de l'environnement modèle qui sert de référence à la
+# machine virtuelle.
 
-*TODO* Attention: ceci nécessite d'avoir installé un client SSH (cf. [[...FAQ]])
+# Afin de mettre à jour l'environnement déjà installé dans une machine
+# virtuelle, pour prendre en compte les évolutions de l'environnement
+# modèle des enseignants, entrez la commande suivante dans une invite de
+# commande:
+
+# #+BEGIN_example
+# vagrant ssh -c "sudo update-script"
+# #+END_example
+
+# *TODO* Attention: ceci nécessite d'avoir installé un client SSH (cf. [[...FAQ]])
 
 * En savoir plus et résolutions des problèmes
 
-Une version plus complète de cette documentation est disponible sur http://localhost:8080/.
+Une version plus complète de cette documentation est disponible sur
+=http://localhost:8080/= en page d'accueil du serveur Web intégré à la
+machine virtuelle, ou accessible depuis le site du cours sur http://mooc.telecom-sudparis.eu/.
 
-En cas de problème, référez-vous aux forums du MOOC, sur
-http://mooc.telecom-sudparis.eu/
-
-* Footnotes
+En cas de problème, posez vos questions dans les forums du MOOC.
 
 [fn:1] autrement appelé /terminal/, /shell/, selon les systèmes d'exploitation
 
@@ -119,8 +209,9 @@ professional.
 
 [fn:3] la machine virtuelle fait fonctionner un système GNU/Linux /Debian/ minimal avec /Apache/, /PHP/ et /PostgreSQL/
 
-[fn:4] Une fois l'installation de la box réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
+[fn:4] Une fois l'installation de la /box/ réalisée, l'utilisation de la machine virtuelle se fait en local, sans avoir besoin d'une connexion internet.
 
-[fn:5] Si votre système est en 32 bits, référez-vous à la [[./manuel.html#FAQ][FAQ]].
+[fn:5] Si votre système est en 32 bits, référez-vous à la FAQ de la
+version complète de la documentation.
 
 
