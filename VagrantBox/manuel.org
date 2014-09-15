@@ -63,7 +63,7 @@ environnement installé en local sur votre ordinateur, y compris /sans
 accès à internet/.
 
 L'utilisation de *Vagrant* et *VirtualBox* pour faire tourner cet
-environnement permet en théorie un même fonctionnement quelque soit
+environnement permet en théorie un même fonctionnement quel que soit
 votre système d'exploitation Linux, MacOSX, Windows (à condition qu'il soit relativement
 récent). Consultez cependant attentivement la section [[*Prérequis][Prérequis]].
 
