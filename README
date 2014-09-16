@@ -6,13 +6,11 @@ The purpose of this project is to create a virtual environment built
 with Vagrant and run by VirtualBox for labs of a MOOC on Relational
 Databases developped at Telecom SudParis [0].
 
-VagrantBox contains the Vagrantfile and associate provisioning scripts
-necessary to create the labs VM/Box.
+The 'VagrantBox/' subdir contains the 'Vagrantfile' and associate
+provisioning scripts necessary to create the labs VM/Box.
 
-See VagrantBox/manuel.[org|html] for more docs (in french).
-
-User documentation is available at
-https://fusionforge.int-evry.fr/www/moocbdvm/
+See VagrantBox/manuel.[org|html] for more docs (in french), which is
+also available at: https://fusionforge.int-evry.fr/www/moocbdvm/
 
 Development
 -----------
@@ -35,8 +33,8 @@ License (cf. COPYING file).
 Authors
 -------
 Stéphane Germain (ENSIIE student intern)
-Olivier Berger
-Christian Bac
+Olivier Berger (Telecom SudParis)
+Christian Bac (Telecom SudParis)
 
 
 Acknowledgements

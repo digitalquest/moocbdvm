@@ -1,5 +1,5 @@
-Provisioning correspond au travail sur le provisionnement d'une box de
-base données.
+'Provisioning/' correspond au travail sur le provisionnement d'une box
+de base de données.
 
 Plusieurs étapes :
  1. fabrication des box debian jessie de base
@@ -14,7 +14,7 @@ A faire une fois de temps en temps pour refaire une image Debian
 testing mise-à-jour, à publier dans
 oberger/debianjessiemini-[amd64|i686] sur vagrantcloud.
 
-Utilisation de bootstrap-vz avec le fichier manifest ad-hoc.
+Utilisation de 'bootstrap-vz' avec le fichier manifest ad-hoc.
 
 Cf. le README dans le répertoire 'DebianJessieBaseBox' pour plus de
 détails.
