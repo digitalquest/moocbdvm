@@ -16,9 +16,9 @@
 #+LATEX_HEADER:
 #+LANGUAGE: fr
 
-* TL/DR;
+/La version la plus à jour de cette documentation est [[https://fusionforge.int-evry.fr/www/moocbdvm/][disponible en ligne]]./
 
-(/Too Long/ / /Didn't Read/;)
+* TL/DR (/Too Long/ / /Didn't Read/;)
 
 *Pour le lecteur pressé, lire : [[./TLDR.html][Prise en main rapide de la Box Vagrant du MOOC BD Télécom SudParis]].*
 
@@ -263,7 +263,7 @@ comme une machine virtuelle ordinaire.
 
 Une fois la machine virtuelle lancée, ouvrir un navigateur Web et aller sur http://localhost:8080/bdsqlwiz/appli/
 
-TODO screenshot
+# TODO screenshot
 
 Vous pouvez maintenant commencer votre apprentissage du langage SQL,
 en sélectionnant l'une des deux bases de données disponibles (/films/
@@ -528,12 +528,14 @@ indépendantes, les applications que nous avons empaquetées dans la
 
 Notez tout d'abord qu'un environnement d'exerciseur est disponible
 aussi pour les navigateurs basés sur Webkit (Chrome, Safari), sans
-nécessiter l'installation d'un SGBD comme PostgreSQL. (Cf. instructions du MOOC XXX - TODO)
+nécessiter l'installation d'un SGBD comme
+PostgreSQL (cf. instructions sur la page de cours du MOOC - Semaine 2).
 
 Autrement, pas besoin de machine virtuelle, si vous savez installer un
 SGBD par vous-même. Si vous avez la possibilité de créer une base de
 données PostgreSQL localement, les scripts de création de base sont
-disponibles dans XXX TODO.
+disponibles dans
+[[https://fusionforge.int-evry.fr/plugins/scmgit/cgi-bin/gitweb.cgi?p=bdsqlwiz/bdsqlwiz.git;a=tree;f=db-creation;hb=HEAD][le référentiel Git du projet =bdsqlwiz=]].
 
 # ** Il y a plein de messages en verts et rouge quand j'entre la commande =vagrant up= !
 
@@ -591,11 +593,58 @@ Il semble que cela ne soit pas rédhibitoire : un nouveau =vagrant up= semble po
 
 ** Quand j'utilise la commande =vagrant up=, je reçois un message d'erreur après de nombreuses tentatives de connection.
 
-Si vous recevez un message d'erreur de ce genre:
+Vous recevez un message d'erreur de ce genre, mais la VM VirtualBox
+est bien lancée (constaté pour l'instant sous Windows 7):
+#+BEGIN_example
+default: Error: Connection timeout. Retrying...
+default: Error: Connection timeout. Retrying...
+default: Error: Connection timeout. Retrying...
+default: Error: Connection timeout. Retrying...
+default: Error: Connection timeout. Retrying...
+Timed out while waiting for the machine to boot. This means that
+Vagrant was unable to communicate with the guest machine within
+the configured ("config.vm.boot_timeout" value) time period.
 
-[[file:timeout.png][Message d'erreur d'un timeout]]
+If you look above, you should be able to see the error(s) that
+Vagrant had when attempting to connect to the machine. These errors
+are usually good hints as to what may be wrong.
 
-Refaire un =vagrant up=. Si le problème persiste, veuillez vous diriger vers les forums du MOOC pour résoudre le problème.
+If you're using a custom box, make sure that networking is properly
+working and you're able to connect to the machine. It is a common
+problem that networking isn't setup properly in these boxes.
+Verify that authentication configurations are also setup properly,
+as well.
+#+END_example
+
+La VM est bien lancée, mais Vagrant n'arrive pas à s'y connecter via SSH.
+# [[file:timeout.png][Message d'erreur d'un timeout]]
+
+Essayez de refaire un =vagrant up=. Si le problème persiste vous êtes
+probablement dans un cas où la configuration du réseau
+des VM VirtualBox, par défaut en mode *NAT* (/Network Address
+Translation/) ne permet pas à Vagrant sur l'hôte, de contacter le
+serveur SSH à l'intérieur de la VM.
+
+Une solution de contournement consiste à :
+1. arrêter la VM
+2. modifier la configuration réseau pour utiliser un pont/bridge au
+   lieu du NAT
+3. regénérer l'adresse MAC fictive de la VM (afin d'éviter des
+   conflits avec d'autres utilisateurs sur le même brin réseau)
+4. relancer la VM
+5. refaire une tentative avec =vagrant up= pour vérifier si tout
+   fonctionne bien
+
+Si cette solution résout le problème, il faut alors utiliser non-pas
+des adresses de la forme =http://localhost:8080/= mais se connecter
+sur le port HTTP standard de la VM, une fois connue son adresse
+IP. L'adresse IP est visible dans une infobulle apparaîssant dans
+l'interface VirtualBox au niveau de l'icône de réseau de la VM (par
+ex. : =192.168.5.2=). On se connectera donc aux applications Web
+internes à la VM via =http://192.168.5.2/...=.
+
+Pour plus d'aide, comme d'habitude, tournez-vous vers les forums du
+MOOC.
 
 ** Le lancement de la VM affiche un problème de versions des /guest additions/
 
@@ -753,7 +802,7 @@ l'utilisateur =vagrant= et le mot-de-passe =vagrant= sur le port 2222
 de l'/hôte/ (redirigé vers le port 22 du /guest/) : =ssh -p 2222 vagrant@localhost= (mot de passe : =vagrant=)
 
 
-** TODO J'ai écrasé la base de données, que faire
+# ** TODO J'ai écrasé la base de données, que faire
 
 ** Comment mettre à jour ma machine virtuelle
 
