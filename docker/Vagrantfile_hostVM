@@ -1,50 +1,21 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# somehow we need explicitely vagrant up --provider=docker
-#ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
-
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "postgre" do |postgre|
-    postgre.vm.provider "docker" do |d|
-
-      d.force_host_vm = true
-
-      d.name = "tsp-moocdb-postgres"
-      d.build_dir = "docker-buildenv/tsp-moocdb-postgres"
-      d.vagrant_vagrantfile = 'Vagrantfile_hostVM'
-    end
-  end
-
-  config.vm.define "webapp" do |webapp|
-    webapp.vm.provider "docker" do |d|
-
-      d.force_host_vm = true
-
-      d.name = "tsp-moocdb-web"
-      d.build_dir = "docker-buildenv/tsp-moocdb-web"
-      d.link "tsp-moocdb-postgres:tsp-moocdb-postgres"
-      d.vagrant_vagrantfile = 'Vagrantfile_hostVM'
-      d.ports = ["8080:80"]
-#      d.volumes = ["/docker_data:/vagrant_data"]
-    end
-  end
-
-  config.vm.synced_folder "docker-buildenv/tsp-moocdb-postgres", "/vagrant_data-postgres", type: "rsync"
-  config.vm.synced_folder "docker-buildenv/tsp-moocdb-web", "/vagrant_data-web", type: "rsync"
-
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
+#  config.vm.name = "coin"
+
   # Every Vagrant virtual environment requires a box to build off of.
-#  config.vm.box = "coin"
-  #config.vm.box = "mitchellh/boot2docker"
-  
+  #config.vm.box = "phusion/baseimage"
+  config.vm.box = "mitchellh/boot2docker"
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -53,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  #config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -72,20 +43,36 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
+#  config.vm.synced_folder ".", "/vagrant_data"
+  config.vm.synced_folder "docker-buildenv", "/vagrant_data", type: "rsync"
 
+#  config.vm.synced_folder "tsp-moocdb-postgres", "/vagrant_data-postgres", type: "rsync"
+#  config.vm.synced_folder "tsp-moocdb-web", "/vagrant_data-web", type: "rsync"
+    
+ 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  # #   # Don't boot with headless mode
-  #    vb.gui = true
-  # #
-  # #   # Use VBoxManage to customize the VM. For example to change memory:
-  #    #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  #    vb.customize ["modifyvm", :id, "--vram", "36"]
-  # end
+  config.vm.provider "virtualbox" do |vb|
+  #   # Don't boot with headless mode
+    vb.gui = true
+  #
+  #   # Use VBoxManage to customize the VM. For example to change memory:
+    #   vb.customize ["modifyvm", :id, "--memory", "1024"]
+    
+    # On VirtualBox, we don't have guest additions or a functional vboxsf
+    # in TinyCore Linux, so tell Vagrant that so it can be smarter.
+  #  vb.memory  = 1536
+    vb.check_guest_additions = false
+    vb.functional_vboxsf     = false
+
+    vb.customize ["modifyvm", :id, "--vram", "36"]
+  end
+
+  # b2d doesn't support NFS
+  config.nfs.functional = false
+  
   #
   # View the documentation for the provider you're using for more
   # information on available options.
