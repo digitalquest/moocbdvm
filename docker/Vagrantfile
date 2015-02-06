@@ -24,7 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       d.name = "tsp-moocdb-postgres"
       d.build_dir = "docker-buildenv/tsp-moocdb-postgres"
-
+      d.build_args = ["-t=tsp-moocdb-postgres"]
+      
       # Use a custom boot2docker VM instead of default one
       d.vagrant_vagrantfile = 'Vagrantfile_hostVM'
     end
@@ -38,6 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       d.name = "tsp-moocdb-web"
       d.build_dir = "docker-buildenv/tsp-moocdb-web"
+      d.build_args = ["-t=tsp-moocdb-web"]
 
       # Relies on the postgres container
       d.link "tsp-moocdb-postgres:tsp-moocdb-postgres"
