@@ -13,6 +13,8 @@ Vagrantfile).
 
 Installation :
  $ git clone https://github.com/pfe-asr-2014/moocdbdocker.git docker-buildenv
+or
+ $ git clone https://github.com/olberger/moocdbdocker.git docker-buildenv
 
 Start with :
 vagrant up [--provider=docker] --no-parallel
