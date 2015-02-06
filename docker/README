@@ -1,4 +1,4 @@
-vagrant up --provider=docker --no-parallel
+vagrant up [--provider=docker] --no-parallel
 
 SSH into boot2docker with :
  ssh -p 2222 docker@127.0.0.1

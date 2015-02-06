@@ -2,17 +2,21 @@
 # vi: set ft=ruby :
 
 # somehow we need explicitely vagrant up --provider=docker
-#ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
+
+#FORCE_HOST_VM = false
+FORCE_HOST_VM = true
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "postgre" do |postgre|
     postgre.vm.provider "docker" do |d|
 
-      d.force_host_vm = true
+#      d.force_host_vm = true
+      d.force_host_vm = FORCE_HOST_VM
 
       d.name = "tsp-moocdb-postgres"
       d.build_dir = "docker-buildenv/tsp-moocdb-postgres"
@@ -23,7 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "webapp" do |webapp|
     webapp.vm.provider "docker" do |d|
 
-      d.force_host_vm = true
+#      d.force_host_vm = true
+      d.force_host_vm = FORCE_HOST_VM
 
       d.name = "tsp-moocdb-web"
       d.build_dir = "docker-buildenv/tsp-moocdb-web"
