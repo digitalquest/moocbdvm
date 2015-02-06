@@ -1,6 +1,25 @@
+This directory contains the Vagrant + docker setup relying on the
+Vagrant docker provider.
+
+On Linux, normally (unless FORCE_HOST_VM = true is set in the
+Vagrantfile -- see below) vagrant up will just directly use docker
+from the host.
+
+On Windows, the docker provider will boot an intermediary VirtualBox
+VM (boot2docker) specified in the vagrant_vagrantfile (hence
+Vagrantfile_hostVM). It is also possible to test a similar setup on
+Linux, to start boot2docker, by setting FORCE_HOST_VM = true in the
+Vagrantfile).
+
+Start with :
 vagrant up [--provider=docker] --no-parallel
 
-SSH into boot2docker with :
- ssh -p 2222 docker@127.0.0.1
+ -- no-parallel is important for the moment
+ --provider=docker is optional
 
+Debugging inside boot2docker is done by SSHing into the boot2docker VM
+with :
+ $ ssh -p 2222 docker@127.0.0.1
 password is 'tcuser'
+
+The docker containers are reused from https://github.com/pfe-asr-2014/moocdbdocker

@@ -6,6 +6,8 @@ The purpose of this project is to create a virtual environment built
 with Vagrant and run by VirtualBox for labs of a MOOC on Relational
 Databases developped at Telecom SudParis [0].
 
+Vagrant basic version
+---------------------
 The 'VagrantBox/' subdir contains the 'Vagrantfile' and associate
 provisioning scripts necessary to create the labs VM/Box.
 
@@ -20,6 +22,14 @@ https://fusionforge.int-evry.fr/projects/moocbdvm/
 The project's Git repository is available at
 https://fusionforge.int-evry.fr/scm/?group_id=63
 
+Docker experimental version
+---------------------------
+The docker/ subdir contains an experimental setup using Vagrant and
+Docker, relying on the docker provider for Vagrant.
+
+Attention: the line endings are important for scripts run inside
+docker so the .gitattributes forces Windows to not convert to DOS
+endings at checkout time.
 
 Copyright and license
 ---------------------
