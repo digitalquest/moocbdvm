@@ -28,3 +28,6 @@ with :
 password is 'tcuser'
 
 The docker containers are reused from https://github.com/pfe-asr-2014/moocdbdocker
+
+VBoxManage list vms
+vagrant package --output vagrant-docker.box --base ...

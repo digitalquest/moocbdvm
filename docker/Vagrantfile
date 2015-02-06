@@ -11,8 +11,8 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 VAGRANTFILE_API_VERSION = "2"
 
 # Explicitely set to true to trigger boot2docker VirtualBox VM invocation on Linux too
-FORCE_HOST_VM = false
-#FORCE_HOST_VM = true
+#FORCE_HOST_VM = false
+FORCE_HOST_VM = true
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
