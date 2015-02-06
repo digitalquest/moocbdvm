@@ -11,6 +11,9 @@ Vagrantfile_hostVM). It is also possible to test a similar setup on
 Linux, to start boot2docker, by setting FORCE_HOST_VM = true in the
 Vagrantfile).
 
+Installation :
+ $ git clone https://github.com/pfe-asr-2014/moocdbdocker.git docker-buildenv
+
 Start with :
 vagrant up [--provider=docker] --no-parallel
 
