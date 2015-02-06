@@ -1,0 +1,2 @@
+# make sure on windows, the git checkout won't mess with the LF, so that things are smooth at docker provisionning inside boot2docker
+* text eol=lf
