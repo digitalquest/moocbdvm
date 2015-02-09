@@ -16,8 +16,8 @@ oberger/debianjessiemini-[amd64|i686] sur vagrantcloud.
 
 Utilisation de 'bootstrap-vz' avec le fichier manifest ad-hoc.
 
-Cf. le README dans le répertoire 'DebianJessieBaseBox' pour plus de
-détails.
+Cf https://github.com/olberger/DebianJessieBaseBox
+
 
 Fabrication de la box du MOOC
 -----------------------------
