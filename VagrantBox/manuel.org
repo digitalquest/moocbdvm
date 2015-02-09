@@ -960,9 +960,9 @@ sur tout système cible récent dans lequel le gestionnaire de
 machines virtuelles VirtualBox est disponible (couple Vagrant et VirtualBox).
 
 La fabrication de la box Vagrant repose sur l'utilisation de
-[[http://andsens.github.io/bootstrap-vz/][bootstrap-vz]] pour l'installation du système Debian de base, complétée
+[[http://andsens.github.io/bootstrap-vz/][bootstrap-vz]] pour l'installation du système Debian de base (cf. [[https://github.com/olberger/DebianJessieBaseBox]]), complétée
 par des scripts de /provisionning/ que nous avons développés
-(disponibles sur ...)
+(disponibles sur [[https://fusionforge.int-evry.fr/plugins/scmgit/cgi-bin/gitweb.cgi?p=moocbdvm/moocbdvm.git;a=tree;f=VagrantBox/Provisionning;hb=HEAD]])
 
 ** Utilité dans des contextes différents
 

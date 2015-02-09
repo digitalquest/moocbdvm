@@ -54,6 +54,10 @@ Documentation utilisateur initiale : TLDR.[org|html]
 
 Cf. manuel.org pour plus de documentation.
 
+Cette documentation est en reproduite en ligne sur
+https://fusionforge.int-evry.fr/www/moocbdvm/ (mis à jour via :
+scp manuel.html USER@fusionforge.int-evry.fr:/var/lib/gforge/chroot/home/groups/moocbdvm/htdocs/index.html).
+
 Scripts de mises-à-jour
 -----------------------
 
